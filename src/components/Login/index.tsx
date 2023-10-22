@@ -25,6 +25,8 @@ const Login = (props: Props) => {
       redirect: false,
     });
 
+    if (res?.error) { window.alert("error")}
+
     if (!res?.error) {
       router.push(props.callbackUrl ?? "http://localhost:3000/dashboard");
     }
