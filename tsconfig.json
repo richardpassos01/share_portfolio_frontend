@@ -21,6 +21,7 @@
     "paths": {
       "@api/*": ["./src/app/api/*"],
       "@components/*": ["./src/components/*"],
+      "@designSystem": ["./src/design-system/index"],
       "@pages/*": ["./src/pages/*"]
     }
   },

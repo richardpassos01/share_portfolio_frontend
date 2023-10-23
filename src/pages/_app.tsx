@@ -1,13 +1,17 @@
 import NextScript from 'next/script';
 import { AppProps } from 'next/app';
-import Providers from '../components/Providers';
+import { GlobalStyles, Theme } from '@designSystem';
+import { SessionProvider } from 'next-auth/react';
+import { ThemeProvider } from 'styled-components';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Providers>
-      <h1>ola</h1>
-      <Component {...pageProps} />
-      <NextScript />
-    </Providers>
+    <SessionProvider>
+      <ThemeProvider theme={Theme}>
+        <GlobalStyles />
+        <Component {...pageProps} />
+        <NextScript />
+      </ThemeProvider>
+    </SessionProvider>
   );
 }
