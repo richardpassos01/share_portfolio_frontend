@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   labelText?: string;
@@ -16,7 +16,7 @@ const InputBox = ({ labelText, error, ...props }: Props) => {
       <input
         className={`border  rounded-md disabled:border-slate-100 w-full block outline-none py-2 px-1 transition-all text-xs lg:text-sm xl:text-base  bg-slate-50 focus:shadow focus:shadow-blue-500 
               ${
-                error ? " border-red-500   animate-shake" : "border-slate-400"
+                error ? ' border-red-500   animate-shake' : 'border-slate-400'
               }`}
         {...props}
       ></input>

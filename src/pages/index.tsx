@@ -1,12 +1,10 @@
-import AppBar from "../components/AppBar/AppBar";
-import Providers from "../components/Providers/Providers";
+import AppBar from '../components/AppBar/AppBar';
 
 const RootPage = ({ children }: { children: React.ReactNode }) => {
-
   return (
     <>
-          <AppBar />
-          {children}
+      <AppBar />
+      {children}
     </>
   );
 };

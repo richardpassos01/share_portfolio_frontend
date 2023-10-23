@@ -1,8 +1,8 @@
-import Login from "../../components/Login";
-import React from "react";
+import Login from '../../components/Login';
+import React from 'react';
 
 type Props = {
-  searchParams?: Record<"callbackUrl" | "error", string>;
+  searchParams?: Record<'callbackUrl' | 'error', string>;
 };
 
 const SignInPage = (props: Props) => {

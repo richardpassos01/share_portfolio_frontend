@@ -1,10 +1,10 @@
-"use client";
-import React, { useRef } from "react";
-import InputBox from "../InputBox";
-import { Button } from "../Button";
-import Link from "next/link";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+'use client';
+import React, { useRef } from 'react';
+import InputBox from '../InputBox';
+import { Button } from '../Button';
+import Link from 'next/link';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   className?: string;
@@ -14,23 +14,24 @@ type Props = {
 
 const Login = (props: Props) => {
   const router = useRouter();
-  const userName = useRef("");
-  const pass = useRef("");
-  
+  const userName = useRef('');
+  const pass = useRef('');
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await signIn("credentials", {
+    const res = await signIn('credentials', {
       username: userName.current,
       password: pass.current,
       redirect: false,
     });
 
-    if (res?.error) { window.alert("error")}
-
-    if (!res?.error) {
-      router.push(props.callbackUrl ?? "http://localhost:3000/dashboard");
+    if (res?.error) {
+      window.alert('error');
     }
 
+    if (!res?.error) {
+      router.push(props.callbackUrl ?? 'http://localhost:3000/dashboard');
+    }
   };
 
   return (
@@ -60,7 +61,7 @@ const Login = (props: Props) => {
             Sign In
           </Button>
           <Link
-            href={props.callbackUrl ?? "/"}
+            href={'/auth/signin'}
             className="w-28 border border-red-600 text-center py-2 rounded-md text-red-600 transition hover:bg-red-600 hover:text-white hover:border-transparent active:scale-95"
           >
             Cancel
