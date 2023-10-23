@@ -1,4 +1,4 @@
-import AppBar from '../components/AppBar/AppBar';
+import AppBar from '@components/AppBar';
 
 const RootPage = ({ children }: { children: React.ReactNode }) => {
   return (

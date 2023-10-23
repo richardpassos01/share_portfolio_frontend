@@ -1,5 +1,5 @@
-import Login from '../../components/Login';
 import React from 'react';
+import Login from '@components/Login';
 
 type Props = {
   searchParams?: Record<'callbackUrl' | 'error', string>;

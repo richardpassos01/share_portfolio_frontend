@@ -1,6 +1,6 @@
 import React from 'react';
-import Table from '../../components/Table';
-import AppBar from '../../components/AppBar/AppBar';
+import Table from '@components/Table';
+import AppBar from '@components/AppBar';
 
 const Dashboard: React.FC = () => {
   return (

@@ -1,4 +1,3 @@
-'use client';
 import React, { useRef } from 'react';
 import InputBox from '../InputBox';
 import { Button } from '../Button';
