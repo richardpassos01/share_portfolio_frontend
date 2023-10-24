@@ -18,6 +18,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div>
+      <title>B3 Portfólio</title>
       <Suspense fallback={<ProgressBar isLoading={isLoading} />}>
         {isLoading ? (
           <ProgressBar isLoading={isLoading} />
