@@ -4,6 +4,7 @@ import { Button } from '../Button';
 import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import Routes from '@constants/Routes';
 
 type Props = {
   className?: string;
@@ -60,7 +61,7 @@ const Login = (props: Props) => {
             Sign In
           </Button>
           <Link
-            href={'/auth/signin'}
+            href={Routes.SIGNIN}
             className="w-28 border border-red-600 text-center py-2 rounded-md text-red-600 transition hover:bg-red-600 hover:text-white hover:border-transparent active:scale-95"
           >
             Cancel

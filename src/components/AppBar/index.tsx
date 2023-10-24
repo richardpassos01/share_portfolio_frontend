@@ -1,6 +1,6 @@
 import React from 'react';
 import SigninButton from '../SiginButton';
-import { Header } from '@designSystem';
+import { Button, Header } from '@designSystem';
 
 interface Props {
   boxShadown?: boolean;

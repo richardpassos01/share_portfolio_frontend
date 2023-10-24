@@ -22,7 +22,8 @@
       "@api/*": ["./src/app/api/*"],
       "@components/*": ["./src/components/*"],
       "@designSystem": ["./src/design-system/index"],
-      "@pages/*": ["./src/pages/*"]
+      "@pages/*": ["./src/pages/*"],
+      "@constants/*": ["./src/constants/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
