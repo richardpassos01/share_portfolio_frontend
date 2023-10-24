@@ -3,6 +3,7 @@ import { AppProps } from 'next/app';
 import { GlobalStyles, Theme, StyledComponentsRegistry } from '@designSystem';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'styled-components';
+import Layout from '@components/Layout';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -10,7 +11,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <SessionProvider>
         <ThemeProvider theme={Theme}>
           <GlobalStyles />
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
           <NextScript />
         </ThemeProvider>
       </SessionProvider>

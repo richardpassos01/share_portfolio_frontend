@@ -11,7 +11,7 @@ export { HyperLink } from './components/HyperLink';
 export { InputText } from './components/InputText';
 export { InputLabel } from './components/InputLabel';
 export { Line } from './components/Line';
-export { Loader } from './components/Loader';
+export { ProgressBar } from './components/ProgressBar';
 export { Title } from './components/Title';
 export { StyledComponentsRegistry } from './components/StyledComponentsRegistry';
 

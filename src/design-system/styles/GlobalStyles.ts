@@ -28,8 +28,6 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    color: transparent;
-    background-color: transparent;
     margin: 0;
     font-family: 'Work Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
