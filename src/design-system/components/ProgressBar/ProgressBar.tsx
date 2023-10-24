@@ -7,14 +7,14 @@ const ProgressBarContainer = styled.div`
   left: 0;
   width: 100%;
   height: 4px;
-  background-color: #e0e0e0;
+  background-color: ${(props) => props.theme.colors.grey};
   z-index: 999;
 `;
 
 const ProgressBarFill = styled.div<{ width: number }>`
   height: 100%;
   width: ${(props) => props.width}%;
-  background-color: #007bff;
+  background-color: ${(props) => props.theme.colors.darkBlue};
   transition: width 0.3s ease;
 `;
 

@@ -1,12 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
-import Tokens from './Tokens';
 
 export const GlobalStyles = createGlobalStyle`
   /* Mobile Styles */
-  @media ${Tokens.mobile} {
-    html {
-      font-size: 100%;
-    }
+  * {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
   }
 
   /* Box Sizing */
@@ -29,7 +29,6 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     margin: 0;
-    font-family: 'Work Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

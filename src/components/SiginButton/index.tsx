@@ -3,6 +3,7 @@ import { Button, Colors } from '@designSystem';
 import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
+import { Container } from './styles';
 
 const SigninButton = () => {
   const { data: session } = useSession();
@@ -26,17 +27,25 @@ const SigninButton = () => {
     );
   }
   return (
-    <>
-      <Button onClick={() => handleClick(Routes.SIGNIN)}>Entrar</Button>
+    <Container>
       <Button
+        width="100"
+        height="42"
         backgroundColor={Colors.white}
         color={Colors.darkBlue}
         borderColor={Colors.darkBlue}
+        onClick={() => handleClick(Routes.SIGNIN)}
+      >
+        Entrar
+      </Button>
+      <Button
+        width="130"
+        height="42"
         onClick={() => handleClick(Routes.SIGNUP)}
       >
         Cadastrar
       </Button>
-    </>
+    </Container>
   );
 };
 

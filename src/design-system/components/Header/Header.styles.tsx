@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { Roboto_Serif } from 'next/font/google';
-const dancingScript = Roboto_Serif({ weight: '500', subsets: ['latin'] });
+import { Open_Sans } from 'next/font/google';
+const dancingScript = Open_Sans({ weight: '500', subsets: ['latin'] });
 
 interface ContentProps {
   backgroundColor?: string;
@@ -13,7 +13,7 @@ export const Content = styled.header<ContentProps>`
   background-color: ${(props) =>
     props.backgroundColor ?? props.theme.colors.white};
   display: flex;
-  padding: 0 12% 0 12%;
+  padding: 0 10% 0 12%;
   align-items: center;
   justify-content: flex-start;
   box-shadow: ${(props) =>
@@ -41,7 +41,7 @@ export const HeaderItem = styled.div`
   justify-content: space-between;
 `;
 
-export const HeaderTitle = styled.h2.attrs((props) => ({
+export const HeaderTitle = styled.h2.attrs(() => ({
   className: dancingScript.className,
 }))`
   color: ${(props) => props.theme.colors.darkBlue};
