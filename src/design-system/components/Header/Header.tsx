@@ -1,9 +1,10 @@
 import {
   Content,
   HeaderContainer,
-  HeaderIcon,
   HeaderItem,
+  HeaderTitle,
 } from './Header.styles';
+import Image from 'next/image';
 import { HyperLink, Icons } from '../../index';
 
 interface Props {
@@ -19,11 +20,13 @@ const Header: React.FunctionComponent<Props> = ({
     <>
       <Content backgroundColor={backgroundColor}>
         <HeaderContainer>
-          <HeaderItem>
-            <HyperLink href="/">
-              <HeaderIcon src={Icons.Icon} />
-            </HyperLink>
-          </HeaderItem>
+          <HyperLink href="/">
+            <HeaderItem>
+              <Image src={Icons.Icon} width={70} height={70} alt="Icon" />
+              <HeaderTitle>Analytics</HeaderTitle>
+            </HeaderItem>
+          </HyperLink>
+
           {children}
         </HeaderContainer>
       </Content>
