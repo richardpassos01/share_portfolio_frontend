@@ -1,9 +1,9 @@
-import { Header } from '../design-system/components/Header';
+import AppBar from '@components/AppBar';
 
 const RootPage = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <Header />
+      <AppBar boxShadown={true} />
       {children}
     </>
   );

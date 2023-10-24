@@ -20,7 +20,7 @@ const Loading = styled.div`
   }
 `;
 
-const Loader: React.FunctionComponent = () => (
+const Loader: React.FC = () => (
   <div>
     <Loading />
   </div>

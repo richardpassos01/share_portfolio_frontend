@@ -8,12 +8,7 @@ interface Props {
   invalid: any;
 }
 
-const InputText: React.FunctionComponent<Props> = ({
-  name,
-  onChange,
-  value,
-  invalid,
-}) => (
+const InputText: React.FC<Props> = ({ name, onChange, value, invalid }) => (
   <Container>
     <Input name={name} onChange={onChange} value={value} invalid={invalid} />
     {invalid && (

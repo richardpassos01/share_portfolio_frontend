@@ -13,6 +13,7 @@ export { InputLabel } from './components/InputLabel';
 export { Line } from './components/Line';
 export { Loader } from './components/Loader';
 export { Title } from './components/Title';
+export { StyledComponentsRegistry } from './components/StyledComponentsRegistry';
 
 export const Icons = {
   Icon,

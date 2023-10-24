@@ -9,24 +9,21 @@ import { HyperLink, Icons } from '../../index';
 
 interface Props {
   backgroundColor?: string;
+  boxShadown?: boolean;
   children?: JSX.Element[];
 }
 
-const Header: React.FunctionComponent<Props> = ({
-  backgroundColor,
-  children,
-}) => {
+const Header: React.FC<Props> = ({ backgroundColor, boxShadown, children }) => {
   return (
     <>
-      <Content backgroundColor={backgroundColor}>
+      <Content backgroundColor={backgroundColor} boxShadown={boxShadown}>
         <HeaderContainer>
-          <HyperLink href="/">
-            <HeaderItem>
-              <Image src={Icons.Icon} width={70} height={70} alt="Icon" />
-              <HeaderTitle>Analytics</HeaderTitle>
-            </HeaderItem>
-          </HyperLink>
-
+          <HeaderItem>
+            <HyperLink href="/">
+              <Image src={Icons.Icon} width={60} height={60} alt="Icon" />
+              <HeaderTitle>Portfólio</HeaderTitle>
+            </HyperLink>
+          </HeaderItem>
           {children}
         </HeaderContainer>
       </Content>

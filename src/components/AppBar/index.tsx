@@ -1,15 +1,16 @@
-import Link from 'next/link';
 import React from 'react';
 import SigninButton from '../SiginButton';
+import { Header } from '@designSystem';
 
-const AppBar = () => {
+interface Props {
+  boxShadown?: boolean;
+}
+
+const AppBar: React.FC<Props> = ({ boxShadown }) => {
   return (
-    <header className="flex gap-4 p-4 bg-gradient-to-b from-white to-gray-200 shadow">
-      <Link className="transition-colors hover:text-blue-500" href={'/'}>
-        App Name
-      </Link>
+    <Header boxShadown={boxShadown}>
       <SigninButton />
-    </header>
+    </Header>
   );
 };
 
