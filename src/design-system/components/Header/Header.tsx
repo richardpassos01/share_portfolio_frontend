@@ -5,7 +5,7 @@ import {
   HeaderTitle,
 } from './Header.styles';
 import Image from 'next/image';
-import { HyperLink, Icons } from '../../index';
+import { Hide, HyperLink, Icons, Tokens } from '../../index';
 
 interface Props {
   backgroundColor?: string;
@@ -22,7 +22,9 @@ const Header: React.FC<Props> = ({ backgroundColor, boxShadown, children }) => {
           <HeaderItem>
             <HyperLink href="/">
               <Image src={Icons.Icon} width={60} height={60} alt="Icon" />
-              <HeaderTitle>Portfólio</HeaderTitle>
+              <Hide on={Tokens.MAX_WIDTH_MOBILE}>
+                <HeaderTitle>Portfólio</HeaderTitle>
+              </Hide>
             </HyperLink>
           </HeaderItem>
           {children}

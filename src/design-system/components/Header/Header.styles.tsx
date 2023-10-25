@@ -36,9 +36,14 @@ export const HeaderContainer = styled.div`
 `;
 
 export const HeaderItem = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  width: 95%;
+
+  @media ${(props) => props.theme.tokens.MIN_WIDTH_TABLE} {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
 
 export const HeaderTitle = styled.h2.attrs(() => ({

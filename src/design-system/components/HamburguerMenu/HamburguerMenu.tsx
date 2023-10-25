@@ -6,7 +6,7 @@ const StyledMenu = styled.nav<{ isOpen: boolean }>`
   div#menuToggle {
     display: block;
     position: fixed;
-    top: 15px;
+    top: 29px;
     right: 20px;
     z-index: 1;
     user-select: none;
@@ -51,7 +51,7 @@ const StyledMenu = styled.nav<{ isOpen: boolean }>`
   div#menuToggle input:checked ~ span {
     opacity: 1;
     transform: rotate(45deg) translate(-2px, -1px);
-    background: ${(props) => props.theme.colors.dark};
+    background: ${(props) => props.theme.colors.darkBlue};
   }
 
   div#menuToggle input:checked ~ span:nth-last-child(3) {
@@ -66,23 +66,28 @@ const StyledMenu = styled.nav<{ isOpen: boolean }>`
 
   ul#menu {
     position: fixed;
-    top: -16px;
-    right: ${({ isOpen }) => (isOpen ? '0' : '-300px')};
-    width: 50%;
+    top: 45px;
+    right: ${({ isOpen }) => (isOpen ? '0' : '-420px')};
+    width: 100%;
     height: 100%;
-    background: ${(props) => props.theme.colors.softGrey};
+    background: ${(props) => props.theme.colors.white};
     list-style-type: none;
     transition: right 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
     display: flex;
     flex-direction: column;
     align-items: baseline;
     justify-content: flex-start;
-    padding: 50px 0 0 20px;
+    padding: 20px 0 0 20px;
   }
 
   ul#menu li {
     padding: 10px 0;
-    font-weight: 600;
+    font-weight: 400;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: ${(props) => props.theme.colors.dark};
   }
 
   div#menuToggle input:checked ~ ul#menu {
@@ -93,8 +98,11 @@ const StyledMenu = styled.nav<{ isOpen: boolean }>`
 
 export function Item({ name, href }: { name: string; href: string }) {
   return (
-    <Link href={href} style={{ textDecoration: 'none' }}>
-      <li>{name}</li>
+    <Link href={href} style={{ textDecoration: 'none', width: '85%' }}>
+      <li>
+        <div>{name}</div>
+        <div>O</div>
+      </li>
     </Link>
   );
 }
