@@ -1,4 +1,5 @@
 import Icon from './icons/icon.png';
+import arrowRight from './icons/arrowRight.svg';
 
 export { GlobalStyles } from './styles/GlobalStyles';
 export { Colors } from './styles/Colors';
@@ -16,4 +17,5 @@ export { Hide } from './components/Hide';
 
 export const Icons = {
   Icon,
+  arrowRight,
 };

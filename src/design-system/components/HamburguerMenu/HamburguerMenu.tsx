@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Image from 'next/image';
+import { Icons } from '../../index';
 
 const StyledMenu = styled.nav<{ isOpen: boolean }>`
   div#menuToggle {
@@ -98,10 +100,10 @@ const StyledMenu = styled.nav<{ isOpen: boolean }>`
 
 export function Item({ name, href }: { name: string; href: string }) {
   return (
-    <Link href={href} style={{ textDecoration: 'none', width: '85%' }}>
+    <Link href={href} style={{ textDecoration: 'none', width: '89%' }}>
       <li>
         <div>{name}</div>
-        <div>O</div>
+        <Image src={Icons.arrowRight} alt="arrowRight" width={12} height={12} />
       </li>
     </Link>
   );
