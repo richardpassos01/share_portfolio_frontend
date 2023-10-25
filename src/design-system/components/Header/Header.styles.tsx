@@ -19,7 +19,7 @@ export const Content = styled.header<ContentProps>`
   box-shadow: ${(props) =>
     props.boxShadown ? '0px 8px 12px rgba(200, 200, 200, 0.5)' : '0'};
 
-  @media ${(props) => props.theme.tokens.tablet} {
+  @media ${(props) => props.theme.tokens.MAX_WIDTH_TABLET} {
     padding: 0 2% 0 2%;
   }
 `;
@@ -30,7 +30,7 @@ export const HeaderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  @media ${(props) => props.theme.tokens.tablet} {
+  @media ${(props) => props.theme.tokens.MAX_WIDTH_TABLET} {
     flex-direction: column;
   }
 `;
@@ -45,11 +45,5 @@ export const HeaderTitle = styled.h2.attrs(() => ({
   className: dancingScript.className,
 }))`
   color: ${(props) => props.theme.colors.darkBlue};
-  margin-left: 15%;
-
-  @media ${(props) => props.theme.tokens.tablet} {
-    margin-left: 0;
-    margin-top: 10px;
-    text-align: center;
-  }
+  margin: 0 0 0 10px;
 `;

@@ -6,23 +6,18 @@ import {
 } from './Header.styles';
 import Image from 'next/image';
 import { HyperLink, Icons } from '../../index';
-import HamburguerMenu, { Item } from '@components/HamburguerMenu';
-import Routes from '@constants/Routes';
 
 interface Props {
   backgroundColor?: string;
   boxShadown?: boolean;
+  HamburgerMenu?: React.FC;
   children?: JSX.Element[];
 }
 
 const Header: React.FC<Props> = ({ backgroundColor, boxShadown, children }) => {
   return (
     <>
-      <HamburguerMenu>
-        <Item name="Entrar" href={Routes.SIGNIN} />
-        <Item name="Cadastrar" href={Routes.SIGNUP} />
-      </HamburguerMenu>
-      {/* <Content backgroundColor={backgroundColor} boxShadown={boxShadown}>
+      <Content backgroundColor={backgroundColor} boxShadown={boxShadown}>
         <HeaderContainer>
           <HeaderItem>
             <HyperLink href="/">
@@ -32,7 +27,7 @@ const Header: React.FC<Props> = ({ backgroundColor, boxShadown, children }) => {
           </HeaderItem>
           {children}
         </HeaderContainer>
-      </Content> */}
+      </Content>
     </>
   );
 };

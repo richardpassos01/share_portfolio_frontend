@@ -99,11 +99,7 @@ export function Item({ name, href }: { name: string; href: string }) {
   );
 }
 
-export default function HamburguerMenu({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function HamburguerMenu({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {

@@ -1,13 +1,10 @@
-const Size = {
-  mobile: '480px',
-  tablet: '768px',
-  desktop: '1024px',
-};
-
-const Tokens = {
-  mobile: `only screen and (max-width: ${Size.mobile})`,
-  tablet: `only screen and (max-width: ${Size.tablet})`,
-  desktop: `only screen and (max-width: ${Size.desktop})`,
-};
+enum Tokens {
+  MAX_WIDTH_MOBILE = 'only screen and (max-width: 480px)',
+  MAX_WIDTH_TABLET = 'only screen and (max-width: 768px)',
+  MAX_WIDTH_DESKTOP = 'only screen and (max-width: 1024px)',
+  MIN_WIDTH_MOBILE = 'only screen and (min-width: 480px)',
+  MIN_WIDTH_TABLET = 'only screen and (min-width: 768px)',
+  MIN_WIDTH_DESKTOP = 'only screen and (min-width: 1024px)',
+}
 
 export default Tokens;
