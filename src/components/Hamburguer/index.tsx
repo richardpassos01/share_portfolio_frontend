@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const StyledMenu = styled.nav`
+const StyledMenu = styled.nav<{ isOpen: boolean }>`
   div#menuToggle {
     display: block;
     position: fixed;
@@ -29,7 +29,7 @@ const StyledMenu = styled.nav`
     height: 4px;
     margin-bottom: 5px;
     position: relative;
-    background: #cdcdcd;
+    background: ${(props) => props.theme.colors.grey};
     border-radius: 3px;
     z-index: 1;
     transform-origin: 4px 0px;
@@ -50,7 +50,7 @@ const StyledMenu = styled.nav`
   div#menuToggle input:checked ~ span {
     opacity: 1;
     transform: rotate(45deg) translate(-2px, -1px);
-    background: #232323;
+    background: ${(props) => props.theme.colors.dark};
   }
 
   div#menuToggle input:checked ~ span:nth-last-child(3) {
@@ -69,7 +69,7 @@ const StyledMenu = styled.nav`
     right: ${({ isOpen }) => (isOpen ? '0' : '-300px')};
     width: 50%;
     height: 100%;
-    background: #ededed;
+    background: ${(props) => props.theme.colors.softGrey};
     list-style-type: none;
     -webkit-font-smoothing: antialiased;
     transition: right 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
@@ -77,7 +77,7 @@ const StyledMenu = styled.nav`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 55px;
+    padding: 50px 0 0 10px;
   }
 
   ul#menu li {
