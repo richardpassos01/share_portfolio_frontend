@@ -36,13 +36,13 @@ export const HeaderContainer = styled.div`
 `;
 
 export const HeaderItem = styled.div`
-  width: 95%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-  @media ${(props) => props.theme.tokens.MIN_WIDTH_TABLE} {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
+    width: 98%;
   }
 `;
 
