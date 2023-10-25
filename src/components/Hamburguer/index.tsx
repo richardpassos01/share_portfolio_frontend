@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const StyledMenu = styled.nav`
   div#menuToggle {
     display: block;
-    position: absolute;
+    position: fixed;
     top: 15px;
     right: 20px;
     z-index: 1;
     user-select: none;
-    height: 100%;
   }
 
   div#menuToggle input {
@@ -65,20 +64,20 @@ const StyledMenu = styled.nav`
   }
 
   ul#menu {
-    position: absolute;
-    width: 300px;
-    margin: -100px 0 0 0;
-    padding: 50px;
-    padding-top: 125px;
-    right: -100px;
+    position: fixed;
+    top: -16px;
+    right: ${({ isOpen }) => (isOpen ? '0' : '-300px')};
+    width: 50%;
+    height: 100%;
     background: #ededed;
     list-style-type: none;
     -webkit-font-smoothing: antialiased;
-    transform-origin: 0% 0%;
-    transform: translate(100%, 0);
-    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
-    opacity: 0;
-    height: 100%;
+    transition: right 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 55px;
   }
 
   ul#menu li {
@@ -93,10 +92,16 @@ const StyledMenu = styled.nav`
 `;
 
 export default function Menu() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
-    <StyledMenu>
+    <StyledMenu isOpen={menuOpen}>
       <div id="menuToggle">
-        <input type="checkbox" />
+        <input type="checkbox" checked={menuOpen} onChange={toggleMenu} />
         <span></span>
         <span></span>
         <span></span>
