@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -71,18 +72,17 @@ const StyledMenu = styled.nav<{ isOpen: boolean }>`
     height: 100%;
     background: ${(props) => props.theme.colors.softGrey};
     list-style-type: none;
-    -webkit-font-smoothing: antialiased;
     transition: right 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: baseline;
     justify-content: flex-start;
-    padding: 50px 0 0 10px;
+    padding: 50px 0 0 20px;
   }
 
   ul#menu li {
     padding: 10px 0;
-    font-size: 22px;
+    font-weight: 600;
   }
 
   div#menuToggle input:checked ~ ul#menu {
@@ -91,7 +91,19 @@ const StyledMenu = styled.nav<{ isOpen: boolean }>`
   }
 `;
 
-export default function Menu() {
+export function Item({ name, href }: { name: string; href: string }) {
+  return (
+    <Link href={href} style={{ textDecoration: 'none' }}>
+      <li>{name}</li>
+    </Link>
+  );
+}
+
+export default function HamburguerMenu({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -105,20 +117,7 @@ export default function Menu() {
         <span></span>
         <span></span>
         <span></span>
-        <ul id="menu">
-          <a href="#">
-            <li>Home</li>
-          </a>
-          <a href="#">
-            <li>About</li>
-          </a>
-          <a href="#">
-            <li>Info</li>
-          </a>
-          <a href="#">
-            <li>Contact</li>
-          </a>
-        </ul>
+        <ul id="menu">{children}</ul>
       </div>
     </StyledMenu>
   );

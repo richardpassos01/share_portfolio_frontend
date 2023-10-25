@@ -6,7 +6,8 @@ import {
 } from './Header.styles';
 import Image from 'next/image';
 import { HyperLink, Icons } from '../../index';
-import Menu from '@components/Hamburguer';
+import HamburguerMenu, { Item } from '@components/HamburguerMenu';
+import Routes from '@constants/Routes';
 
 interface Props {
   backgroundColor?: string;
@@ -17,7 +18,10 @@ interface Props {
 const Header: React.FC<Props> = ({ backgroundColor, boxShadown, children }) => {
   return (
     <>
-      <Menu />
+      <HamburguerMenu>
+        <Item name="Entrar" href={Routes.SIGNIN} />
+        <Item name="Cadastrar" href={Routes.SIGNUP} />
+      </HamburguerMenu>
       {/* <Content backgroundColor={backgroundColor} boxShadown={boxShadown}>
         <HeaderContainer>
           <HeaderItem>
