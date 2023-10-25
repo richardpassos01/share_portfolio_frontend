@@ -16,6 +16,7 @@ export const Button = styled.button<Props>`
   height: ${(props) => `${props.height}px` ?? '100%'};
   font-size: 90%;
   font-weight: 600;
+  font-family: 'Poppins', sans-serif;
   border-radius: 1.5em;
   align-items: center;
   justify-content: center;

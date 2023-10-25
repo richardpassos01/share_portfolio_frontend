@@ -80,8 +80,8 @@ export const StyledMenu = styled.nav<{ isOpen: boolean }>`
 
   ul#menu li {
     padding: 10px 0;
-    font-weight: 400;
     font-size: 18px;
+    font-family: 'Poppins', sans-serif;
     display: flex;
     align-items: center;
     justify-content: space-between;

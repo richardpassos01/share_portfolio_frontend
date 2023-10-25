@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-import { Open_Sans } from 'next/font/google';
-const dancingScript = Open_Sans({ weight: '500', subsets: ['latin'] });
-
 interface ContentProps {
   backgroundColor?: string;
   boxShadown?: boolean;
@@ -46,9 +43,9 @@ export const HeaderItem = styled.div`
   }
 `;
 
-export const HeaderTitle = styled.h2.attrs(() => ({
-  className: dancingScript.className,
-}))`
+export const HeaderTitle = styled.h2`
   color: ${(props) => props.theme.colors.darkBlue};
   margin: 0 0 0 10px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
 `;

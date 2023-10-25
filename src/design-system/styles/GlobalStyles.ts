@@ -2,12 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
   /* Mobile Styles */
-  * {
-    font-family: 'Open Sans', sans-serif;
-    font-family: 'Poppins', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-  }
 
   /* Box Sizing */
   *,
@@ -29,6 +23,9 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     margin: 0;
+    font-family: 'Open Sans', 'Poppins', 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
