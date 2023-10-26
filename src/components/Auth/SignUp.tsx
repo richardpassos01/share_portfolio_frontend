@@ -4,8 +4,8 @@ import styled from 'styled-components';
 const Container = styled.div`
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
 `;
 
 const MaterialTextField = styled.div`
@@ -40,18 +40,42 @@ const Input = styled.input`
     border-color: #6200ee;
   }
 
-  &:focus + ${Label} {
+  &:focus + ${Label}, &:not(:placeholder-shown) + ${Label} {
     color: #6200ee;
     top: 0;
     transform: translateY(-50%) scale(0.9);
   }
 `;
 
+const ErrorText = styled.p`
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+`;
+
 const App = () => {
   const [inputValue, setInputValue] = useState('');
+  const [error, setError] = useState('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+    const value = event.target.value;
+    setInputValue(value);
+  };
+
+  const handleInputBlur = () => {
+    if (!inputValue) {
+      return setError('Campo obrigatório');
+    }
+
+    const isValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(
+      inputValue,
+    );
+
+    if (!isValid) {
+      return setError('Email inválido');
+    }
+
+    return setError('');
   };
 
   return (
@@ -62,9 +86,11 @@ const App = () => {
           placeholder=" "
           value={inputValue}
           onChange={handleInputChange}
+          onBlur={handleInputBlur}
         />
         <Label>Email</Label>
       </MaterialTextField>
+      {error && <ErrorText>{error}</ErrorText>}
     </Container>
   );
 };
