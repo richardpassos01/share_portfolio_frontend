@@ -29,7 +29,8 @@ const Label = styled.label<{ error: boolean }>`
 `;
 
 const Input = styled.input<{ error: boolean }>`
-  font-size: 1rem;
+  font-size: 15px;
+  font-weight: 300;
   outline: none;
   border: 1px solid
     ${(props) =>
@@ -48,6 +49,7 @@ const Input = styled.input<{ error: boolean }>`
   }
 
   &:focus + ${Label}, &:not(:placeholder-shown) + ${Label} {
+    font-size: 14px;
     top: 0;
     transform: translateY(-50%) scale(0.9);
   }
@@ -69,15 +71,15 @@ const App = () => {
   };
 
   const handleInputBlur = () => {
+    const emailInput = document.getElementById(
+      'emailInput',
+    ) as HTMLInputElement;
+
     if (!inputValue) {
       return setError('Campo obrigatório');
     }
 
-    const isValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(
-      inputValue,
-    );
-
-    if (!isValid) {
+    if (emailInput.validity.typeMismatch) {
       return setError('Email inválido');
     }
 
@@ -88,12 +90,13 @@ const App = () => {
     <Container>
       <MaterialTextField>
         <Input
-          type="text"
+          type="email"
           placeholder=" "
           value={inputValue}
           onChange={handleInputChange}
           onBlur={handleInputBlur}
           error={Boolean(error)}
+          id="emailInput"
         />
         <Label error={Boolean(error)}>Email</Label>
       </MaterialTextField>
