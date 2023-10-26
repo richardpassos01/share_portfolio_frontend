@@ -28,7 +28,7 @@ export const StyledMenu = styled.nav<{ isOpen: boolean }>`
     height: 4px;
     margin-bottom: 5px;
     position: relative;
-    background: ${(props) => props.theme.colors.grey};
+    background: ${(props) => props.theme.colors.gray};
     border-radius: 3px;
     z-index: 1;
     transform-origin: 4px 0px;

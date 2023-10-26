@@ -12,14 +12,15 @@ const MaterialTextField = styled.div`
   position: relative;
 `;
 
-const Label = styled.label`
+const Label = styled.label<{ error: boolean }>`
   position: absolute;
   font-size: 1rem;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
   background-color: white;
-  color: gray;
+  color: ${(props) =>
+    props.error ? props.theme.colors.red : props.theme.colors.darkGray};
   padding: 0 0.3rem;
   margin: 0 0.5rem;
   transition: 0.1s ease-out;
@@ -27,21 +28,26 @@ const Label = styled.label`
   pointer-events: none;
 `;
 
-const Input = styled.input`
+const Input = styled.input<{ error: boolean }>`
   font-size: 1rem;
   outline: none;
-  border: 1px solid gray;
+  border: 1px solid
+    ${(props) =>
+      props.error ? props.theme.colors.red : props.theme.colors.gray};
   border-radius: 5px;
   padding: 1rem 0.7rem;
-  color: gray;
+  color: ${(props) => props.theme.colors.darkGray};
   transition: 0.1s ease-out;
 
   &:focus {
     border-color: #6200ee;
   }
 
-  &:focus + ${Label}, &:not(:placeholder-shown) + ${Label} {
+  &:focus + ${Label} {
     color: #6200ee;
+  }
+
+  &:focus + ${Label}, &:not(:placeholder-shown) + ${Label} {
     top: 0;
     transform: translateY(-50%) scale(0.9);
   }
@@ -87,8 +93,9 @@ const App = () => {
           value={inputValue}
           onChange={handleInputChange}
           onBlur={handleInputBlur}
+          error={Boolean(error)}
         />
-        <Label>Email</Label>
+        <Label error={Boolean(error)}>Email</Label>
       </MaterialTextField>
       {error && <ErrorText>{error}</ErrorText>}
     </Container>

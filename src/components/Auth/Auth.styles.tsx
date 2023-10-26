@@ -16,7 +16,7 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: colum;
   justify-content: space-between;
-  background-color: ${(props) => props.theme.colors.softGrey};
+  background-color: ${(props) => props.theme.colors.gray};
 
   @media ${(props) => props.theme.tokens.MIN_WIDTH_TABLET} {
     width: 40%;

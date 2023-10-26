@@ -7,7 +7,7 @@ const ProgressBarContainer = styled.div`
   left: 0;
   width: 100%;
   height: 4px;
-  background-color: ${(props) => props.theme.colors.grey};
+  background-color: ${(props) => props.theme.colors.gray};
   z-index: 999;
 `;
 
