@@ -1,7 +1,9 @@
 import Icon from './icons/icon.png';
 import Signin from './icons/signin.png';
 import Signup from './icons/signup.png';
-import arrowRight from './icons/arrowRight.svg';
+import ArrowRight from './icons/arrowRight.svg';
+import Eye from './icons/eye.svg';
+import EyeSlash from './icons/eyeSlash.svg';
 
 export { GlobalStyles } from './styles/GlobalStyles';
 export { Colors } from './styles/Colors';
@@ -16,10 +18,13 @@ export { Title } from './components/Title';
 export { StyledComponentsRegistry } from './components/StyledComponentsRegistry';
 export { default as Hamburger } from './components/HamburguerMenu';
 export { Hide } from './components/Hide';
+export { default as InputText } from './components/InputText';
 
 export const Icons = {
   Icon,
   Signin,
   Signup,
-  arrowRight,
+  ArrowRight,
+  Eye,
+  EyeSlash,
 };

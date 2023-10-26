@@ -7,7 +7,7 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Routes from '@constants/Routes';
 import { ImageContainer, Container, FormContainer } from './Auth.styles';
-import { Hide, Icons, Tokens } from '@designSystem';
+import { Hide, Icons, Tokens, InputText } from '@designSystem';
 
 type Props = {
   className?: string;
@@ -45,7 +45,10 @@ const Login = (props: Props) => {
         </ImageContainer>
       </Hide>
       <FormContainer>
-        <div className={props.className}>
+        <InputText.Email></InputText.Email>
+        <InputText.Password></InputText.Password>
+
+        {/* <div className={props.className}>
           <div className="bg-gradient-to-b  from-slate-50 to-slate-200 p-2 text-center text-slate-600">
             Login Form
           </div>
@@ -76,9 +79,9 @@ const Login = (props: Props) => {
               >
                 Cancel
               </Link>
-            </div>
-          </form>
-        </div>
+            </div> */}
+        {/* </form> */}
+        {/* </div> */}
       </FormContainer>
     </Container>
   );

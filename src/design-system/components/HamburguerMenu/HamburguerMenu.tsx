@@ -9,7 +9,7 @@ export function Item({ name, href }: { name: string; href: string }) {
     <Link href={href} style={{ textDecoration: 'none', width: '89%' }}>
       <li>
         <div>{name}</div>
-        <Image src={Icons.arrowRight} alt="arrowRight" width={12} height={12} />
+        <Image src={Icons.ArrowRight} alt="arrowRight" width={12} height={12} />
       </li>
     </Link>
   );
