@@ -1,4 +1,6 @@
 import Icon from './icons/icon.png';
+import Signin from './icons/signin.png';
+import Signup from './icons/signup.png';
 import arrowRight from './icons/arrowRight.svg';
 
 export { GlobalStyles } from './styles/GlobalStyles';
@@ -17,5 +19,7 @@ export { Hide } from './components/Hide';
 
 export const Icons = {
   Icon,
+  Signin,
+  Signup,
   arrowRight,
 };

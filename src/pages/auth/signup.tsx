@@ -1,11 +1,14 @@
+import { SignUp } from '@components/Auth';
+import { Header } from '@designSystem';
 import React from 'react';
 
-const SignInPage = () => {
+const SignUpPage = () => {
   return (
     <>
-      <h1>Sign Up</h1>
+      <Header />
+      <SignUp />
     </>
   );
 };
 
-export default SignInPage;
+export default SignUpPage;

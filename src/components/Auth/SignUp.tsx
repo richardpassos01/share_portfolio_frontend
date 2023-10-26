@@ -1,37 +1,38 @@
-import React, { useRef } from 'react';
-import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { Container } from './Auth.styles';
+import React from 'react';
 
-type Props = {
-  className?: string;
-  callbackUrl?: string;
-  error?: string;
+const styles = {
+  formControl: {
+    display: 'flex',
+    flexDirection: 'column',
+    margin: '20px',
+  },
+  label: {
+    fontSize: '16px',
+    marginBottom: '4px',
+    color: '#3f51b5', // Cor do rótulo
+  },
+  outlinedInput: {
+    border: '1px solid #ccc',
+    padding: '10px',
+    fontSize: '14px',
+    borderRadius: '4px',
+  },
 };
 
-const SignUp = (props: Props) => {
-  const router = useRouter();
-  const userName = useRef('');
-  const pass = useRef('');
+function MyTextField() {
+  return (
+    <div style={styles.formControl}>
+      <label htmlFor="component-outlined" style={styles.label}>
+        Namae
+      </label>
+      <input
+        type="text"
+        id="component-outlined"
+        style={styles.outlinedInput}
+        defaultValue="Composed TextField"
+      />
+    </div>
+  );
+}
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const res = await signIn('credentials', {
-      username: userName.current,
-      password: pass.current,
-      redirect: false,
-    });
-
-    if (res?.error) {
-      window.alert('error');
-    }
-
-    if (!res?.error) {
-      router.push(props.callbackUrl ?? 'http://localhost:3000/dashboard');
-    }
-  };
-
-  return <Container></Container>;
-};
-
-export default SignUp;
+export default MyTextField;
