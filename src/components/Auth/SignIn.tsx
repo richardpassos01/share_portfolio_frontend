@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import InputBox from '../InputBox';
 import { Button } from '../Button';
 import Link from 'next/link';
@@ -7,12 +7,63 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Routes from '@constants/Routes';
 import { ImageContainer, Container, FormContainer } from './Auth.styles';
-import { Hide, Icons, Tokens, InputText } from '@designSystem';
+import { Hide, Icons, Tokens, Input } from '@designSystem';
 
 type Props = {
   className?: string;
   callbackUrl?: string;
   error?: string;
+};
+const Form = () => {
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  const handleEmailBlur = () => {
+    setEmailError('');
+
+    if (!emailValue) {
+      setEmailError('Campo obrigatório');
+    } else if (!isEmailValid(emailValue)) {
+      setEmailError('Email inválido');
+    }
+  };
+
+  const handlePasswordBlur = () => {
+    setPasswordError('');
+    if (!passwordValue) {
+      setPasswordError('Campo obrigatório');
+    }
+  };
+
+  const isEmailValid = (email: string) => {
+    return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleEmailBlur();
+    handlePasswordBlur();
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Input.Email
+        value={emailValue}
+        onChange={(e) => setEmailValue(e.target.value)}
+        onBlur={handleEmailBlur}
+        error={emailError}
+      />
+      <Input.Password
+        value={passwordValue}
+        onChange={(e) => setPasswordValue(e.target.value)}
+        onBlur={handlePasswordBlur}
+        error={passwordError}
+      />
+      <button type="submit">Enviar</button>
+    </form>
+  );
 };
 
 const Login = (props: Props) => {
@@ -45,9 +96,6 @@ const Login = (props: Props) => {
         </ImageContainer>
       </Hide>
       <FormContainer>
-        <InputText.Email></InputText.Email>
-        <InputText.Password></InputText.Password>
-
         {/* <div className={props.className}>
           <div className="bg-gradient-to-b  from-slate-50 to-slate-200 p-2 text-center text-slate-600">
             Login Form
@@ -79,9 +127,10 @@ const Login = (props: Props) => {
               >
                 Cancel
               </Link>
-            </div> */}
-        {/* </form> */}
-        {/* </div> */}
+            </div>
+          </form>
+        </div> */}
+        <Form />
       </FormContainer>
     </Container>
   );

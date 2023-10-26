@@ -1,9 +1,9 @@
 import Email from './Email';
 import Password from './Password';
 
-const InputText = {
+const Input = {
   Email,
   Password,
 };
 
-export default InputText;
+export default Input;

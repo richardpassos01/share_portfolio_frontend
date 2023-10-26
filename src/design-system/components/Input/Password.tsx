@@ -1,39 +1,48 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
 import {
   Container,
   ErrorText,
   Input,
   Label,
-  TextField,
   ShowPasswordButton,
-} from './InputText.styles';
-import { Icons } from '@designSystem';
+  TextField,
+} from './Input.styles';
+import Image from 'next/image';
+import { Icons } from '../../index';
 
-const InputEmail = () => {
-  const [inputValue, setInputValue] = useState('');
-  const [error, setError] = useState('');
+interface Props {
+  value: string;
+  onBlur: () => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error: string;
+}
+
+export const InputPassword: React.FC<Props> = ({
+  value,
+  onBlur,
+  onChange,
+  error,
+}) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setInputValue(value);
-  };
+  const [inputType, setInputType] = useState('password');
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
+    setInputType(passwordVisible ? 'text' : 'password');
   };
 
   return (
     <Container>
       <TextField>
         <Input
-          type={passwordVisible ? 'text' : 'password'}
+          type={inputType}
+          id="passwordInput"
           placeholder=" "
-          value={inputValue}
-          onChange={handleInputChange}
+          value={value}
+          onChange={onChange}
           error={Boolean(error)}
-          maxLength={30}
+          onBlur={onBlur}
+          maxLength={20}
         />
         <Label error={Boolean(error)}>Senha</Label>
         <ShowPasswordButton onClick={togglePasswordVisibility}>
@@ -49,4 +58,4 @@ const InputEmail = () => {
   );
 };
 
-export default InputEmail;
+export default InputPassword;

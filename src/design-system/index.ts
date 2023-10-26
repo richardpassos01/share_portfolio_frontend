@@ -18,7 +18,7 @@ export { Title } from './components/Title';
 export { StyledComponentsRegistry } from './components/StyledComponentsRegistry';
 export { default as Hamburger } from './components/HamburguerMenu';
 export { Hide } from './components/Hide';
-export { default as InputText } from './components/InputText';
+export { default as Input } from './components/Input';
 
 export const Icons = {
   Icon,

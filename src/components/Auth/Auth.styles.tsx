@@ -21,6 +21,6 @@ export const FormContainer = styled.div`
   @media ${(props) => props.theme.tokens.MIN_WIDTH_TABLET} {
     width: 40%;
     height: 100vh;
-    margin-top: -80px;
+    margin-top: -50px;
   }
 `;
