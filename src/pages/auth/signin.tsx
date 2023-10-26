@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from '@components/Login';
+import { SignIn } from '@components/Auth';
 import { Header } from '@designSystem';
 
 type Props = {
@@ -10,7 +10,7 @@ const SignInPage = (props: Props) => {
   return (
     <>
       <Header />
-      <Login
+      <SignIn
         error={props.searchParams?.error}
         callbackUrl={props.searchParams?.callbackUrl}
       />
