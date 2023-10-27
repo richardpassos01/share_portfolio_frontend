@@ -12,7 +12,7 @@ export const TextField = styled.div`
   width: 100%;
 `;
 
-export const Label = styled.label<{ error: boolean }>`
+export const Label = styled.label<{ $error: string }>`
   position: absolute;
   font-size: 1rem;
   left: 0;
@@ -20,7 +20,7 @@ export const Label = styled.label<{ error: boolean }>`
   transform: translateY(-50%);
   background-color: white;
   color: ${(props) =>
-    props.error ? props.theme.colors.red : props.theme.colors.darkGray};
+    props.$error ? props.theme.colors.red : props.theme.colors.darkGray};
   padding: 0 0.3rem;
   margin: 0 0.5rem;
   transition: 0.1s ease-out;
@@ -29,14 +29,14 @@ export const Label = styled.label<{ error: boolean }>`
   user-select: none;
 `;
 
-export const Input = styled.input<{ error: boolean }>`
+export const Input = styled.input<{ $error: string }>`
   width: 100%;
   font-size: 15px;
   font-weight: 300;
   outline: none;
   border: 1px solid
     ${(props) =>
-      props.error ? props.theme.colors.red : props.theme.colors.gray};
+      props.$error ? props.theme.colors.red : props.theme.colors.gray};
   border-radius: 5px;
   padding: 1rem 0.7rem;
   color: ${(props) => props.theme.colors.darkGray};

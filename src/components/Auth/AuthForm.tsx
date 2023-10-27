@@ -94,10 +94,12 @@ const AuthForm: React.FC<Props> = ({
 
   return (
     <>
-      {Boolean(submitError) && (
+      {submitError ? (
         <ErrorContainer>
           <Paragraph color={Colors.red}>{submitError}</Paragraph>
         </ErrorContainer>
+      ) : (
+        <></>
       )}
 
       <Form onSubmit={handleSubmit}>

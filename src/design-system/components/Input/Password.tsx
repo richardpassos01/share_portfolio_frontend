@@ -38,11 +38,11 @@ export const InputPassword: React.FC<Props> = ({
           placeholder=" "
           value={value}
           onChange={onChange}
-          error={Boolean(error)}
           onBlur={onBlur}
           maxLength={20}
+          $error={error}
         />
-        <Label error={Boolean(error)}>Senha</Label>
+        <Label $error={error}>Senha</Label>
         <ShowPasswordButton onClick={togglePasswordVisibility}>
           {passwordVisible ? (
             <Image src={Icons.Eye} alt="eye" width={20} height={20} />

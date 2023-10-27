@@ -22,12 +22,12 @@ export const InputUsername: React.FC<Props> = ({
           id="usernameInput"
           placeholder=" "
           value={value}
-          error={Boolean(error)}
           onChange={onChange}
           onBlur={onBlur}
           maxLength={20}
+          $error={error}
         />
-        <Label error={Boolean(error)}>Username</Label>
+        <Label $error={error}>Username</Label>
       </TextField>
       {error && <ErrorText>{error}</ErrorText>}
     </Container>

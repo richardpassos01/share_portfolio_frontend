@@ -10,7 +10,7 @@ interface Props {
 
 export default function Hide({ on, children, width }: Props) {
   return (
-    <Container token={on} width={width}>
+    <Container $token={on} width={width}>
       {children}
     </Container>
   );
