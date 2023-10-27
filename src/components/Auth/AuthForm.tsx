@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Button, Input } from '@designSystem';
+import React, { useState, useEffect } from 'react';
+import { Button, Colors, Input, Paragraph } from '@designSystem';
 import { ErrorContainer, Form, SubmitContainer } from './Auth.styles';
+import Messages from '@constants/Messages';
 
 type Props = {
   submitError: string;
@@ -13,12 +14,21 @@ const AuthForm: React.FC<Props> = ({ submitError, setSubmitError, submit }) => {
   const [passwordValue, setPasswordValue] = useState('');
   const [usernameError, setUsernameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+
+  useEffect(() => {
+    if (!usernameError && !passwordError && usernameValue && passwordValue) {
+      return setIsSubmitDisabled(false);
+    }
+
+    return setIsSubmitDisabled(true);
+  }, [usernameError, passwordError, usernameValue, passwordValue]);
 
   const handleUsernameBlur = () => {
     setUsernameError('');
 
     if (!usernameValue) {
-      return setUsernameError('Campo obrigatório');
+      setUsernameError(Messages.MISSING_FIELD);
     }
   };
 
@@ -26,7 +36,7 @@ const AuthForm: React.FC<Props> = ({ submitError, setSubmitError, submit }) => {
     setPasswordError('');
 
     if (!passwordValue) {
-      setPasswordError('Campo obrigatório');
+      setPasswordError(Messages.MISSING_FIELD);
     }
   };
 
@@ -35,7 +45,7 @@ const AuthForm: React.FC<Props> = ({ submitError, setSubmitError, submit }) => {
     handleUsernameBlur();
     handlePasswordBlur();
 
-    if (!usernameError && !passwordError && usernameValue && passwordValue) {
+    if (!isSubmitDisabled) {
       submit(usernameValue, passwordValue);
     }
   };
@@ -50,28 +60,34 @@ const AuthForm: React.FC<Props> = ({ submitError, setSubmitError, submit }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Input.Username
-        value={usernameValue}
-        onChange={(e) => handleOnChange(e, setUsernameValue)}
-        onBlur={handleUsernameBlur}
-        error={usernameError}
-      />
-      <Input.Password
-        value={passwordValue}
-        onChange={(e) => handleOnChange(e, setPasswordValue)}
-        onBlur={handlePasswordBlur}
-        error={passwordError}
-      />
+    <>
+      {Boolean(submitError) && (
+        <ErrorContainer>
+          <Paragraph color={Colors.red}>{submitError}</Paragraph>
+        </ErrorContainer>
+      )}
 
-      {Boolean(submitError) && <ErrorContainer>{submitError}</ErrorContainer>}
-
-      <SubmitContainer>
-        <Button type="submit" height="45" disabled={true}>
-          Login
-        </Button>
-      </SubmitContainer>
-    </Form>
+      <Form onSubmit={handleSubmit}>
+        <Input.Username
+          value={usernameValue}
+          onChange={(e) => handleOnChange(e, setUsernameValue)}
+          onBlur={handleUsernameBlur}
+          error={usernameError}
+        />
+        <Input.Password
+          value={passwordValue}
+          onChange={(e) => handleOnChange(e, setPasswordValue)}
+          onBlur={handlePasswordBlur}
+          error={passwordError}
+        />
+        <SubmitContainer>
+          <Button type="submit" height="45" disabled={isSubmitDisabled}>
+            Login
+          </Button>
+        </SubmitContainer>
+      </Form>
+    </>
   );
 };
+
 export default AuthForm;

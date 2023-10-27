@@ -16,8 +16,11 @@ export const ImageContainer = styled.div`
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  padding: 5%;
 
   @media ${(props) => props.theme.tokens.MIN_WIDTH_TABLET} {
+    padding: 0;
     width: 40%;
     margin: 0 50px 0 28px;
   }
@@ -31,7 +34,13 @@ export const Form = styled.form`
   height: 12em;
 `;
 
-export const ErrorContainer = styled.div``;
+export const ErrorContainer = styled.div`
+  border: 1px solid red;
+  border-radius: 5px;
+  margin-bottom: 26px;
+  padding: 0 0 0 11px;
+  background-color: #fcd;
+`;
 
 export const SubmitContainer = styled.div`
   width: 100%;

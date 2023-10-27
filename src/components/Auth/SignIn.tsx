@@ -6,6 +6,7 @@ import { ImageContainer, Container, FormContainer } from './Auth.styles';
 import { Hide, Icons, Tokens, Input, Title } from '@designSystem';
 import AuthForm from './AuthForm';
 import Routes from '@constants/Routes';
+import Messages from '@constants/Messages';
 
 const SignIn: React.FC = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const SignIn: React.FC = () => {
     });
 
     if (response?.error) {
-      setSubmitError('Usuario ou senha inválidos');
+      setSubmitError(Messages.MIS_INFORMATION);
     }
 
     if (!response?.error) {
