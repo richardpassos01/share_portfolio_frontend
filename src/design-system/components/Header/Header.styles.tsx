@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Title } from '../Title';
 
 interface ContentProps {
   backgroundColor?: string;
@@ -43,9 +44,6 @@ export const HeaderItem = styled.div`
   }
 `;
 
-export const HeaderTitle = styled.h2`
-  color: ${(props) => props.theme.colors.darkBlue};
+export const HeaderTitle = styled(Title)`
   margin: 0 0 0 10px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
 `;

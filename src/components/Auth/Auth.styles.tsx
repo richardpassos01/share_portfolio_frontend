@@ -15,11 +15,24 @@ export const ImageContainer = styled.div`
 
 export const FormContainer = styled.div`
   display: flex;
-  flex-direction: colum;
-  justify-content: space-between;
+  flex-direction: column;
 
   @media ${(props) => props.theme.tokens.MIN_WIDTH_TABLET} {
-    width: 60%;
-    margin-left: 5%;
+    width: 40%;
+    margin: 0 50px 0 28px;
   }
+`;
+
+export const Form = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 12em;
+`;
+
+export const ErrorContainer = styled.div``;
+
+export const SubmitContainer = styled.div`
+  width: 100%;
 `;

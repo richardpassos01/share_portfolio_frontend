@@ -4,13 +4,11 @@ interface Props {
   color?: string;
 }
 
-export const Span = styled.span<Props>`
-  font-family: system-ui;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.5em;
-  line-height: 32px;
-  color: ${(props) => props.color ?? props.theme.colors.black};
-  margin-left: 0.3em;
-  font-size: 27px;
+const Title = styled.h2<Props>`
+  color: ${(props) => props.theme.colors.darkBlue};
+  font-family: 'Roboto', sans-serif;
+  font-size: 30px;
+  font-weight: 500;
 `;
+
+export default Title;

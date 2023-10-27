@@ -4,10 +4,12 @@ export const Container = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const TextField = styled.div`
   position: relative;
+  width: 100%;
 `;
 
 export const Label = styled.label<{ error: boolean }>`
@@ -24,9 +26,11 @@ export const Label = styled.label<{ error: boolean }>`
   transition: 0.1s ease-out;
   transform-origin: left top;
   pointer-events: none;
+  user-select: none;
 `;
 
 export const Input = styled.input<{ error: boolean }>`
+  width: 100%;
   font-size: 15px;
   font-weight: 300;
   outline: none;
@@ -39,11 +43,11 @@ export const Input = styled.input<{ error: boolean }>`
   transition: 0.1s ease-out;
 
   &:focus {
-    border-color: #6200ee;
+    border-color: ${(props) => props.theme.colors.blue};
   }
 
   &:focus + ${Label} {
-    color: #6200ee;
+    color: ${(props) => props.theme.colors.blue};
   }
 
   &:focus + ${Label}, &:not(:placeholder-shown) + ${Label} {
@@ -54,18 +58,32 @@ export const Input = styled.input<{ error: boolean }>`
 `;
 
 export const ErrorText = styled.p`
-  color: red;
+  color: ${(props) => props.theme.colors.red};
   font-size: 0.8rem;
   margin-top: 0.2rem;
 `;
 
-export const ShowPasswordButton = styled.button`
+export const ShowPasswordButton = styled.div`
   position: absolute;
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  background-color: transparent;
-  border: none;
   cursor: pointer;
-  outline: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background-color: transparent;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s;
+    margin: -7px 0 0 -7.5px;
+  }
+
+  &:hover::before {
+    background-color: ${(props) => props.theme.colors.gray};
+    opacity: 0.5;
+  }
 `;

@@ -80,7 +80,7 @@ const App = () => {
     }
 
     if (emailInput.validity.typeMismatch) {
-      return setError('Email inválido');
+      return setError('Username inválido');
     }
 
     return setError('');

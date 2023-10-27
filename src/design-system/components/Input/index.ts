@@ -1,8 +1,8 @@
-import Email from './Email';
+import Username from './Username';
 import Password from './Password';
 
 const Input = {
-  Email,
+  Username,
   Password,
 };
 

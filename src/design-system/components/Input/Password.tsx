@@ -24,18 +24,16 @@ export const InputPassword: React.FC<Props> = ({
   error,
 }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [inputType, setInputType] = useState('password');
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
-    setInputType(passwordVisible ? 'text' : 'password');
   };
 
   return (
     <Container>
       <TextField>
         <Input
-          type={inputType}
+          type={passwordVisible ? 'text' : 'password'}
           id="passwordInput"
           placeholder=" "
           value={value}
@@ -47,9 +45,9 @@ export const InputPassword: React.FC<Props> = ({
         <Label error={Boolean(error)}>Senha</Label>
         <ShowPasswordButton onClick={togglePasswordVisibility}>
           {passwordVisible ? (
-            <Image src={Icons.Eye} alt="Eye" width={20} height={20} />
+            <Image src={Icons.Eye} alt="eye" width={20} height={20} />
           ) : (
-            <Image src={Icons.EyeSlash} alt="EyeSlash" width={20} height={20} />
+            <Image src={Icons.EyeSlash} alt="eyeSlash" width={20} height={20} />
           )}
         </ShowPasswordButton>
       </TextField>
