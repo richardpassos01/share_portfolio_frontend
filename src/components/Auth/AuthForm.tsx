@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Colors, Input, Paragraph } from '@designSystem';
-import { ErrorContainer, Form, SubmitContainer } from './Auth.styles';
+import { Button, Colors, HyperLink, Input, Paragraph } from '@designSystem';
+import {
+  ErrorContainer,
+  SignUpContainer,
+  Form,
+  SubmitContainer,
+} from './Auth.styles';
 import Messages from '@constants/Messages';
+import Routes from '@constants/Routes';
+import { useRouter } from 'next/router';
 
 type Props = {
   submitError: string;
@@ -10,11 +17,16 @@ type Props = {
 };
 
 const AuthForm: React.FC<Props> = ({ submitError, setSubmitError, submit }) => {
+  const router = useRouter();
   const [usernameValue, setUsernameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [usernameError, setUsernameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+
+  const handleSignUp = () => {
+    router.push(Routes.SIGNUP);
+  };
 
   useEffect(() => {
     if (!usernameError && !passwordError && usernameValue && passwordValue) {
@@ -86,6 +98,13 @@ const AuthForm: React.FC<Props> = ({ submitError, setSubmitError, submit }) => {
           </Button>
         </SubmitContainer>
       </Form>
+
+      <SignUpContainer>
+        <Paragraph color={Colors.gray}>Novo na plataforma?</Paragraph>
+        <HyperLink color={Colors.blue} fontSize="14" onClick={handleSignUp}>
+          Criar conta
+        </HyperLink>
+      </SignUpContainer>
     </>
   );
 };

@@ -42,6 +42,17 @@ export const ErrorContainer = styled.div`
   background-color: #fcd;
 `;
 
+export const SignUpContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+
+  a {
+    margin: 10px;
+  }
+`;
+
 export const SubmitContainer = styled.div`
   width: 100%;
 `;

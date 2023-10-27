@@ -9,7 +9,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setIsLoading(status !== 'loading' ? false : true);
-    }, 500);
+    }, 200);
 
     return () => {
       clearTimeout(timeoutId);

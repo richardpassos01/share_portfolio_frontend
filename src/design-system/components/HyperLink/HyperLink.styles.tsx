@@ -20,7 +20,7 @@ export const HyperLink = styled.a<Props>`
   text-decoration: none;
   font-family: system-ui;
   font-family: 'Poppins', sans-serif;
-  font-size: ${(props) => props.fontSize ?? '16px'};
+  font-size: ${(props) => (props.fontSize ? `${props.fontSize}px` : '16px')};
   cursor: pointer;
 `;
 
