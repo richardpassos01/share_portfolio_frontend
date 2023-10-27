@@ -36,7 +36,7 @@ const SignIn: React.FC = () => {
         </ImageContainer>
       </Hide>
       <FormContainer>
-        <Title>Bem vindo</Title>
+        <Title>Faça seu login</Title>
         <AuthForm
           submit={onSubmit}
           setSubmitError={setSubmitError}

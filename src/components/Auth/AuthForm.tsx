@@ -21,11 +21,13 @@ const RedirectTexts = {
   signUp: {
     paragraph: 'Já possui uma conta?',
     link: 'Fazer login',
+    submit: 'Cadastrar',
     redirectTo: Routes.SIGNIN,
   },
   signIn: {
     paragraph: 'Novo na plataforma?',
     link: 'Criar conta',
+    submit: 'Acessar',
     redirectTo: Routes.SIGNUP,
   },
 };
@@ -113,7 +115,7 @@ const AuthForm: React.FC<Props> = ({
         />
         <SubmitContainer>
           <Button type="submit" height="45" disabled={isSubmitDisabled}>
-            Login
+            {RedirectTexts[target].submit}
           </Button>
         </SubmitContainer>
       </Form>

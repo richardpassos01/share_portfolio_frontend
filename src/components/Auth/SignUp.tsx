@@ -13,19 +13,7 @@ const SignUp: React.FC = () => {
   const [submitError, setSubmitError] = useState('');
 
   const onSubmit = async (username: string, password: string) => {
-    const response = await signIn('credentials', {
-      username,
-      password,
-      redirect: false,
-    });
-
-    if (response?.error) {
-      setSubmitError(Messages.MIS_INFORMATION);
-    }
-
-    if (!response?.error) {
-      router.push(Routes.DASHBOARD);
-    }
+    alert('create account');
   };
 
   return (
@@ -36,7 +24,7 @@ const SignUp: React.FC = () => {
         </ImageContainer>
       </Hide>
       <FormContainer>
-        <Title>Bem vindo</Title>
+        <Title>Faça seu cadastro</Title>
         <AuthForm
           submit={onSubmit}
           setSubmitError={setSubmitError}
