@@ -14,6 +14,7 @@ type Props = {
   callbackUrl?: string;
   error?: string;
 };
+
 const Form = () => {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
@@ -24,9 +25,11 @@ const Form = () => {
     setEmailError('');
 
     if (!emailValue) {
-      setEmailError('Campo obrigatório');
-    } else if (!isEmailValid(emailValue)) {
-      setEmailError('Email inválido');
+      return setEmailError('Campo obrigatório');
+    }
+
+    if (!isEmailValid(emailValue)) {
+      return setEmailError('Email inválido');
     }
   };
 
@@ -41,8 +44,8 @@ const Form = () => {
     return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     handleEmailBlur();
     handlePasswordBlur();
   };

@@ -10,17 +10,16 @@ export const ImageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  border-right: 1px solid ${(props) => props.theme.colors.gray};
 `;
 
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: colum;
   justify-content: space-between;
-  background-color: ${(props) => props.theme.colors.gray};
 
   @media ${(props) => props.theme.tokens.MIN_WIDTH_TABLET} {
-    width: 40%;
-    height: 100vh;
-    margin-top: -50px;
+    width: 60%;
+    margin-left: 5%;
   }
 `;
