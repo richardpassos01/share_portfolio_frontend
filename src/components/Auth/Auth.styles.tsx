@@ -42,7 +42,7 @@ export const ErrorContainer = styled.div`
   background-color: #fcd;
 `;
 
-export const SignUpContainer = styled.div`
+export const RedirectContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

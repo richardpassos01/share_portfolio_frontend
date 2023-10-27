@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Colors, HyperLink, Input, Paragraph } from '@designSystem';
 import {
   ErrorContainer,
-  SignUpContainer,
+  RedirectContainer,
   Form,
   SubmitContainer,
 } from './Auth.styles';
@@ -13,10 +13,29 @@ import { useRouter } from 'next/router';
 type Props = {
   submitError: string;
   setSubmitError: Function;
+  target: 'signIn' | 'signUp';
   submit: (username: string, password: string) => Promise<void>;
 };
 
-const AuthForm: React.FC<Props> = ({ submitError, setSubmitError, submit }) => {
+const RedirectTexts = {
+  signUp: {
+    paragraph: 'Já possui uma conta?',
+    link: 'Fazer login',
+    redirectTo: Routes.SIGNIN,
+  },
+  signIn: {
+    paragraph: 'Novo na plataforma?',
+    link: 'Criar conta',
+    redirectTo: Routes.SIGNUP,
+  },
+};
+
+const AuthForm: React.FC<Props> = ({
+  submitError,
+  setSubmitError,
+  submit,
+  target,
+}) => {
   const router = useRouter();
   const [usernameValue, setUsernameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
@@ -25,7 +44,7 @@ const AuthForm: React.FC<Props> = ({ submitError, setSubmitError, submit }) => {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
   const handleSignUp = () => {
-    router.push(Routes.SIGNUP);
+    router.push(RedirectTexts[target].redirectTo);
   };
 
   useEffect(() => {
@@ -99,12 +118,14 @@ const AuthForm: React.FC<Props> = ({ submitError, setSubmitError, submit }) => {
         </SubmitContainer>
       </Form>
 
-      <SignUpContainer>
-        <Paragraph color={Colors.gray}>Novo na plataforma?</Paragraph>
+      <RedirectContainer>
+        <Paragraph color={Colors.gray}>
+          {RedirectTexts[target].paragraph}
+        </Paragraph>
         <HyperLink color={Colors.blue} fontSize="14" onClick={handleSignUp}>
-          Criar conta
+          {RedirectTexts[target].link}
         </HyperLink>
-      </SignUpContainer>
+      </RedirectContainer>
     </>
   );
 };

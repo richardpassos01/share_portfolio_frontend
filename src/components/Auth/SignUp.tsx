@@ -1,108 +1,51 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import Image from 'next/image';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { ImageContainer, Container, FormContainer } from './Auth.styles';
+import { Hide, Icons, Tokens, Input, Title } from '@designSystem';
+import AuthForm from './AuthForm';
+import Routes from '@constants/Routes';
+import Messages from '@constants/Messages';
 
-const Container = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-`;
+const SignUp: React.FC = () => {
+  const router = useRouter();
+  const [submitError, setSubmitError] = useState('');
 
-const MaterialTextField = styled.div`
-  position: relative;
-`;
+  const onSubmit = async (username: string, password: string) => {
+    const response = await signIn('credentials', {
+      username,
+      password,
+      redirect: false,
+    });
 
-const Label = styled.label<{ error: boolean }>`
-  position: absolute;
-  font-size: 1rem;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: white;
-  color: ${(props) =>
-    props.error ? props.theme.colors.red : props.theme.colors.darkGray};
-  padding: 0 0.3rem;
-  margin: 0 0.5rem;
-  transition: 0.1s ease-out;
-  transform-origin: left top;
-  pointer-events: none;
-`;
-
-const Input = styled.input<{ error: boolean }>`
-  font-size: 15px;
-  font-weight: 300;
-  outline: none;
-  border: 1px solid
-    ${(props) =>
-      props.error ? props.theme.colors.red : props.theme.colors.gray};
-  border-radius: 5px;
-  padding: 1rem 0.7rem;
-  color: ${(props) => props.theme.colors.darkGray};
-  transition: 0.1s ease-out;
-
-  &:focus {
-    border-color: #6200ee;
-  }
-
-  &:focus + ${Label} {
-    color: #6200ee;
-  }
-
-  &:focus + ${Label}, &:not(:placeholder-shown) + ${Label} {
-    font-size: 14px;
-    top: 0;
-    transform: translateY(-50%) scale(0.9);
-  }
-`;
-
-const ErrorText = styled.p`
-  color: red;
-  font-size: 0.8rem;
-  margin-top: 0.2rem;
-`;
-
-const App = () => {
-  const [inputValue, setInputValue] = useState('');
-  const [error, setError] = useState('');
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setInputValue(value);
-  };
-
-  const handleInputBlur = () => {
-    const emailInput = document.getElementById(
-      'emailInput',
-    ) as HTMLInputElement;
-
-    if (!inputValue) {
-      return setError('Campo obrigatório');
+    if (response?.error) {
+      setSubmitError(Messages.MIS_INFORMATION);
     }
 
-    if (emailInput.validity.typeMismatch) {
-      return setError('Username inválido');
+    if (!response?.error) {
+      router.push(Routes.DASHBOARD);
     }
-
-    return setError('');
   };
 
   return (
     <Container>
-      <MaterialTextField>
-        <Input
-          type="email"
-          placeholder=" "
-          value={inputValue}
-          onChange={handleInputChange}
-          onBlur={handleInputBlur}
-          error={Boolean(error)}
-          id="emailInput"
+      <Hide on={Tokens.MAX_WIDTH_MOBILE} width="100%">
+        <ImageContainer>
+          <Image src={Icons.Signup} alt="Signup" width={650} height={600} />
+        </ImageContainer>
+      </Hide>
+      <FormContainer>
+        <Title>Bem vindo</Title>
+        <AuthForm
+          submit={onSubmit}
+          setSubmitError={setSubmitError}
+          submitError={submitError}
+          target="signUp"
         />
-        <Label error={Boolean(error)}>Email</Label>
-      </MaterialTextField>
-      {error && <ErrorText>{error}</ErrorText>}
+      </FormContainer>
     </Container>
   );
 };
 
-export default App;
+export default SignUp;
