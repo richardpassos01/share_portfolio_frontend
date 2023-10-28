@@ -19,7 +19,7 @@ const SignUp: React.FC = () => {
       return setSubmitError(Messages.SIGNUP_FAILURE);
     }
 
-    return signIn(Providers.SIGNUP_PROVIDER, {
+    signIn(Providers.SIGNUP_PROVIDER, {
       username,
       password,
       callbackUrl: Routes.DASHBOARD,
@@ -33,7 +33,7 @@ const SignUp: React.FC = () => {
           <Image src={Icons.Signup} alt="Signup" width={650} height={600} />
         </ImageContainer>
       </Hide>
-      <FormContainer>
+      <FormContainer $error={Boolean(submitError)}>
         <Title>Faça seu cadastro</Title>
         <AuthForm
           submit={onSubmit}
