@@ -36,7 +36,7 @@ const SignIn: React.FC = () => {
           <Image src={Icons.Signin} alt="signin" width={650} height={600} />
         </ImageContainer>
       </Hide>
-      <FormContainer>
+      <FormContainer $error={Boolean(submitError)}>
         <Title>Faça seu login</Title>
         <AuthForm
           submit={onSubmit}

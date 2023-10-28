@@ -96,7 +96,7 @@ const AuthForm: React.FC<Props> = ({
     <>
       {submitError ? (
         <ErrorContainer>
-          <Paragraph color={Colors.red}>{submitError}</Paragraph>
+          <Paragraph $color={Colors.red}>{submitError}</Paragraph>
         </ErrorContainer>
       ) : (
         <></>
@@ -115,15 +115,15 @@ const AuthForm: React.FC<Props> = ({
           onBlur={handlePasswordBlur}
           error={passwordError}
         />
-        <SubmitContainer>
+        <SubmitContainer $error={Boolean(usernameError)}>
           <Button type="submit" $height="45" disabled={isSubmitDisabled}>
             {RedirectTexts[target].submit}
           </Button>
         </SubmitContainer>
       </Form>
 
-      <RedirectContainer>
-        <Paragraph color={Colors.gray}>
+      <RedirectContainer $errors={Boolean(usernameError && passwordError)}>
+        <Paragraph $color={Colors.darkGray}>
           {RedirectTexts[target].paragraph}
         </Paragraph>
         <HyperLink color={Colors.blue} fontSize="14" onClick={handleSignUp}>

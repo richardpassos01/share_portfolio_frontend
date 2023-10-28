@@ -79,7 +79,7 @@ export const ShowPasswordButton = styled.div`
     border-radius: 50%;
     opacity: 0;
     transition: opacity 0.3s;
-    margin: -7px 0 0 -7.5px;
+    margin: -7px 0 0 -8px;
   }
 
   &:hover::before {

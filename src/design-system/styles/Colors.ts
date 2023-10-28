@@ -10,4 +10,5 @@ export const Colors = {
   gray: '#e0e0e0',
   darkGray: '#534f5a',
   disabled: '#9d9c9f',
+  pink: '#fcd',
 };
