@@ -1,9 +1,10 @@
 import React from 'react';
-import { Hamburger, Header } from '@designSystem';
+import { Hamburger } from '@designSystem';
 import Routes from '@constants/Routes';
 import { Hide, Tokens } from '@designSystem';
 import { signOut } from 'next-auth/react';
 import { Session } from 'next-auth';
+import HeaderPages from '@constants/HeaderPages';
 
 interface props {
   session: Session | null;
@@ -15,6 +16,14 @@ const HamburgerMenu: React.FC<props> = ({ session }) => {
       <Hamburger.Menu>
         {session?.user ? (
           <>
+            <Hamburger.Item
+              name={HeaderPages.DASHBOARD}
+              href={Routes.DASHBOARD}
+            />
+            <Hamburger.Item
+              name={HeaderPages.TRANSACTIONS}
+              href={Routes.TRANSACTIONS}
+            />
             <Hamburger.Item
               name="Logout"
               href={Routes.HOME}

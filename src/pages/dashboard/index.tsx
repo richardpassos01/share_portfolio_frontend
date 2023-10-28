@@ -1,13 +1,12 @@
 import React from 'react';
 import { Table } from '@designSystem';
 import { AppBar } from '@components/AppBar';
-import { AppNavHeader, NavHeaderPages } from '@components/AppNavHeader';
+import HeaderPages from '@constants/HeaderPages';
 
 const Dashboard: React.FC = () => {
   return (
     <div>
-      <AppBar />
-      <AppNavHeader currentPage={NavHeaderPages.DASHBOARD} />
+      <AppBar currentPage={HeaderPages.DASHBOARD} />
       <h1>Dashboard</h1>
       <Table />
     </div>
