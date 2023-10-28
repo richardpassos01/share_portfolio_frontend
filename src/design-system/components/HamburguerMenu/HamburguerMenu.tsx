@@ -2,21 +2,27 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Icons } from '../../index';
-import { StyledMenu } from './HamburguerMenuStyles';
+import { ItemName, StyledMenu } from './HamburguerMenuStyles';
 
 export function Item({
   name,
   href,
   onClick,
+  activated,
 }: {
   name: string;
   href: string;
   onClick?: () => void;
+  activated?: string;
 }) {
+  const isCurrentItemActivate = name === activated;
+
   return (
     <Link href={href} style={{ textDecoration: 'none', width: '89%' }}>
       <li>
-        <div onClick={onClick}>{name}</div>
+        <ItemName onClick={onClick} $isActivate={isCurrentItemActivate}>
+          {name}
+        </ItemName>
         <Image src={Icons.ArrowRight} alt="arrowRight" width={12} height={12} />
       </li>
     </Link>

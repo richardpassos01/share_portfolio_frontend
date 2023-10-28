@@ -4,12 +4,11 @@ import {
   NavHeaderItem,
   Underline,
 } from './NavHeader.styles';
-import { HyperLink, Paragraph, Colors } from '../../index';
+import { Paragraph, Colors } from '../../index';
 import { useState } from 'react';
 
 interface Props {
   $backgroundColor?: string;
-  HamburgerMenu?: React.FC;
   children?: JSX.Element[];
 }
 

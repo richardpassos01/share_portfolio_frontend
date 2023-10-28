@@ -21,7 +21,7 @@ const AppBar: React.FC<Props> = ({ boxShadown, currentPage }) => {
         <Hide on={Tokens.MAX_WIDTH_MOBILE}>
           <SignInOutButton session={session} />
         </Hide>
-        <HamburgerMenu session={session} />
+        <HamburgerMenu session={session} currentPage={currentPage} />
       </Header>
       {currentPage && <NavHeader currentPage={currentPage} />}
     </>

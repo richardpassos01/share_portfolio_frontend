@@ -93,3 +93,8 @@ export const StyledMenu = styled.nav<{ $isOpen: boolean }>`
     opacity: 1;
   }
 `;
+
+export const ItemName = styled.div<{ $isActivate: boolean }>`
+  color: ${(props) =>
+    props.$isActivate ? props.theme.colors.blue : props.theme.colors.darkGray};
+`;

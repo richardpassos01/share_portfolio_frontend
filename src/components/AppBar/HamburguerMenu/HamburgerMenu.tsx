@@ -8,9 +8,10 @@ import HeaderPages from '@constants/HeaderPages';
 
 interface props {
   session: Session | null;
+  currentPage?: HeaderPages;
 }
 
-const HamburgerMenu: React.FC<props> = ({ session }) => {
+const HamburgerMenu: React.FC<props> = ({ session, currentPage }) => {
   return (
     <Hide on={Tokens.MIN_WIDTH_TABLET}>
       <Hamburger.Menu>
@@ -19,10 +20,12 @@ const HamburgerMenu: React.FC<props> = ({ session }) => {
             <Hamburger.Item
               name={HeaderPages.DASHBOARD}
               href={Routes.DASHBOARD}
+              activated={currentPage}
             />
             <Hamburger.Item
               name={HeaderPages.TRANSACTIONS}
               href={Routes.TRANSACTIONS}
+              activated={currentPage}
             />
             <Hamburger.Item
               name="Logout"
