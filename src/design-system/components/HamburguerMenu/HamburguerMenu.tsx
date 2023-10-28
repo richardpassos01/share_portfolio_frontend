@@ -23,7 +23,7 @@ export function HamburguerMenu({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <StyledMenu isOpen={menuOpen}>
+    <StyledMenu $isOpen={menuOpen}>
       <div id="menuToggle">
         <input type="checkbox" checked={menuOpen} onChange={toggleMenu} />
         <span></span>

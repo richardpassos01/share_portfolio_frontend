@@ -30,18 +30,18 @@ const SigninButton = () => {
   return (
     <Container>
       <Button
-        width="100"
-        height="42"
-        backgroundColor={Colors.white}
-        color={Colors.darkBlue}
-        borderColor={Colors.darkBlue}
+        $width="100"
+        $height="42"
+        $backgroundColor={Colors.white}
+        $color={Colors.darkBlue}
+        $borderColor={Colors.darkBlue}
         onClick={() => handleClick(Routes.SIGNIN)}
       >
         Entrar
       </Button>
       <Button
-        width="130"
-        height="42"
+        $width="130"
+        $height="42"
         onClick={() => handleClick(Routes.SIGNUP)}
       >
         Cadastrar

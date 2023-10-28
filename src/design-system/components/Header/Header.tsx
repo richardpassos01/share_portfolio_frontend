@@ -8,16 +8,20 @@ import Image from 'next/image';
 import { Hide, HyperLink, Icons, Tokens } from '../../index';
 
 interface Props {
-  backgroundColor?: string;
-  boxShadown?: boolean;
+  $backgroundColor?: string;
+  $boxShadown?: boolean;
   HamburgerMenu?: React.FC;
   children?: JSX.Element[];
 }
 
-const Header: React.FC<Props> = ({ backgroundColor, boxShadown, children }) => {
+const Header: React.FC<Props> = ({
+  $backgroundColor,
+  $boxShadown,
+  children,
+}) => {
   return (
     <>
-      <Content backgroundColor={backgroundColor} boxShadown={boxShadown}>
+      <Content $backgroundColor={$backgroundColor} $boxShadown={$boxShadown}>
         <HeaderContainer>
           <HeaderItem>
             <HyperLink href="/">

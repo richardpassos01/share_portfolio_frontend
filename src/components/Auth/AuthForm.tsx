@@ -116,7 +116,7 @@ const AuthForm: React.FC<Props> = ({
           error={passwordError}
         />
         <SubmitContainer>
-          <Button type="submit" height="45" disabled={isSubmitDisabled}>
+          <Button type="submit" $height="45" disabled={isSubmitDisabled}>
             {RedirectTexts[target].submit}
           </Button>
         </SubmitContainer>

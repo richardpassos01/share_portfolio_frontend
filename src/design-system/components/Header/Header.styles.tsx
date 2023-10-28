@@ -2,20 +2,20 @@ import styled from 'styled-components';
 import { Title } from '../Title';
 
 interface ContentProps {
-  backgroundColor?: string;
-  boxShadown?: boolean;
+  $backgroundColor?: string;
+  $boxShadown?: boolean;
 }
 
 export const Content = styled.header<ContentProps>`
   height: 80px;
   background-color: ${(props) =>
-    props.backgroundColor ?? props.theme.colors.white};
+    props.$backgroundColor ?? props.theme.colors.white};
   display: flex;
   padding: 0 10% 0 12%;
   align-items: center;
   justify-content: flex-start;
   box-shadow: ${(props) =>
-    props.boxShadown ? '0px 8px 12px rgba(200, 200, 200, 0.5)' : '0'};
+    props.$boxShadown ? '0px 8px 12px rgba(200, 200, 200, 0.5)' : '0'};
 
   @media ${(props) => props.theme.tokens.MAX_WIDTH_TABLET} {
     padding: 0 2% 0 2%;

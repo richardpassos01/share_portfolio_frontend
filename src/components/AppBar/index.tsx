@@ -24,7 +24,7 @@ const AppBar: React.FC<Props> = ({ boxShadown }) => {
   const { data: session } = useSession();
 
   return (
-    <Header boxShadown={boxShadown}>
+    <Header $boxShadown={boxShadown}>
       <Hide on={Tokens.MAX_WIDTH_MOBILE}>
         <SigninButton />
       </Hide>

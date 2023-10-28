@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledMenu = styled.nav<{ isOpen: boolean }>`
+export const StyledMenu = styled.nav<{ $isOpen: boolean }>`
   div#menuToggle {
     display: block;
     position: fixed;
@@ -65,7 +65,7 @@ export const StyledMenu = styled.nav<{ isOpen: boolean }>`
   ul#menu {
     position: fixed;
     top: 45px;
-    right: ${({ isOpen }) => (isOpen ? '0' : '-420px')};
+    right: ${(props) => (props.$isOpen ? '0' : '-420px')};
     width: 100%;
     height: 100%;
     background: ${(props) => props.theme.colors.white};
