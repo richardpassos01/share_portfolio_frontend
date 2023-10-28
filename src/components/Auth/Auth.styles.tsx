@@ -67,3 +67,11 @@ export const SubmitContainer = styled.div<{ $error: boolean }>`
   margin-top: ${(props) => (props.$error ? '10px' : '0')};
   width: 100%;
 `;
+
+export const PasswordContainer = styled.div<{ $error: boolean }>`
+  margin-top: ${(props) => (props.$error ? '15px' : '0')};
+`;
+
+export const UsernameContainer = styled.div<{ $error: boolean }>`
+  margin-bottom: ${(props) => (props.$error ? '12px' : '0')};
+`;

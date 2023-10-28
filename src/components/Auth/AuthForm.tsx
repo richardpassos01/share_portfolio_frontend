@@ -5,6 +5,8 @@ import {
   RedirectContainer,
   Form,
   SubmitContainer,
+  PasswordContainer,
+  UsernameContainer,
 } from './Auth.styles';
 import Messages from '@constants/Messages';
 import Routes from '@constants/Routes';
@@ -103,18 +105,22 @@ const AuthForm: React.FC<Props> = ({
       )}
 
       <Form onSubmit={handleSubmit}>
-        <Input.Username
-          value={usernameValue}
-          onChange={(e) => handleOnChange(e, setUsernameValue)}
-          onBlur={handleUsernameBlur}
-          error={usernameError}
-        />
-        <Input.Password
-          value={passwordValue}
-          onChange={(e) => handleOnChange(e, setPasswordValue)}
-          onBlur={handlePasswordBlur}
-          error={passwordError}
-        />
+        <UsernameContainer $error={Boolean(usernameError && !passwordError)}>
+          <Input.Username
+            value={usernameValue}
+            onChange={(e) => handleOnChange(e, setUsernameValue)}
+            onBlur={handleUsernameBlur}
+            error={usernameError}
+          />
+        </UsernameContainer>
+        <PasswordContainer $error={Boolean(passwordError && !usernameError)}>
+          <Input.Password
+            value={passwordValue}
+            onChange={(e) => handleOnChange(e, setPasswordValue)}
+            onBlur={handlePasswordBlur}
+            error={passwordError}
+          />
+        </PasswordContainer>
         <SubmitContainer $error={Boolean(usernameError)}>
           <Button type="submit" $height="45" disabled={isSubmitDisabled}>
             {RedirectTexts[target].submit}
