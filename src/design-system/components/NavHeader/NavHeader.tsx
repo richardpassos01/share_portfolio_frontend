@@ -5,6 +5,7 @@ import {
   Underline,
 } from './NavHeader.styles';
 import { HyperLink, Paragraph, Colors } from '../../index';
+import { useState } from 'react';
 
 interface Props {
   $backgroundColor?: string;
@@ -12,19 +13,53 @@ interface Props {
   children?: JSX.Element[];
 }
 
+export function Item({
+  name,
+  onClick,
+  activated,
+}: {
+  name: string;
+  onClick: () => void;
+  activated: string;
+}) {
+  const [isMouseOver, setIsMouseOver] = useState(false);
+
+  const handleMouseOver = () => {
+    setIsMouseOver(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsMouseOver(false);
+  };
+
+  const isCurrentItemActivate = name === activated;
+
+  return (
+    <NavHeaderItem
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
+      onClick={onClick}
+    >
+      <Paragraph
+        $color={Colors.darkGray}
+        $weight={isCurrentItemActivate ? 600 : 400}
+      >
+        {name}
+      </Paragraph>
+      {isMouseOver || isCurrentItemActivate ? (
+        <Underline $activated={true} />
+      ) : (
+        <Underline />
+      )}
+    </NavHeaderItem>
+  );
+}
+
 const NavHeader: React.FC<Props> = ({ $backgroundColor, children }) => {
   return (
     <>
       <Content $backgroundColor={$backgroundColor}>
-        <NavHeaderContainer>
-          <HyperLink href="/">
-            <NavHeaderItem>
-              <Paragraph $color={Colors.darkGray}>Inicío</Paragraph>
-              <Underline />
-            </NavHeaderItem>
-          </HyperLink>
-          {children}
-        </NavHeaderContainer>
+        <NavHeaderContainer>{children}</NavHeaderContainer>
       </Content>
     </>
   );

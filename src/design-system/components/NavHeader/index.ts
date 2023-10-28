@@ -1,2 +1,8 @@
-export { default as NavHeader } from './NavHeader';
-export { NavHeaderItem } from './NavHeader.styles';
+import { default as NavHeader, Item } from './NavHeader';
+
+const Nav = {
+  Header: NavHeader,
+  Item,
+};
+
+export default Nav;

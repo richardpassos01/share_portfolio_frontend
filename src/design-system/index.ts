@@ -12,7 +12,7 @@ export { Theme } from './styles/Theme';
 
 export { Button } from './components/Button';
 export { Header, HeaderItem } from './components/Header';
-export { NavHeader, NavHeaderItem } from './components/NavHeader';
+export { default as Nav } from './components/NavHeader';
 export { HyperLink } from './components/HyperLink';
 export { ProgressBar } from './components/ProgressBar';
 export { Title } from './components/Title';

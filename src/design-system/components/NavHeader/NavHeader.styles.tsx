@@ -19,7 +19,6 @@ export const NavHeaderContainer = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: space-between;
 `;
 
 export const NavHeaderItem = styled.div`
@@ -28,10 +27,13 @@ export const NavHeaderItem = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
+  margin-right: 20px;
 `;
 
-export const Underline = styled.div`
-  background-color: ${(props) => props.theme.colors.blue};
+export const Underline = styled.div<{ $activated?: boolean }>`
+  background: ${(props) =>
+    props.$activated ? props.theme.colors.blue : 'transparent'};
   height: 2px;
   width: 100%;
 `;

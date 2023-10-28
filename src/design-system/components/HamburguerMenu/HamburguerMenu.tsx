@@ -11,7 +11,7 @@ export function Item({
 }: {
   name: string;
   href: string;
-  onClick?: any;
+  onClick?: () => void;
 }) {
   return (
     <Link href={href} style={{ textDecoration: 'none', width: '89%' }}>
