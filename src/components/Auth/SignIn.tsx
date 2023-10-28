@@ -7,13 +7,14 @@ import { Hide, Icons, Tokens, Input, Title } from '@designSystem';
 import AuthForm from './AuthForm';
 import Routes from '@constants/Routes';
 import Messages from '@constants/Messages';
+import Providers from '@constants/Providers';
 
 const SignIn: React.FC = () => {
   const router = useRouter();
   const [submitError, setSubmitError] = useState('');
 
   const onSubmit = async (username: string, password: string) => {
-    const response = await signIn('credentials', {
+    const response = await signIn(Providers.SIGNIN_PROVIDER, {
       username,
       password,
       redirect: false,

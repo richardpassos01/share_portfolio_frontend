@@ -1,19 +1,29 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import { ImageContainer, Container, FormContainer } from './Auth.styles';
 import { Hide, Icons, Tokens, Input, Title } from '@designSystem';
 import AuthForm from './AuthForm';
-import Routes from '@constants/Routes';
 import Messages from '@constants/Messages';
+import bff from '@bff';
+import Routes from '@constants/Routes';
+import Providers from '@constants/Providers';
 
 const SignUp: React.FC = () => {
-  const router = useRouter();
   const [submitError, setSubmitError] = useState('');
 
   const onSubmit = async (username: string, password: string) => {
-    alert('create account');
+    const user = await bff.signup({ username, password });
+
+    if (!user) {
+      return setSubmitError(Messages.SIGNUP_FAILURE);
+    }
+
+    return signIn(Providers.SIGNUP_PROVIDER, {
+      username,
+      password,
+      callbackUrl: Routes.DASHBOARD,
+    });
   };
 
   return (

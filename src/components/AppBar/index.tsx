@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import SigninButton from '../SiginButton';
 import { Hamburger, Header } from '@designSystem';
 import Routes from '@constants/Routes';

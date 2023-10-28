@@ -1,7 +1,8 @@
+import Providers from '@constants/Providers';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-interface User {
+export interface User {
   id: string;
   username: string;
 }
@@ -9,7 +10,22 @@ interface User {
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
-      name: 'credentials',
+      id: Providers.SIGNUP_PROVIDER,
+      name: Providers.SIGNUP_PROVIDER,
+      credentials: {
+        username: { label: 'Username', type: 'text' },
+        password: { label: 'Password', type: 'password' },
+      },
+      async authorize(credentials, req) {
+        return {
+          id: '1',
+          username: credentials?.username,
+        } as User;
+      },
+    }),
+    CredentialsProvider({
+      id: Providers.SIGNIN_PROVIDER,
+      name: Providers.SIGNIN_PROVIDER,
       credentials: {
         username: { label: 'Username', type: 'text' },
         password: { label: 'Password', type: 'password' },
@@ -21,7 +37,7 @@ const handler = NextAuth({
         ) {
           return {
             id: '1',
-            username: 'fake_user',
+            username: credentials.username,
           } as User;
         }
 
