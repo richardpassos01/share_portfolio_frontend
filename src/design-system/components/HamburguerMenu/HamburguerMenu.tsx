@@ -4,11 +4,19 @@ import Image from 'next/image';
 import { Icons } from '../../index';
 import { StyledMenu } from './HamburguerMenuStyles';
 
-export function Item({ name, href }: { name: string; href: string }) {
+export function Item({
+  name,
+  href,
+  onClick,
+}: {
+  name: string;
+  href: string;
+  onClick?: any;
+}) {
   return (
     <Link href={href} style={{ textDecoration: 'none', width: '89%' }}>
       <li>
-        <div>{name}</div>
+        <div onClick={onClick}>{name}</div>
         <Image src={Icons.ArrowRight} alt="arrowRight" width={12} height={12} />
       </li>
     </Link>

@@ -1,34 +1,41 @@
 import React from 'react';
 import { Button, Colors } from '@designSystem';
-import { signOut, useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
-import { Container } from './styles';
+import { LoggedOutContainer, LoggedContainer } from './styles';
+import { Session } from 'next-auth';
 
-const SigninButton = () => {
-  const { data: session } = useSession();
+interface props {
+  session: Session | null;
+}
+
+const SignInOutButton: React.FC<props> = ({ session }) => {
   const router = useRouter();
 
   const handleClick = (route: Routes) => {
     router.push(route);
   };
 
-  if (session && session.user) {
+  if (session?.user) {
     return (
-      <div className="flex gap-4 ml-auto">
-        <p className="text-sky-600">{session.user.name}</p>
-        <button
+      <LoggedContainer>
+        <Button
+          $width="100"
+          $height="42"
+          $backgroundColor={Colors.white}
+          $color={Colors.darkBlue}
+          $borderColor={Colors.darkBlue}
           onClick={() => signOut({ callbackUrl: Routes.HOME })}
-          className="text-red-600"
         >
-          Sign Out
-        </button>
-      </div>
+          Logout
+        </Button>
+      </LoggedContainer>
     );
   }
 
   return (
-    <Container>
+    <LoggedOutContainer>
       <Button
         $width="100"
         $height="42"
@@ -46,8 +53,8 @@ const SigninButton = () => {
       >
         Cadastrar
       </Button>
-    </Container>
+    </LoggedOutContainer>
   );
 };
 
-export default SigninButton;
+export default SignInOutButton;
