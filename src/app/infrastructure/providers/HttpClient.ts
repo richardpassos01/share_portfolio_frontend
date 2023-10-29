@@ -3,7 +3,12 @@ export default class HttpClient {
 
   constructor(private readonly baseURL: string) {}
 
-  private async request(endpoint: string, method: string, data?: any) {
+  private async request(
+    endpoint: string,
+    method: string,
+    data?: Record<string, string>,
+  ) {
+    console.log(`${this.baseURL}${endpoint}`);
     const requestConfig = {
       method,
       mode: 'cors',

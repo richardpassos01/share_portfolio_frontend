@@ -1,8 +1,9 @@
+import { JWT } from 'next-auth/jwt';
 import { withAuth } from 'next-auth/middleware';
 import { NextRequest, NextResponse } from 'next/server';
 
 export default withAuth(
-  function middleware(req: NextRequest & { nextauth: { token: any } }) {
+  function middleware(req: NextRequest & { nextauth: { token: JWT | null } }) {
     if (
       (req.nextUrl.pathname === '/' && req.nextauth.token) ||
       (req.nextUrl.pathname.startsWith('/auth') && req.nextauth.token)

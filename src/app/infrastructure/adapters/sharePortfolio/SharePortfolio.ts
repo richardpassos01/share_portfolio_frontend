@@ -4,7 +4,7 @@ import Endpoints from './Endpoints';
 export default class SharePortfolio {
   private static instance: HttpClient;
   private static baseURL: string =
-    process.env.SHARE_PORTFOLIO_API ?? 'http:localhost';
+    process.env.NEXT_PUBLIC_SHARE_PORTFOLIO_API ?? '';
 
   private static getInstance(): HttpClient {
     if (!SharePortfolio.instance) {
@@ -36,6 +36,18 @@ export default class SharePortfolio {
   public static resyncPortfolio(institutionId: string) {
     return SharePortfolio.getInstance().post(
       Endpoints.RESYNC_PORTFOLIO.replace(':institutionId', institutionId),
+    );
+  }
+
+  public static listTransactions(
+    institutionId: string,
+    page: number,
+    limit: number,
+  ) {
+    return SharePortfolio.getInstance().get(
+      Endpoints.LIST_TRANSACTIONS.replace(':institutionId', institutionId)
+        .replace(':page', String(page))
+        .replace(':limit', String(limit)),
     );
   }
 
