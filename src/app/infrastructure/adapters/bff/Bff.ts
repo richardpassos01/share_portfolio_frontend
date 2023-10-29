@@ -53,10 +53,11 @@ export default class Bff {
   public static async listTransactions(
     institutionId: string,
     page: number,
-    limit = 10,
+    limit: number,
+    order = 'desc',
   ) {
     const { currentPage, totalPages, results } =
-      await SharePortfolio.listTransactions(institutionId, page, limit);
+      await SharePortfolio.listTransactions(institutionId, page, limit, order);
 
     return {
       currentPage,

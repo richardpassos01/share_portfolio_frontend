@@ -21,7 +21,7 @@ export { default as Hamburger } from './components/HamburguerMenu';
 export { Hide } from './components/Hide';
 export { default as Input } from './components/Input';
 export { Paragraph } from './components/Paragraph';
-export { Table } from './components/Table';
+export { default as Table } from './components/Table';
 export { Card } from './components/Card';
 
 export const Icons = {

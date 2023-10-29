@@ -44,11 +44,13 @@ export default class SharePortfolio {
     institutionId: string,
     page: number,
     limit: number,
+    order: string,
   ): Promise<Pagination> {
     return SharePortfolio.getInstance().get(
       Endpoints.LIST_TRANSACTIONS.replace(':institutionId', institutionId)
         .replace(':page', String(page))
-        .replace(':limit', String(limit)),
+        .replace(':limit', String(limit))
+        .replace(':order', order),
     );
   }
 

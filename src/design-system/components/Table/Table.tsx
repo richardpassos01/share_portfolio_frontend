@@ -13,7 +13,6 @@ const TableHeader = styled.thead`
 
 const TableHeaderCell = styled.th`
   padding: 10px;
-  cursor: pointer;
   position: relative;
 `;
 
@@ -60,13 +59,8 @@ const Table: React.FC<Props> = ({ data }) => {
   const [sortOrder, setSortOrder] = useState('asc');
   const [filter, setFilter] = useState({ ticketSymbol: '', dateMonth: '' });
 
-  const handleSort = (column: string) => {
-    if (sortBy === column) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-    } else {
-      setSortBy(column);
-      setSortOrder('asc');
-    }
+  const handleDataSort = () => {
+    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -87,7 +81,7 @@ const Table: React.FC<Props> = ({ data }) => {
 
   const renderSortIcon = (column: string) => {
     if (sortBy === column) {
-      return sortOrder === 'asc' ? '|↑' : '|↓';
+      return sortOrder === 'asc' ? '↑' : '↓';
     }
     return '';
   };
@@ -101,41 +95,30 @@ const Table: React.FC<Props> = ({ data }) => {
   return (
     <div>
       <div>
-        <label>Ticket Symbol: </label>
+        <label>Ação: </label>
         <select name="ticketSymbol" onChange={handleFilterChange}>
           <option value="">All</option>
-          {/* Inclua as opções para os ticketSymbols aqui */}
         </select>
-        <label>Date-Month: </label>
+        <label>Ano: </label>
         <select name="dateMonth" onChange={handleFilterChange}>
           <option value="">All</option>
-          {/* Inclua as opções para os date-month aqui */}
         </select>
       </div>
       <TableWrapper>
         <TableHeader>
           <TableRow>
-            <TableHeaderCell onClick={() => handleSort('type')}>
-              Type {renderSortIcon('type')}
+            <TableHeaderCell>Tipo</TableHeaderCell>
+            <TableHeaderCell
+              onClick={() => handleDataSort()}
+              style={{ cursor: 'pointer' }}
+            >
+              {sortOrder === 'asc' ? '↑' : '↓'} Data
             </TableHeaderCell>
-            <TableHeaderCell onClick={() => handleSort('date')}>
-              Date {renderSortIcon('date')}
-            </TableHeaderCell>
-            <TableHeaderCell onClick={() => handleSort('category')}>
-              Category {renderSortIcon('category')}
-            </TableHeaderCell>
-            <TableHeaderCell onClick={() => handleSort('ticketSymbol')}>
-              Ticket Symbol {renderSortIcon('ticketSymbol')}
-            </TableHeaderCell>
-            <TableHeaderCell onClick={() => handleSort('quantity')}>
-              Quantity {renderSortIcon('quantity')}
-            </TableHeaderCell>
-            <TableHeaderCell onClick={() => handleSort('unitPrice')}>
-              Unit Price {renderSortIcon('unitPrice')}
-            </TableHeaderCell>
-            <TableHeaderCell onClick={() => handleSort('totalCost')}>
-              Total Cost {renderSortIcon('totalCost')}
-            </TableHeaderCell>
+            <TableHeaderCell>Movimentação</TableHeaderCell>
+            <TableHeaderCell>Produto</TableHeaderCell>
+            <TableHeaderCell>Quantidade</TableHeaderCell>
+            <TableHeaderCell>Preço unitário</TableHeaderCell>
+            <TableHeaderCell>Valor da operação</TableHeaderCell>
           </TableRow>
         </TableHeader>
         <tbody>

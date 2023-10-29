@@ -1,1 +1,2 @@
-export { default as Table } from './Table';
+import * as Table from './Table.styles';
+export default Table;

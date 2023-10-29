@@ -1,26 +1,44 @@
 import styled from 'styled-components';
 
-const TableWrapper = styled.table`
+export const Wrapper = styled.table`
   width: 100%;
   border-collapse: collapse;
   font-size: 16px;
 `;
 
-const TableHeader = styled.thead`
+export const Header = styled.thead`
   background-color: #f2f2f2;
 `;
 
-const TableHeaderCell = styled.th`
+export const HeaderCell = styled.th`
   padding: 10px;
-  cursor: pointer;
+  position: relative;
 `;
 
-const TableRow = styled.tr`
+export const SortIcon = styled.span`
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+`;
+
+export const Row = styled.tr`
   &:nth-child(even) {
     background-color: #f2f2f2;
   }
 `;
 
-const TableCell = styled.td`
+export const Cell = styled.td`
   padding: 10px;
+`;
+
+export const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+`;
+
+export const PageButton = styled.button<{ active?: any }>`
+  margin: 0 5px;
+  background-color: ${(props) => (props.active ? 'gray' : 'transparent')};
 `;
