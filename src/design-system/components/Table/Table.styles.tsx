@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.table`
+export const Wrapper = styled.div`
+  width: 100%;
+  overflow-x: auto; /* Adicione uma barra de rolagem horizontal em dispositivos menores */
+`;
+
+export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
 `;
@@ -8,7 +13,7 @@ export const Wrapper = styled.table`
 export const Header = styled.thead``;
 
 export const HeaderCell = styled.th`
-  padding: 20px 0 20px 40px;
+  padding: 18px 30px 18px 30px;
   position: relative;
   border-bottom: 1px solid ${(props) => props.theme.colors.gray};
   font-size: 14px;
@@ -16,6 +21,11 @@ export const HeaderCell = styled.th`
   color: ${(props) => props.theme.colors.darkGray};
   text-align: left;
   vertical-align: middle;
+
+  @media (max-width: 767px) {
+    /* Aplique estilos específicos para dispositivos móveis */
+    padding: 10px; /* Reduza o preenchimento para economizar espaço */
+  }
 `;
 
 export const SortIcon = styled.span`
@@ -28,12 +38,17 @@ export const SortIcon = styled.span`
 export const Row = styled.tr``;
 
 export const Cell = styled.td`
-  padding: 20px 0 20px 40px;
+  padding: 18px 30px 18px 30px;
   border-bottom: 1px solid ${(props) => props.theme.colors.gray};
   font-size: 14px;
   color: ${(props) => props.theme.colors.lightGray};
   text-align: left;
   vertical-align: middle;
+
+  @media (max-width: 767px) {
+    /* Aplique estilos específicos para dispositivos móveis */
+    padding: 10px; /* Reduza o preenchimento para economizar espaço */
+  }
 `;
 
 export const Pagination = styled.div`

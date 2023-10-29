@@ -48,63 +48,61 @@ const TransactionsTable: React.FC = () => {
 
   return (
     <Container>
-      <Card $width="80%">
-        <div>
-          <Table.Wrapper>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Tipo</Table.HeaderCell>
-                <Table.HeaderCell
-                  onClick={() => handleDateSort()}
-                  style={{ cursor: 'pointer' }}
-                >
-                  {sortOrder === 'asc' ? '↑' : '↓'} Data
-                </Table.HeaderCell>
-                <Table.HeaderCell>Movimentação</Table.HeaderCell>
-                <Table.HeaderCell>Produto</Table.HeaderCell>
-                <Table.HeaderCell>Quantidade</Table.HeaderCell>
-                <Table.HeaderCell>Preço unitário</Table.HeaderCell>
-                <Table.HeaderCell>Valor da operação</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <tbody>
-              {data?.transactions.map((item, index) => (
-                <Table.Row key={index}>
-                  <Table.Cell>{item.type}</Table.Cell>
-                  <Table.Cell>{item.date}</Table.Cell>
-                  <Table.Cell>{item.category}</Table.Cell>
-                  <Table.Cell>{item.ticketSymbol}</Table.Cell>
-                  <Table.Cell>{item.quantity}</Table.Cell>
-                  <Table.Cell>{item.unitPrice}</Table.Cell>
-                  <Table.Cell>{item.totalCost}</Table.Cell>
-                </Table.Row>
-              ))}
-            </tbody>
-          </Table.Wrapper>
-          <Table.Pagination>
-            <Table.PageButton
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              Anterior
-            </Table.PageButton>
-            {pages.map((page) => (
-              <Table.PageButton
-                key={page}
-                active={page === currentPage}
-                onClick={() => handlePageChange(page)}
+      <Card $width="auto">
+        <Table.Wrapper>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Tipo</Table.HeaderCell>
+              <Table.HeaderCell
+                onClick={() => handleDateSort()}
+                style={{ cursor: 'pointer' }}
               >
-                {page}
-              </Table.PageButton>
+                {sortOrder === 'asc' ? '↑' : '↓'} Data
+              </Table.HeaderCell>
+              <Table.HeaderCell>Movimentação</Table.HeaderCell>
+              <Table.HeaderCell>Produto</Table.HeaderCell>
+              <Table.HeaderCell>Quantidade</Table.HeaderCell>
+              <Table.HeaderCell>Preço unitário</Table.HeaderCell>
+              <Table.HeaderCell>Valor da operação</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <tbody>
+            {data?.transactions.map((item, index) => (
+              <Table.Row key={index}>
+                <Table.Cell>{item.type}</Table.Cell>
+                <Table.Cell>{item.date}</Table.Cell>
+                <Table.Cell>{item.category}</Table.Cell>
+                <Table.Cell>{item.ticketSymbol}</Table.Cell>
+                <Table.Cell>{item.quantity}</Table.Cell>
+                <Table.Cell>{item.unitPrice}</Table.Cell>
+                <Table.Cell>{item.totalCost}</Table.Cell>
+              </Table.Row>
             ))}
+          </tbody>
+        </Table.Wrapper>
+        <Table.Pagination>
+          <Table.PageButton
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Anterior
+          </Table.PageButton>
+          {pages.map((page) => (
             <Table.PageButton
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === data.totalPages}
+              key={page}
+              active={page === currentPage}
+              onClick={() => handlePageChange(page)}
             >
-              Próxima
+              {page}
             </Table.PageButton>
-          </Table.Pagination>
-        </div>
+          ))}
+          <Table.PageButton
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === data.totalPages}
+          >
+            Próxima
+          </Table.PageButton>
+        </Table.Pagination>
       </Card>
     </Container>
   );
