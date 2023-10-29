@@ -16,11 +16,11 @@ const TransactionsTable: React.FC = () => {
 
   return (
     <Container>
-      <Card $width="50%">
-        {data.results.map((item) => (
+      <Card $width="80%">
+        <Table data={data} />
+        {/* {data.results.map((item) => (
           <div key={item.id}>{item.ticketSymbol}</div>
-        ))}
-        <Table />
+        ))} */}
       </Card>
     </Container>
   );

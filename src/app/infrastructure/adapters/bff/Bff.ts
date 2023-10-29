@@ -1,6 +1,38 @@
+import { dateStringYYYYMMDDToDDMMYYYY, formatterMoney } from '../../../helpers';
 import { HttpClient } from '../../providers';
 import SharePortfolio from '../sharePortfolio/SharePortfolio';
+import {
+  TRANSACTION_TYPE,
+  TRANSACTION_CATEGORY,
+} from '../sharePortfolio/types';
 import Endpoints from './Endpoints';
+
+const typeMapper = (type: TRANSACTION_TYPE) => {
+  const mapper = {
+    [TRANSACTION_TYPE.BUY]: 'Compra',
+    [TRANSACTION_TYPE.SELL]: 'Venda',
+  };
+
+  return mapper[type];
+};
+
+const categoryMapper = (category: TRANSACTION_CATEGORY) => {
+  const mapper = {
+    [TRANSACTION_CATEGORY.TRADE]: 'Trade',
+    [TRANSACTION_CATEGORY.DIVIDENDS]: 'Dividendo/JCP', // Rendimento/jcp/dividendo
+    [TRANSACTION_CATEGORY.SPLIT]: 'Desdobro',
+    [TRANSACTION_CATEGORY.BONUS_SHARE]: 'Bonificação em Ativos',
+    [TRANSACTION_CATEGORY.OTHER]: 'Outros' /**
+    'Direitos de Subscrição - Não Exercido'
+    'Cessão de Direitos - Solicitada': 
+    'Cessão de Direitos',
+    'Direito de Subscrição'
+    Atualização,
+    */,
+  };
+
+  return mapper[category];
+};
 
 export default class Bff {
   private static instance: HttpClient;
@@ -18,11 +50,27 @@ export default class Bff {
     return Bff.getInstance().post(Endpoints.SIGNUP, data);
   }
 
-  public static listTransactions(
+  public static async listTransactions(
     institutionId: string,
     page: number,
-    limit = 100,
+    limit = 10,
   ) {
-    return SharePortfolio.listTransactions(institutionId, page, limit);
+    const { currentPage, totalPages, results } =
+      await SharePortfolio.listTransactions(institutionId, page, limit);
+
+    return {
+      currentPage,
+      totalPages,
+      transactions: results.map(
+        ({ date, totalCost, type, category, unitPrice, ...rest }) => ({
+          category: categoryMapper(category),
+          type: typeMapper(type),
+          date: dateStringYYYYMMDDToDDMMYYYY(date),
+          unitPrice: formatterMoney(unitPrice),
+          totalCost: formatterMoney(totalCost),
+          ...rest,
+        }),
+      ),
+    };
   }
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '../../providers';
 import Endpoints from './Endpoints';
+import { Pagination } from './types';
 
 export default class SharePortfolio {
   private static instance: HttpClient;
@@ -43,7 +44,7 @@ export default class SharePortfolio {
     institutionId: string,
     page: number,
     limit: number,
-  ) {
+  ): Promise<Pagination> {
     return SharePortfolio.getInstance().get(
       Endpoints.LIST_TRANSACTIONS.replace(':institutionId', institutionId)
         .replace(':page', String(page))

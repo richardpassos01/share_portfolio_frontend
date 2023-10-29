@@ -7,8 +7,6 @@ const Dashboard: React.FC = () => {
   return (
     <div>
       <AppBar currentPage={HeaderPages.DASHBOARD} />
-      <h1>Dashboard</h1>
-      <Table />
     </div>
   );
 };

@@ -7,7 +7,6 @@ const Transactions: React.FC = () => {
   return (
     <div>
       <AppBar currentPage={HeaderPages.TRANSACTIONS} />
-      <h1>Transactions</h1>
       <TransactionsTable />
     </div>
   );
