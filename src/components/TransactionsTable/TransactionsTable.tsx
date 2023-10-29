@@ -7,59 +7,50 @@ import bff from '@bff';
 const key = 'my-unique-key';
 
 const TransactionsTable: React.FC = () => {
-  function fetchData(page: number, sortOrder: string) {
-    const limitPage = 10;
-    return bff.listTransactions(
-      'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2',
-      page,
-      limitPage,
-      sortOrder,
-    );
-  }
-
+  const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState('asc');
 
-  const [filter, setFilter] = useState({ ticketSymbol: '', dateMonth: '' });
-
-  const { data, error, isLoading } = useSWR([key, currentPage, sortOrder], () =>
-    fetchData(currentPage, sortOrder),
+  const { data, error, isValidating } = useSWR(
+    [key, currentPage, sortOrder],
+    () => fetchData(currentPage, sortOrder),
   );
+
+  async function fetchData(page: number, sortOrder: string) {
+    return bff.listTransactions(
+      'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2',
+      page,
+      itemsPerPage,
+      sortOrder,
+    );
+  }
 
   const handleDateSort = () => {
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
 
-  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = event.target;
-    setFilter({ ...filter, [name]: value });
-  };
-
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
-    // if (newPage >= 1 && newPage <= data?.totalPages) {
-    //   // Implemente a lógica para lidar com a mudança de página
-    // }
   };
 
-  if (error) return <div>failed to load</div>;
-  if (isLoading) return <div>loading...</div>;
-  if (!data?.transactions) return <div>empty</div>;
+  if (error) return <div>Failed to load</div>;
+  if (isValidating) return <div>Loading...</div>;
+  if (!data?.transactions || data.transactions.length === 0)
+    return <div>Empty</div>;
+
+  const visiblePages = Math.min(10, data.totalPages);
+  const firstPage = Math.max(1, currentPage - 2);
+  const lastPage = Math.min(data.totalPages, firstPage + visiblePages - 1);
+
+  const pages = Array.from(
+    { length: visiblePages },
+    (_, index) => firstPage + index,
+  );
 
   return (
     <Container>
       <Card $width="80%">
         <div>
-          {/* <div>
-            <label>Ação: </label>
-            <select name="ticketSymbol" onChange={handleFilterChange}>
-              <option value="">All</option>
-            </select>
-            <label>Ano: </label>
-            <select name="dateMonth" onChange={handleFilterChange}>
-              <option value="">All</option>
-            </select>
-          </div> */}
           <Table.Wrapper>
             <Table.Header>
               <Table.Row>
@@ -93,24 +84,23 @@ const TransactionsTable: React.FC = () => {
           </Table.Wrapper>
           <Table.Pagination>
             <Table.PageButton
-              onClick={() => handlePageChange(data.currentPage - 1)}
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
             >
               Anterior
             </Table.PageButton>
-            {Array.from(
-              { length: data.totalPages > 10 ? 10 : data.totalPages },
-              (_, index) => (
-                <Table.PageButton
-                  key={index}
-                  active={index + 1 === data.currentPage}
-                  onClick={() => handlePageChange(index + 1)}
-                >
-                  {index + 1}
-                </Table.PageButton>
-              ),
-            )}
+            {pages.map((page) => (
+              <Table.PageButton
+                key={page}
+                active={page === currentPage}
+                onClick={() => handlePageChange(page)}
+              >
+                {page}
+              </Table.PageButton>
+            ))}
             <Table.PageButton
-              onClick={() => handlePageChange(data.currentPage + 1)}
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === data.totalPages}
             >
               Próxima
             </Table.PageButton>
