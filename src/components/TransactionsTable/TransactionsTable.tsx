@@ -3,8 +3,7 @@ import { Card, Table } from '@designSystem';
 import { Container } from './TransactionsTable.stytes';
 import useSWR from 'swr';
 import bff from '@bff';
-
-const key = 'my-unique-key';
+import FetcherKeys from '@constants/FetcherKeys';
 
 const TransactionsTable: React.FC = () => {
   const itemsPerPage = 10;
@@ -12,7 +11,7 @@ const TransactionsTable: React.FC = () => {
   const [sortOrder, setSortOrder] = useState('asc');
 
   const { data, error, isValidating } = useSWR(
-    [key, currentPage, sortOrder],
+    [FetcherKeys.LIST_TRANSACTIONS, currentPage, sortOrder],
     () => fetchData(currentPage, sortOrder),
   );
 

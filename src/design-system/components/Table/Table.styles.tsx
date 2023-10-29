@@ -3,16 +3,19 @@ import styled from 'styled-components';
 export const Wrapper = styled.table`
   width: 100%;
   border-collapse: collapse;
-  font-size: 16px;
 `;
 
-export const Header = styled.thead`
-  background-color: #f2f2f2;
-`;
+export const Header = styled.thead``;
 
 export const HeaderCell = styled.th`
-  padding: 10px;
+  padding: 20px 0 20px 40px;
   position: relative;
+  border-bottom: 1px solid ${(props) => props.theme.colors.gray};
+  font-size: 14px;
+  font-weight: 600;
+  color: ${(props) => props.theme.colors.darkGray};
+  text-align: left;
+  vertical-align: middle;
 `;
 
 export const SortIcon = styled.span`
@@ -22,14 +25,15 @@ export const SortIcon = styled.span`
   transform: translateY(-50%);
 `;
 
-export const Row = styled.tr`
-  &:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-`;
+export const Row = styled.tr``;
 
 export const Cell = styled.td`
-  padding: 10px;
+  padding: 20px 0 20px 40px;
+  border-bottom: 1px solid ${(props) => props.theme.colors.gray};
+  font-size: 14px;
+  color: ${(props) => props.theme.colors.lightGray};
+  text-align: left;
+  vertical-align: middle;
 `;
 
 export const Pagination = styled.div`
