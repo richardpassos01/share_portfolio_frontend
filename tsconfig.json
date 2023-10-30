@@ -22,6 +22,7 @@
       "@api/*": ["./src/app/api/*"],
       "@bff": ["./src/app/infrastructure/adapters/bff/Bff"],
       "@components/*": ["./src/components/*"],
+      "@hooks/*": ["./src/hooks/*"],
       "@designSystem": ["./src/design-system/index"],
       "@pages/*": ["./src/pages/*"],
       "@constants/*": ["./src/constants/*"]

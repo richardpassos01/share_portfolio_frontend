@@ -9,12 +9,11 @@ export const Container = styled.div`
   }
 `;
 
-export const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-`;
+export const Wrapper = styled.table``;
 
 export const Header = styled.thead``;
+
+export const Body = styled.tbody``;
 
 export const HeaderCell = styled.th`
   padding: 18px 30px 18px 30px;
@@ -27,20 +26,11 @@ export const HeaderCell = styled.th`
   vertical-align: middle;
 `;
 
-export const StickyTableColumnHeader = styled(HeaderCell)`
+export const HeaderFixedCell = styled(HeaderCell)`
   @media (max-width: 767px) {
     position: sticky;
     left: 0;
     z-index: 10;
-    background: #fff;
-  }
-`;
-
-export const StickyTableHeader = styled(HeaderCell)`
-  @media (max-width: 767px) {
-    position: sticky;
-    top: 0;
-    z-index: 9;
     background: #fff;
   }
 `;
