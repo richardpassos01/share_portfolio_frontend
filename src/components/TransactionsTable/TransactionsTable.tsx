@@ -10,25 +10,29 @@ const PAGE_LIMIT = 10;
 
 const TransactionsTable: React.FC = () => {
   const [loading, setLoading] = useState(false);
+  const [totalItems, setTotalItems] = useState(0);
   const observer = useRef(null);
 
   const [sortOrder, setSortOrder] = useState('asc');
 
-  const { data, setSize, size } = useSWRInfinite(
+  const { data, setSize, size, isLoading } = useSWRInfinite(
     (index) => [FetcherKeys.LIST_TRANSACTIONS, index + 1, sortOrder],
     (key) => fetcher(key[1], sortOrder),
   );
 
   const newData = useMemo(() => {
     setLoading(false);
+
     if (data) {
-      const concatenatedData = data.flatMap((page) => page.transactions);
-      return concatenatedData;
+      const transactions = data.flatMap(({ transactions }) => transactions);
+      setTotalItems(data[data.length - 1].totalItems);
+      return transactions;
     }
+
     return [];
   }, [data]);
 
-  const isEnd = newData.length < PAGE_LIMIT;
+  const fetchedAllTransactions = totalItems === newData.length;
 
   const { lastDataRendered } = useInfiniteScroll(
     setLoading,
@@ -36,7 +40,7 @@ const TransactionsTable: React.FC = () => {
     observer,
     size,
     loading,
-    isEnd,
+    fetchedAllTransactions,
   );
 
   function fetcher(page: number, sortOrder: string) {
@@ -52,7 +56,7 @@ const TransactionsTable: React.FC = () => {
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
 
-  if (!newData.length) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
@@ -89,7 +93,9 @@ const TransactionsTable: React.FC = () => {
                   <Table.Cell>{item.totalCost}</Table.Cell>
                 </Table.Row>
               ))}
-              <div ref={lastDataRendered}>loading</div>
+              <div ref={lastDataRendered}>
+                {!fetchedAllTransactions && 'loading'}
+              </div>
             </Table.Body>
           </Table.Wrapper>
         </Table.Container>
