@@ -23,9 +23,9 @@ export type Transaction = {
   id: string;
 };
 
-export type Pagination = {
+export type Pagination<T> = {
   currentPage: number;
   totalPages: number;
   totalItems: number;
-  results: Transaction[];
+  items: T[];
 };

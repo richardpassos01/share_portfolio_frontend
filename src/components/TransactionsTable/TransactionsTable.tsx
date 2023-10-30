@@ -1,48 +1,15 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState } from 'react';
 import { Table } from '@designSystem';
 import { Container, TransactionCard } from './TransactionsTable.stytes';
-import useSWRInfinite from 'swr/infinite';
 import bff from '@bff';
 import FetcherKeys from '@constants/FetcherKeys';
-import useInfiniteScroll from '@hooks/useInfiniteScroll';
+import useInfiniteFetch from '@hooks/useInfiniteFetch';
 
-const PAGE_LIMIT = 10;
+const PAGE_LIMIT = 100;
 
 const TransactionsTable: React.FC = () => {
   const screenWidth = window.screen.width;
-  const [loading, setLoading] = useState(false);
-  const [totalItems, setTotalItems] = useState(0);
-  const observer = useRef(null);
-
   const [sortOrder, setSortOrder] = useState('asc');
-
-  const { data, setSize, size, isLoading } = useSWRInfinite(
-    (index) => [FetcherKeys.LIST_TRANSACTIONS, index + 1, sortOrder],
-    (key) => fetcher(key[1], sortOrder),
-  );
-
-  const newData = useMemo(() => {
-    setLoading(false);
-
-    if (data) {
-      const transactions = data.flatMap(({ transactions }) => transactions);
-      setTotalItems(data[data.length - 1].totalItems);
-      return transactions;
-    }
-
-    return [];
-  }, [data]);
-
-  const fetchedAllTransactions = totalItems === newData.length;
-
-  const { lastDataRendered } = useInfiniteScroll(
-    setLoading,
-    setSize,
-    observer,
-    size,
-    loading,
-    fetchedAllTransactions,
-  );
 
   function fetcher(page: number, sortOrder: string) {
     return bff.listTransactions(
@@ -52,6 +19,13 @@ const TransactionsTable: React.FC = () => {
       sortOrder,
     );
   }
+
+  const {
+    data: newData,
+    isLoading,
+    lastDataRendered,
+    fetchedAll,
+  } = useInfiniteFetch(fetcher, FetcherKeys.LIST_TRANSACTIONS, sortOrder);
 
   const handleDateSort = () => {
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -95,9 +69,7 @@ const TransactionsTable: React.FC = () => {
                   <Table.Cell>{item.totalCost}</Table.Cell>
                 </Table.Row>
               ))}
-              <div ref={lastDataRendered}>
-                {!fetchedAllTransactions && 'loading'}
-              </div>
+              <div ref={lastDataRendered}>{!fetchedAll && 'loading'}</div>
             </Table.Body>
           </Table.Wrapper>
         </Table.Container>

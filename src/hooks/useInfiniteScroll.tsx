@@ -6,8 +6,11 @@ const useInfiniteScroll = (
   observer: MutableRefObject<IntersectionObserver | null>,
   size: number,
   loading: boolean,
-  isEnd: boolean,
+  totalItems: number,
+  newData: any[],
 ) => {
+  const fetchedAll = totalItems === newData.length;
+
   const fetchData = useCallback(() => {
     setLoading(true);
     setSize(size + 1);
@@ -15,7 +18,7 @@ const useInfiniteScroll = (
 
   const lastDataRendered = useCallback(
     (node: HTMLElement | null) => {
-      if (loading || isEnd) return;
+      if (loading || fetchedAll) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
@@ -24,10 +27,10 @@ const useInfiniteScroll = (
       });
       if (node) observer.current.observe(node);
     },
-    [loading, isEnd, fetchData, observer],
+    [loading, fetchedAll, fetchData, observer],
   );
 
-  return { lastDataRendered };
+  return { lastDataRendered, fetchedAll };
 };
 
 export default useInfiniteScroll;

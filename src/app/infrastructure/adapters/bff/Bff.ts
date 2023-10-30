@@ -56,7 +56,7 @@ export default class Bff {
     limit: number,
     order = 'desc',
   ) {
-    const { totalItems, results } = await SharePortfolio.listTransactions(
+    const { totalItems, items } = await SharePortfolio.listTransactions(
       institutionId,
       page,
       limit,
@@ -65,7 +65,7 @@ export default class Bff {
 
     return {
       totalItems,
-      transactions: results.map(
+      items: items.map(
         ({ date, totalCost, type, category, unitPrice, ...rest }) => ({
           category: categoryMapper(category),
           type: typeMapper(type),
