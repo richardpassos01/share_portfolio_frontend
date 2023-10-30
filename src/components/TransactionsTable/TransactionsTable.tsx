@@ -49,27 +49,31 @@ const TransactionsTable: React.FC = () => {
   return (
     <Container>
       <Card $width="auto">
-        <Table.Wrapper>
+        <Table.Container>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Tipo</Table.HeaderCell>
-              <Table.HeaderCell
+              <Table.StickyTableColumnHeader>
+                Tipo
+              </Table.StickyTableColumnHeader>
+              <Table.StickyTableHeader
                 onClick={() => handleDateSort()}
                 style={{ cursor: 'pointer' }}
               >
                 {sortOrder === 'asc' ? '↑' : '↓'} Data
-              </Table.HeaderCell>
-              <Table.HeaderCell>Movimentação</Table.HeaderCell>
-              <Table.HeaderCell>Produto</Table.HeaderCell>
-              <Table.HeaderCell>Quantidade</Table.HeaderCell>
-              <Table.HeaderCell>Preço unitário</Table.HeaderCell>
-              <Table.HeaderCell>Valor da operação</Table.HeaderCell>
+              </Table.StickyTableHeader>
+              <Table.StickyTableHeader>Movimentação</Table.StickyTableHeader>
+              <Table.StickyTableHeader>Produto</Table.StickyTableHeader>
+              <Table.StickyTableHeader>Quantidade</Table.StickyTableHeader>
+              <Table.StickyTableHeader>Preço unitário</Table.StickyTableHeader>
+              <Table.StickyTableHeader>
+                Valor da operação
+              </Table.StickyTableHeader>
             </Table.Row>
           </Table.Header>
           <tbody>
             {data?.transactions.map((item, index) => (
               <Table.Row key={index}>
-                <Table.Cell>{item.type}</Table.Cell>
+                <Table.StickyTableCell>{item.type}</Table.StickyTableCell>
                 <Table.Cell>{item.date}</Table.Cell>
                 <Table.Cell>{item.category}</Table.Cell>
                 <Table.Cell>{item.ticketSymbol}</Table.Cell>
@@ -79,7 +83,7 @@ const TransactionsTable: React.FC = () => {
               </Table.Row>
             ))}
           </tbody>
-        </Table.Wrapper>
+        </Table.Container>
         <Table.Pagination>
           <Table.PageButton
             onClick={() => handlePageChange(currentPage - 1)}

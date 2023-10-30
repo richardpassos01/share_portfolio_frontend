@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
   width: 100%;
-  overflow-x: auto; /* Adicione uma barra de rolagem horizontal em dispositivos menores */
+  overflow-x: auto;
+
+  @media (max-width: 767px) {
+    overflow: scroll;
+  }
 `;
 
 export const Table = styled.table`
@@ -21,10 +25,23 @@ export const HeaderCell = styled.th`
   color: ${(props) => props.theme.colors.darkGray};
   text-align: left;
   vertical-align: middle;
+`;
 
+export const StickyTableColumnHeader = styled(HeaderCell)`
   @media (max-width: 767px) {
-    /* Aplique estilos específicos para dispositivos móveis */
-    padding: 10px; /* Reduza o preenchimento para economizar espaço */
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    background: #fff;
+  }
+`;
+
+export const StickyTableHeader = styled(HeaderCell)`
+  @media (max-width: 767px) {
+    position: sticky;
+    top: 0;
+    z-index: 9;
+    background: #fff;
   }
 `;
 
@@ -44,10 +61,14 @@ export const Cell = styled.td`
   color: ${(props) => props.theme.colors.lightGray};
   text-align: left;
   vertical-align: middle;
+`;
 
+export const StickyTableCell = styled(Cell)`
   @media (max-width: 767px) {
-    /* Aplique estilos específicos para dispositivos móveis */
-    padding: 10px; /* Reduza o preenchimento para economizar espaço */
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    background: #fff;
   }
 `;
 
