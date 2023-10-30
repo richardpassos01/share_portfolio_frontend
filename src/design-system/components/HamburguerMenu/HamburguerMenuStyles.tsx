@@ -6,7 +6,7 @@ export const StyledMenu = styled.nav<{ $isOpen: boolean }>`
     position: fixed;
     top: 29px;
     right: 20px;
-    z-index: 1;
+    z-index: 900;
     user-select: none;
   }
 
@@ -19,7 +19,7 @@ export const StyledMenu = styled.nav<{ $isOpen: boolean }>`
     left: -5px;
     cursor: pointer;
     opacity: 0;
-    z-index: 2;
+    z-index: 1000;
   }
 
   div#menuToggle span {
@@ -30,7 +30,7 @@ export const StyledMenu = styled.nav<{ $isOpen: boolean }>`
     position: relative;
     background: ${(props) => props.theme.colors.gray};
     border-radius: 3px;
-    z-index: 1;
+    z-index: 900;
     transform-origin: 4px 0px;
     transition:
       transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
@@ -76,6 +76,7 @@ export const StyledMenu = styled.nav<{ $isOpen: boolean }>`
     align-items: baseline;
     justify-content: flex-start;
     padding: 20px 0 0 20px;
+    z-index: 900;
   }
 
   ul#menu li {

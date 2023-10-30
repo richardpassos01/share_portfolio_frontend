@@ -36,7 +36,6 @@ export const HeaderFixedCell = styled(HeaderCell)`
   @media (max-width: 767px) {
     position: sticky;
     left: 0;
-    z-index: 10;
     background: #fff;
   }
 `;

@@ -8,7 +8,6 @@ const ProgressBarContainer = styled.div`
   width: 100%;
   height: 4px;
   background-color: ${(props) => props.theme.colors.gray};
-  z-index: 999;
 `;
 
 const ProgressBarFill = styled.div<{ width: number }>`

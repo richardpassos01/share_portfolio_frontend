@@ -1,6 +1,6 @@
 import React, { useState, useRef, useMemo } from 'react';
-import { Card, Table } from '@designSystem';
-import { Container } from './TransactionsTable.stytes';
+import { Table } from '@designSystem';
+import { Container, TransactionCard } from './TransactionsTable.stytes';
 import useSWRInfinite from 'swr/infinite';
 import bff from '@bff';
 import FetcherKeys from '@constants/FetcherKeys';
@@ -9,6 +9,7 @@ import useInfiniteScroll from '@hooks/useInfiniteScroll';
 const PAGE_LIMIT = 10;
 
 const TransactionsTable: React.FC = () => {
+  const screenWidth = window.screen.width;
   const [loading, setLoading] = useState(false);
   const [totalItems, setTotalItems] = useState(0);
   const observer = useRef(null);
@@ -62,7 +63,8 @@ const TransactionsTable: React.FC = () => {
 
   return (
     <Container>
-      <Card $width="auto" $height="500px">
+      <TransactionCard $width={screenWidth}>
+        <h1>Transactions</h1>
         <Table.Container>
           <Table.Wrapper>
             <Table.Header>
@@ -99,7 +101,7 @@ const TransactionsTable: React.FC = () => {
             </Table.Body>
           </Table.Wrapper>
         </Table.Container>
-      </Card>
+      </TransactionCard>
     </Container>
   );
 };
