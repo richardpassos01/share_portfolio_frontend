@@ -9,15 +9,24 @@ export const Container = styled.div`
   }
 `;
 
-export const Wrapper = styled.table``;
+export const Wrapper = styled.table`
+  width: 100%;
+`;
 
-export const Header = styled.thead``;
+export const Header = styled.thead`
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+`;
 
-export const Body = styled.tbody``;
+export const Body = styled.tbody`
+  max-height: 400px;
+  overflow-y: auto;
+`;
 
 export const HeaderCell = styled.th`
-  padding: 18px 30px 18px 30px;
-  position: relative;
+  padding: 18px 30px;
   border-bottom: 1px solid ${(props) => props.theme.colors.gray};
   font-size: 14px;
   font-weight: 600;
@@ -45,7 +54,7 @@ export const SortIcon = styled.span`
 export const Row = styled.tr``;
 
 export const Cell = styled.td`
-  padding: 18px 30px 18px 30px;
+  padding: 18px 30px;
   border-bottom: 1px solid ${(props) => props.theme.colors.gray};
   font-size: 14px;
   color: ${(props) => props.theme.colors.lightGray};
@@ -57,7 +66,6 @@ export const StickyTableCell = styled(Cell)`
   @media (max-width: 767px) {
     position: sticky;
     left: 0;
-    z-index: 10;
     background: #fff;
   }
 `;

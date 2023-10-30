@@ -62,7 +62,7 @@ const TransactionsTable: React.FC = () => {
 
   return (
     <Container>
-      <Card $width="auto">
+      <Card $width="auto" $height="500px">
         <Table.Container>
           <Table.Wrapper>
             <Table.Header>
