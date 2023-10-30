@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledMenu = styled.nav<{ $isOpen: boolean }>`
   div#menuToggle {
     display: block;
-    position: fixed;
+    position: absolute;
     top: 29px;
     right: 20px;
     z-index: 900;

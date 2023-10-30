@@ -4,6 +4,7 @@ import Signup from './icons/signup.png';
 import ArrowRight from './icons/arrowRight.svg';
 import Eye from './icons/eye.svg';
 import EyeSlash from './icons/eyeSlash.svg';
+import Filter from './icons/filter.svg';
 
 export { GlobalStyles } from './styles/GlobalStyles';
 export { Colors } from './styles/Colors';
@@ -18,6 +19,7 @@ export { ProgressBar } from './components/ProgressBar';
 export { Title } from './components/Title';
 export { StyledComponentsRegistry } from './components/StyledComponentsRegistry';
 export { default as Hamburger } from './components/HamburguerMenu';
+export { default as Filter } from './components/FilterMenu';
 export { Hide } from './components/Hide';
 export { default as Input } from './components/Input';
 export { Paragraph } from './components/Paragraph';
@@ -31,4 +33,5 @@ export const Icons = {
   ArrowRight,
   Eye,
   EyeSlash,
+  Filter,
 };

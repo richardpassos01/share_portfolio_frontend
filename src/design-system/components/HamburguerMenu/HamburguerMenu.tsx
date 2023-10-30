@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Icons } from '../../index';
-import { ItemName, StyledMenu } from './HamburguerMenuStyles';
+import { ItemName, StyledMenu } from './HamburguerMenu.styles';
 
 export function Item({
   name,

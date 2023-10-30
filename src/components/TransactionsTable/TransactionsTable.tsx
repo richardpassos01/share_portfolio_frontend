@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
-import { Table } from '@designSystem';
-import { Container, TransactionCard } from './TransactionsTable.stytes';
+import { Button, Colors, Filter, Hide, Table, Tokens } from '@designSystem';
+import {
+  Container,
+  TransactionCard,
+  Header,
+  FilterButtonsContainer,
+} from './TransactionsTable.stytes';
 import bff from '@bff';
 import FetcherKeys from '@constants/FetcherKeys';
 import useInfiniteFetch from '@hooks/useInfiniteFetch';
@@ -8,7 +13,6 @@ import useInfiniteFetch from '@hooks/useInfiniteFetch';
 const PAGE_LIMIT = 100;
 
 const TransactionsTable: React.FC = () => {
-  const screenWidth = window.screen.width;
   const [sortOrder, setSortOrder] = useState('asc');
 
   function fetcher(page: number, sortOrder: string) {
@@ -37,8 +41,37 @@ const TransactionsTable: React.FC = () => {
 
   return (
     <Container>
-      <TransactionCard $width={screenWidth}>
-        <h1>Transactions</h1>
+      <TransactionCard>
+        <Header>
+          <Hide on={Tokens.MAX_WIDTH_MOBILE}>
+            <FilterButtonsContainer>
+              <Button
+                $width="100"
+                $height="42"
+                $backgroundColor={Colors.white}
+                $color={Colors.darkBlue}
+                $borderColor={Colors.darkBlue}
+                onClick={() => alert('')}
+              >
+                Ticker
+              </Button>
+              <Button
+                $width="100"
+                $height="42"
+                $backgroundColor={Colors.white}
+                $color={Colors.darkBlue}
+                $borderColor={Colors.darkBlue}
+                onClick={() => alert('')}
+              >
+                Ano
+              </Button>
+            </FilterButtonsContainer>
+          </Hide>
+          <Filter.Menu>
+            <Filter.Item name={'t'} href={'/'} activated={'t'} />
+            <Filter.Item name={'1'} href={'/'} activated={'t'} />
+          </Filter.Menu>
+        </Header>
         <Table.Container>
           <Table.Wrapper>
             <Table.Header>

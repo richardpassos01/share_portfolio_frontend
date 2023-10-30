@@ -8,13 +8,25 @@ export const Container = styled.div`
   margin-top: 20px;
 `;
 
-export const TransactionCard = styled(Card)<{ $width: number }>`
+export const Header = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+`;
+
+export const FilterButtonsContainer = styled.div`
+  width: 230px;
+  margin: 25px 15px 25px 0;
+  display: flex;
+  justify-content: space-around;
+`;
+
+export const TransactionCard = styled(Card)`
   width: auto;
   height: 500px;
 
   @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
-    margin: 2%;
-    width: ${(props) => `${props.$width - 15}px`};
-    height: 650px;
+    width: 96%;
+    height: 90%;
   }
 `;
