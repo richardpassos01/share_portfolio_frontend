@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Colors, Filter, Hide, Table, Tokens } from '@designSystem';
+import { SelectBox, Colors, Filter, Hide, Table, Tokens } from '@designSystem';
 import {
   Container,
   TransactionCard,
@@ -61,26 +61,8 @@ const TransactionsTable: React.FC = () => {
         <Header>
           <Hide on={Tokens.MAX_WIDTH_MOBILE}>
             <FilterButtonsContainer>
-              <Button
-                $width="100"
-                $height="42"
-                $backgroundColor={Colors.white}
-                $color={Colors.darkBlue}
-                $borderColor={Colors.darkBlue}
-                onClick={() => alert('')}
-              >
-                Ticker
-              </Button>
-              <Button
-                $width="100"
-                $height="42"
-                $backgroundColor={Colors.white}
-                $color={Colors.darkBlue}
-                $borderColor={Colors.darkBlue}
-                onClick={() => alert('')}
-              >
-                Ano
-              </Button>
+              <SelectBox></SelectBox>
+              <SelectBox></SelectBox>
             </FilterButtonsContainer>
           </Hide>
           <Hide on={Tokens.MIN_WIDTH_MOBILE}>
@@ -125,7 +107,9 @@ const TransactionsTable: React.FC = () => {
                 <Table.Row key={index}>
                   <Table.StickyTableCell>
                     <Table.BackgroundColor
-                      backgroundColor={typeColors[item.type]}
+                      backgroundColor={
+                        typeColors[item.type as 'Compra' | 'Venda']
+                      }
                     >
                       {item.type}
                     </Table.BackgroundColor>
