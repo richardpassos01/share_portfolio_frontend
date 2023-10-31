@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Colors, Filter, Hide, Table, Tokens } from '@designSystem';
 import {
   Container,
   TransactionCard,
   Header,
   FilterButtonsContainer,
+  MobileFilterContainer,
 } from './TransactionsTable.stytes';
 import bff from '@bff';
 import FetcherKeys from '@constants/FetcherKeys';
@@ -12,8 +13,19 @@ import useInfiniteFetch from '@hooks/useInfiniteFetch';
 
 const PAGE_LIMIT = 100;
 
+const availableFilters = {
+  tickers: ['ABV', 'TSLA'],
+  monthYear: ['01/2022'],
+};
+
 const TransactionsTable: React.FC = () => {
   const [sortOrder, setSortOrder] = useState('asc');
+  const [monthYearFilter, setMonthYearFilter] = useState([]);
+  const [tickerFilter, setTickerFilter] = useState([]);
+
+  useEffect(() => {
+    console.log(tickerFilter);
+  }, [tickerFilter]);
 
   function fetcher(page: number, sortOrder: string) {
     return bff.listTransactions(
@@ -67,10 +79,24 @@ const TransactionsTable: React.FC = () => {
               </Button>
             </FilterButtonsContainer>
           </Hide>
-          <Filter.Menu>
-            <Filter.Item name={'t'} href={'/'} activated={'t'} />
-            <Filter.Item name={'1'} href={'/'} activated={'t'} />
-          </Filter.Menu>
+          <Hide on={Tokens.MIN_WIDTH_MOBILE}>
+            <MobileFilterContainer>
+              <Filter.Menu>
+                <Filter.Item
+                  label={'Ticker'}
+                  items={availableFilters.tickers}
+                  filter={tickerFilter}
+                  setFilter={setTickerFilter}
+                />
+                <Filter.Item
+                  label={'Mês'}
+                  items={availableFilters.monthYear}
+                  filter={monthYearFilter}
+                  setFilter={setMonthYearFilter}
+                />
+              </Filter.Menu>
+            </MobileFilterContainer>
+          </Hide>
         </Header>
         <Table.Container>
           <Table.Wrapper>

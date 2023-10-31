@@ -34,6 +34,10 @@ export function HamburguerMenu({ children }: { children: React.ReactNode }) {
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+    if (menuOpen) {
+      return (document.body.style.overflow = 'auto');
+    }
+    document.body.style.overflow = 'hidden';
   };
 
   return (

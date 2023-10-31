@@ -8,7 +8,6 @@ export default class HttpClient {
     method: string,
     data?: Record<string, string>,
   ) {
-    console.log(`${this.baseURL}${endpoint}`);
     const requestConfig = {
       method,
       mode: 'cors',

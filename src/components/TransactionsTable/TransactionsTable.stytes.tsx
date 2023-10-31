@@ -21,6 +21,10 @@ export const FilterButtonsContainer = styled.div`
   justify-content: space-around;
 `;
 
+export const MobileFilterContainer = styled.div`
+  margin: 25px 15px 25px 0;
+`;
+
 export const TransactionCard = styled(Card)`
   width: auto;
   height: 500px;

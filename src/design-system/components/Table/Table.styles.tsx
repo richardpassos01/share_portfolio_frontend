@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 100%;
   overflow-x: auto;
+  height: 100%;
 
   @media (max-width: 767px) {
     overflow: scroll;
