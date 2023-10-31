@@ -22,6 +22,10 @@ const TransactionsTable: React.FC = () => {
   const [sortOrder, setSortOrder] = useState('asc');
   const [monthYearFilter, setMonthYearFilter] = useState([]);
   const [tickerFilter, setTickerFilter] = useState([]);
+  const typeColors = {
+    Compra: Colors.green,
+    Venda: Colors.pink,
+  };
 
   useEffect(() => {
     console.log(tickerFilter);
@@ -119,7 +123,13 @@ const TransactionsTable: React.FC = () => {
             <Table.Body>
               {newData.map((item, index) => (
                 <Table.Row key={index}>
-                  <Table.StickyTableCell>{item.type}</Table.StickyTableCell>
+                  <Table.StickyTableCell>
+                    <Table.BackgroundColor
+                      backgroundColor={typeColors[item.type]}
+                    >
+                      {item.type}
+                    </Table.BackgroundColor>
+                  </Table.StickyTableCell>
                   <Table.Cell>{item.date}</Table.Cell>
                   <Table.Cell>{item.category}</Table.Cell>
                   <Table.Cell>{item.ticketSymbol}</Table.Cell>
