@@ -5,15 +5,15 @@ export const ArrowButton = styled.div`
   position: relative;
   cursor: pointer;
   border-radius: 4px;
-  padding: 0px 5px 3px 14px;
+  padding: 0px 4px 3px 10px;
 
   .left-bar,
   .right-bar {
     position: absolute;
     background-color: transparent;
     top: 0;
-    width: 12px;
-    height: 8px;
+    width: 8px;
+    height: 6px;
     display: block;
     float: right;
     border-radius: 2px;
@@ -23,8 +23,8 @@ export const ArrowButton = styled.div`
   .right-bar:after {
     content: '';
     background-color: DodgerBlue;
-    width: 12px;
-    height: 3px;
+    width: 8px;
+    height: 2px;
     display: block;
     float: right;
     transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
@@ -32,10 +32,10 @@ export const ArrowButton = styled.div`
   }
 
   .right-bar {
-    left: 10px;
+    left: 7px;
     transform: rotate(-40deg);
     &:after {
-      border-radius: 10px 6px 6px 10px;
+      border-radius: 6px 4px 4px 6px;
       transform-origin: center center;
     }
   }
@@ -44,7 +44,7 @@ export const ArrowButton = styled.div`
     left: 0;
     transform: rotate(40deg);
     &:after {
-      border-radius: 6px 10px 10px 6px;
+      border-radius: 4px 6px 6px 4px;
       transform-origin: center center;
     }
   }

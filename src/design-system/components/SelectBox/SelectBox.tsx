@@ -8,16 +8,29 @@ import {
   OptionList,
 } from './SelectBox.styles';
 
-const CustomSelect = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  const options = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5'];
+type Option = string;
 
-  const selectRef = useRef(null);
+const CustomSelect: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
+
+  const options: Option[] = [
+    'Option 1',
+    'Option 2',
+    'Option 3',
+    'Option 4',
+    'Option 5',
+  ];
+
+  const selectRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (selectRef.current && !selectRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        selectRef.current &&
+        event.target instanceof Node &&
+        !selectRef.current.contains(event.target)
+      ) {
         setIsOpen(false);
       }
     };
@@ -33,12 +46,14 @@ const CustomSelect = () => {
     setIsOpen(!isOpen);
   };
 
-  const toggleOption = (option) => {
-    if (selectedOptions.includes(option)) {
-      setSelectedOptions(selectedOptions.filter((item) => item !== option));
-    } else {
-      setSelectedOptions([...selectedOptions, option]);
-    }
+  const toggleOption = (option: Option) => {
+    setSelectedOptions((prevOptions: Option[]) => {
+      if (prevOptions.includes(option)) {
+        return prevOptions.filter((item) => item !== option);
+      } else {
+        return [...prevOptions, option];
+      }
+    });
   };
 
   return (
