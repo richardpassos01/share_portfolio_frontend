@@ -95,8 +95,8 @@ export const ErrorText = styled.p`
 
 export const ShowPasswordButton = styled.div`
   position: absolute;
-  right: 10px;
-  top: 50%;
+  right: 15px;
+  top: 55%;
   transform: translateY(-50%);
   cursor: pointer;
 
@@ -109,7 +109,7 @@ export const ShowPasswordButton = styled.div`
     border-radius: 50%;
     opacity: 0;
     transition: opacity 0.3s;
-    margin: -7px 0 0 -8px;
+    margin: -8px 0 0 -7.5px;
   }
 
   &:hover::before {

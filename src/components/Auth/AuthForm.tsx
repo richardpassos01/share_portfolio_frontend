@@ -7,6 +7,7 @@ import {
   SubmitContainer,
   PasswordContainer,
   UsernameContainer,
+  AuthFormContainer,
 } from './Auth.styles';
 import Messages from '@constants/Messages';
 import Routes from '@constants/Routes';
@@ -95,7 +96,7 @@ const AuthForm: React.FC<Props> = ({
   };
 
   return (
-    <>
+    <AuthFormContainer>
       {submitError ? (
         <ErrorContainer>
           <Paragraph $color={Colors.red}>{submitError}</Paragraph>
@@ -103,7 +104,6 @@ const AuthForm: React.FC<Props> = ({
       ) : (
         <></>
       )}
-
       <Form onSubmit={handleSubmit}>
         <UsernameContainer $error={Boolean(usernameError && !passwordError)}>
           <Input.Username
@@ -136,7 +136,7 @@ const AuthForm: React.FC<Props> = ({
           {RedirectTexts[target].link}
         </HyperLink>
       </RedirectContainer>
-    </>
+    </AuthFormContainer>
   );
 };
 

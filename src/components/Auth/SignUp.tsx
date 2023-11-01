@@ -33,7 +33,7 @@ const SignUp: React.FC = () => {
           <Image src={Icons.Signup} alt="Signup" width={650} height={600} />
         </ImageContainer>
       </Hide>
-      <FormContainer $error={Boolean(submitError)}>
+      <FormContainer>
         <Title>Faça seu cadastro</Title>
         <AuthForm
           submit={onSubmit}

@@ -5,6 +5,11 @@ export const Container = styled.div`
   justify-content: space-between;
 `;
 
+export const AuthFormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const ImageContainer = styled.div`
   width: 100%;
   display: flex;
@@ -13,20 +18,12 @@ export const ImageContainer = styled.div`
   border-right: 1px solid ${(props) => props.theme.colors.gray};
 `;
 
-export const FormContainer = styled.div<{ $error: boolean }>`
+export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   padding: 5%;
   justify-content: space-between;
-
-  form {
-    margin-bottom: ${(props) => (props.$error ? '20px' : '0')};
-
-    input {
-      margin-bottom: ${(props) => (props.$error ? '30px' : '0')};
-    }
-  }
 
   @media ${(props) => props.theme.tokens.MIN_WIDTH_TABLET} {
     padding: 0;
