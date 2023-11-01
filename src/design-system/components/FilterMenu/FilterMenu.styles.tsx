@@ -21,6 +21,7 @@ export const LabelTitle = styled.span`
   font-family: 'Roboto', sans-serif;
   font-weight: 600;
   font-size: 14px;
+  color: ${(props) => props.theme.colors.darkGray};
 `;
 
 export const TitleContainer = styled.div`
