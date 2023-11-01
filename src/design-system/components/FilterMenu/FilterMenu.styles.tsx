@@ -44,8 +44,8 @@ export const Menu = styled.nav<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   left: ${(props) => (props.$isOpen ? '20%' : '100%')};
-  width: 100%; /* Cobrindo metade da tela */
-  height: 100%; /* Cobrindo toda a altura da tela */
+  width: 100%;
+  height: 100%;
   background: ${(props) => props.theme.colors.white};
   display: flex;
   flex-direction: column;
@@ -58,7 +58,7 @@ export const Menu = styled.nav<{ $isOpen: boolean }>`
 `;
 
 export const MenuContent = styled.div<{ $isOpen: boolean }>`
-  width: 100%; /* Ajustado para ocupar toda a largura do Menu */
+  width: 100%;
 `;
 
 export const ItemName = styled.div<{ $isActivate: boolean }>`
@@ -75,7 +75,7 @@ export const CheckboxContainer = styled.div`
 `;
 
 export const CheckboxInput = styled.input`
-  display: none; /* Ocultar o input padrão */
+  display: none;
 `;
 
 export const CustomCheckbox = styled.div`
@@ -94,7 +94,7 @@ export const CheckboxLabel = styled.label`
 export const CustomCheckboxMarker = styled.div`
   width: 20px;
   height: 20px;
-  border: 1px solid black;
+  border: 1px solid ${(props) => props.theme.colors.black};
   background-color: white;
   display: flex;
   align-items: center;

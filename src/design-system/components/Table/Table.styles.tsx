@@ -15,7 +15,7 @@ export const Wrapper = styled.table`
 `;
 
 export const Header = styled.thead`
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.white};
   position: sticky;
   top: 0;
   z-index: 1;
@@ -37,7 +37,7 @@ export const HeaderFixedCell = styled(HeaderCell)`
   @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
     position: sticky;
     left: 0;
-    background: #fff;
+    background: ${(props) => props.theme.colors.white};
   }
 `;
 
@@ -71,7 +71,7 @@ export const StickyTableCell = styled(Cell)`
   @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
     position: sticky;
     left: 0;
-    background: #fff;
+    background: ${(props) => props.theme.colors.white};
   }
 `;
 

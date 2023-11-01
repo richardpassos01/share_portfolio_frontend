@@ -10,14 +10,14 @@ export const SelectBoxContainer = styled.div<{ $width?: string }>`
 
 export const SelectBoxButton = styled.button<{ isOpen: boolean }>`
   background-color: white;
-  color: #093677;
+  color: ${(props) => props.theme.colors.darkBlue};
   width: 100%;
   height: 42px;
   border-radius: 1.5em;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border: 1px solid #093677;
+  border: 1px solid ${(props) => props.theme.colors.darkBlue};
 
   ${(props) =>
     props.isOpen &&
@@ -31,7 +31,7 @@ export const SelectBoxButton = styled.button<{ isOpen: boolean }>`
 export const OptionList = styled.div<{ isOpen: boolean }>`
   position: absolute;
   background-color: white;
-  border: 1px solid #093677;
+  border: 1px solid ${(props) => props.theme.colors.darkBlue};
   top: 100%;
   left: 0;
   right: 0;
