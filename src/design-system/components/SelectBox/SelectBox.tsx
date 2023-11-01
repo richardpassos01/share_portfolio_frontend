@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Arrow } from '../Arrow';
 import {
-  CustomSelectButton,
-  CustomSelectContainer,
+  SelectBoxButton,
+  SelectBoxContainer,
   LabelContainer,
   OptionItem,
   OptionList,
@@ -10,17 +10,23 @@ import {
 
 type Option = string;
 
-const CustomSelect: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
+type Props = {
+  options: Option[];
+  label: string;
+  selectedOptions: Option[];
+  setSelectedOptions: any;
+  $width?: string;
+};
 
-  const options: Option[] = [
-    'Option 1',
-    'Option 2',
-    'Option 3',
-    'Option 4',
-    'Option 5',
-  ];
+export const SelectBox: React.FC<Props> = ({
+  options,
+  label,
+  selectedOptions,
+  setSelectedOptions,
+  $width,
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  // const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
 
   const selectRef = useRef<HTMLDivElement | null>(null);
 
@@ -46,41 +52,34 @@ const CustomSelect: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
-  const toggleOption = (option: Option) => {
+  const selectOption = (option: Option) => {
     setSelectedOptions((prevOptions: Option[]) => {
       if (prevOptions.includes(option)) {
         return prevOptions.filter((item) => item !== option);
-      } else {
-        return [...prevOptions, option];
       }
+      return [...prevOptions, option];
     });
   };
 
   return (
-    <CustomSelectContainer ref={selectRef}>
-      <CustomSelectButton isOpen={isOpen} onClick={toggleSelect}>
+    <SelectBoxContainer ref={selectRef} $width={$width}>
+      <SelectBoxButton isOpen={isOpen} onClick={toggleSelect}>
         <LabelContainer>
-          Select Items
+          {label}
           <Arrow isOpen={isOpen} />
         </LabelContainer>
-      </CustomSelectButton>
+      </SelectBoxButton>
       <OptionList isOpen={isOpen}>
         {options.map((option, index) => (
           <OptionItem
             key={index}
-            onClick={() => toggleOption(option)}
-            style={{
-              backgroundColor: selectedOptions.includes(option)
-                ? 'rgba(0, 0, 0, 0.1)'
-                : 'transparent',
-            }}
+            onClick={() => selectOption(option)}
+            $selected={Boolean(selectedOptions.includes(option))}
           >
             {option}
           </OptionItem>
         ))}
       </OptionList>
-    </CustomSelectContainer>
+    </SelectBoxContainer>
   );
 };
-
-export default CustomSelect;

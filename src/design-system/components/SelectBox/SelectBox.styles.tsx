@@ -1,14 +1,14 @@
 import styled, { css } from 'styled-components';
 
-export const CustomSelectContainer = styled.div`
+export const SelectBoxContainer = styled.div<{ $width?: string }>`
   position: relative;
   font-size: 13px;
   font-weight: 600;
   font-family: 'Poppins', sans-serif;
-  width: 100%;
+  width: ${(props) => (props.$width ? `${props.$width}px` : '100%')};
 `;
 
-export const CustomSelectButton = styled.button<{ isOpen: boolean }>`
+export const SelectBoxButton = styled.button<{ isOpen: boolean }>`
   background-color: white;
   color: #093677;
   width: 100%;
@@ -37,24 +37,24 @@ export const OptionList = styled.div<{ isOpen: boolean }>`
   right: 0;
   z-index: 99;
   border-top: 0;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
   display: ${(props) => (props.isOpen ? 'block' : 'none')};
 `;
 
-export const OptionItem = styled.div`
-  color: black;
-  padding: 8px 0px;
+export const OptionItem = styled.div<{ $selected: boolean }>`
+  color: ${(props) => props.theme.colors.darkGray};
+  padding: 3px 0 3px 12px;
   cursor: pointer;
   user-select: none;
   transition: background-color 0.3s;
   display: flex;
   align-items: center;
-  justify-content: center;
+  border-radius: 38px;
+  margin: 0px 5px 6px 4px;
 
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
+  background-color: ${(props) =>
+    props.$selected ? props.theme.colors.gray : 'transparent'};
 `;
 
 export const LabelContainer = styled.div`
@@ -65,4 +65,5 @@ export const LabelContainer = styled.div`
   font-size: 15px;
   font-weight: 600;
   font-family: 'Poppins', sans-serif;
+  justify-content: space-around;
 `;

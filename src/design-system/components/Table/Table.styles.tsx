@@ -62,7 +62,7 @@ export const Cell = styled.td`
   padding: 10px 20px;
   border-bottom: 1px solid ${(props) => props.theme.colors.gray};
   font-size: 14px;
-  color: ${(props) => props.theme.colors.lightGray};
+  color: ${(props) => props.theme.colors.softGray};
   text-align: left;
   vertical-align: middle;
 `;

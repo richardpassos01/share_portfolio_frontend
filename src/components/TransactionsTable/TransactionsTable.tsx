@@ -28,8 +28,8 @@ const TransactionsTable: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log(tickerFilter);
-  }, [tickerFilter]);
+    console.log(monthYearFilter);
+  }, [monthYearFilter]);
 
   function fetcher(page: number, sortOrder: string) {
     return bff.listTransactions(
@@ -61,8 +61,20 @@ const TransactionsTable: React.FC = () => {
         <Header>
           <Hide on={Tokens.MAX_WIDTH_MOBILE}>
             <FilterButtonsContainer>
-              <SelectBox></SelectBox>
-              <SelectBox></SelectBox>
+              <SelectBox
+                label={'Ticker'}
+                options={availableFilters.tickers}
+                selectedOptions={tickerFilter}
+                setSelectedOptions={setTickerFilter}
+                $width="110"
+              />
+              <SelectBox
+                label={'Mês'}
+                options={availableFilters.monthYear}
+                selectedOptions={monthYearFilter}
+                setSelectedOptions={setMonthYearFilter}
+                $width="110"
+              ></SelectBox>
             </FilterButtonsContainer>
           </Hide>
           <Hide on={Tokens.MIN_WIDTH_MOBILE}>
