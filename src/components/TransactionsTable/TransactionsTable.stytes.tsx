@@ -15,7 +15,7 @@ export const Header = styled.div`
 `;
 
 export const FilterButtonsContainer = styled.div`
-  width: 230px;
+  width: 100%;
   margin: 25px 15px 25px 0;
   display: flex;
   justify-content: space-around;

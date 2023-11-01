@@ -12,6 +12,7 @@ export { default as Tokens } from './styles/Tokens';
 export { Theme } from './styles/Theme';
 
 export { Button } from './components/Button';
+export { Arrow } from './components/Arrow';
 export { SelectBox } from './components/SelectBox';
 export { Header, HeaderItem } from './components/Header';
 export { default as Nav } from './components/NavHeader';
