@@ -5,7 +5,7 @@ export const Container = styled.div`
   overflow-x: auto;
   height: 100%;
 
-  @media (max-width: 767px) {
+  @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
     overflow: scroll;
   }
 `;
@@ -34,7 +34,7 @@ export const HeaderCell = styled.th`
 `;
 
 export const HeaderFixedCell = styled(HeaderCell)`
-  @media (max-width: 767px) {
+  @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
     position: sticky;
     left: 0;
     background: #fff;
@@ -68,7 +68,7 @@ export const Cell = styled.td`
 `;
 
 export const StickyTableCell = styled(Cell)`
-  @media (max-width: 767px) {
+  @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
     position: sticky;
     left: 0;
     background: #fff;
