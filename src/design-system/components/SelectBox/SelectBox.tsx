@@ -65,13 +65,13 @@ export const SelectBox: React.FC<Props> = ({
 
   return (
     <SelectBoxContainer ref={selectRef} $width={$width}>
-      <SelectBoxButton isOpen={isOpen} onClick={toggleSelect}>
+      <SelectBoxButton $isOpen={isOpen} onClick={toggleSelect}>
         <LabelContainer>
           {label}
           <Arrow isOpen={isOpen} />
         </LabelContainer>
       </SelectBoxButton>
-      <OptionList isOpen={isOpen}>
+      <OptionList $isOpen={isOpen}>
         {options.map((option, index) => (
           <OptionItem
             key={index}

@@ -50,8 +50,8 @@ export const SortIcon = styled.span`
 
 export const Row = styled.tr``;
 
-export const BackgroundColor = styled.td<{ backgroundColor?: string }>`
-  background: ${(props) => props.backgroundColor};
+export const BackgroundColor = styled.td<{ $backgroundColor?: string }>`
+  background: ${(props) => props.$backgroundColor};
   border-radius: 16px;
   padding: 2px 16px;
   font-weight: 600;

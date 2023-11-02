@@ -116,7 +116,7 @@ const TransactionsTable: React.FC = () => {
                 <Table.Row key={index}>
                   <Table.StickyTableCell>
                     <Table.BackgroundColor
-                      backgroundColor={
+                      $backgroundColor={
                         typeColors[item.type as 'Compra' | 'Venda']
                       }
                     >
