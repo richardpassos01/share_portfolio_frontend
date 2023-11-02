@@ -20,7 +20,9 @@
       }
     ],
     "paths": {
-      "@api/*": ["./src/app/api/*"],
+      "@helpers": ["./src/app/helpers/index.ts"],
+      "@types": ["./src/app/types/index.ts"],
+      "@adapters/*": ["./src/app/infrastructure/adapters/*"],
       "@components/*": ["./src/components/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@designSystem": ["./src/design-system/index"],
