@@ -1,12 +1,7 @@
 import React from 'react';
 import { Hide, Table, Tokens, Loader, Skeleton } from '@designSystem';
-import {
-  Container,
-  TransactionCard,
-  Header,
-  FilterButtonsContainer,
-  MobileFilterContainer,
-} from './TransactionsTable.stytes';
+import { FilterButtonsContainer, MobileFilterContainer } from './List.stytes';
+import { Container, TransactionCard, Header } from '../Transactions.styles';
 
 const Loading: React.FC = () => {
   return (

@@ -26,7 +26,7 @@ export const Body = styled.tbody`
 `;
 
 export const HeaderCell = styled.th<{ $clickable?: boolean }>`
-  padding: 18px 30px;
+  padding: 18px 20px;
   border-bottom: 1px solid ${(props) => props.theme.colors.gray};
   font-size: 14px;
   font-weight: 600;

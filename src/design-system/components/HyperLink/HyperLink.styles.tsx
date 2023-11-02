@@ -2,14 +2,15 @@ import styled from 'styled-components';
 
 interface Props {
   $color?: string;
+  $border?: string;
   $width?: string;
   $fontSize?: string;
 }
 
 export const HyperLink = styled.a<Props>`
   color: ${(props) => props.$color ?? props.theme.colors.white};
-  border: none;
-  border-radius: 5px;
+  border: ${(props) => (props.$border ? `1px solid ${props.$border}` : 'none')};
+  border-radius: 20px;
   width: ${(props) => props.$width ?? '80px'};
   height: 32px;
   align-items: center;

@@ -4,24 +4,28 @@ import {
   Colors,
   Filter,
   Hide,
-  Table,
   Tokens,
   Loader,
   HyperLink,
 } from '@designSystem';
 import {
-  Container,
-  TransactionCard,
-  Header,
   FilterButtonsContainer,
   MobileFilterContainer,
   LoaderContainer,
-  AddTransactionsContainer,
-} from './TransactionsTable.stytes';
+} from './List.stytes';
 import FetcherKeys from '@constants/FetcherKeys';
 import useInfiniteFetch from '@hooks/useInfiniteFetch';
 import BffEndpoints from '@constants/BffEndpoints';
 import Loading from './Loading';
+import { useRouter } from 'next/router';
+import Routes from '@constants/Routes';
+import {
+  Container,
+  FooterContainer,
+  Header,
+  TransactionCard,
+} from '../Transactions.styles';
+import Table from '../Table/Table';
 
 const availableFilters = {
   tickers: ['ABV', 'TSLA'],
@@ -30,14 +34,11 @@ const availableFilters = {
 
 const institutionId = 'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2';
 
-const TransactionsTable: React.FC = () => {
+const List: React.FC = () => {
+  const router = useRouter();
   const [sortOrder, setSortOrder] = useState('asc');
   const [monthYearFilter, setMonthYearFilter] = useState<string[]>([]);
   const [tickerFilter, setTickerFilter] = useState<string[]>([]);
-  const typeColors = {
-    Compra: Colors.green,
-    Venda: Colors.pink,
-  };
 
   useEffect(() => {
     console.log(monthYearFilter);
@@ -56,8 +57,8 @@ const TransactionsTable: React.FC = () => {
     sortOrder,
   );
 
-  const handleDateSort = () => {
-    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+  const handleRedirect = () => {
+    router.push(Routes.ADD_TRANSACTIONS);
   };
 
   if (isLoading) {
@@ -87,7 +88,12 @@ const TransactionsTable: React.FC = () => {
             </FilterButtonsContainer>
           </Hide>
           <MobileFilterContainer>
-            <HyperLink $color={Colors.blue} $fontSize="14" $width="180px">
+            <HyperLink
+              $color={Colors.blue}
+              $fontSize="14"
+              $width="180px"
+              onClick={handleRedirect}
+            >
               Add transactions
             </HyperLink>
             <Filter.Menu>
@@ -106,57 +112,26 @@ const TransactionsTable: React.FC = () => {
             </Filter.Menu>
           </MobileFilterContainer>
         </Header>
-        <Table.Container>
-          <Table.Wrapper>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderFixedCell>Tipo</Table.HeaderFixedCell>
-                <Table.HeaderCell onClick={() => handleDateSort()} $clickable>
-                  {sortOrder === 'asc' ? '↑' : '↓'} Data
-                </Table.HeaderCell>
-                <Table.HeaderCell>Movimentação</Table.HeaderCell>
-                <Table.HeaderCell>Produto</Table.HeaderCell>
-                <Table.HeaderCell>Quantidade</Table.HeaderCell>
-                <Table.HeaderCell>Preço unitário</Table.HeaderCell>
-                <Table.HeaderCell>Valor da operação</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              {newData.map((item, index) => (
-                <Table.Row key={index}>
-                  <Table.StickyTableCell>
-                    <Table.BackgroundColor
-                      $backgroundColor={
-                        typeColors[item.type as 'Compra' | 'Venda']
-                      }
-                    >
-                      {item.type}
-                    </Table.BackgroundColor>
-                  </Table.StickyTableCell>
-                  <Table.Cell>{item.date}</Table.Cell>
-                  <Table.Cell>{item.category}</Table.Cell>
-                  <Table.Cell>{item.ticketSymbol}</Table.Cell>
-                  <Table.Cell>{item.quantity}</Table.Cell>
-                  <Table.Cell>{item.unitPrice}</Table.Cell>
-                  <Table.Cell>{item.totalCost}</Table.Cell>
-                </Table.Row>
-              ))}
-            </Table.Body>
-          </Table.Wrapper>
+        <Table data={newData} sortOrder={sortOrder} setSortOrder={setSortOrder}>
           {!fetchedAll && (
             <LoaderContainer ref={lastDataRendered}>
               <Loader $size={30} />
             </LoaderContainer>
           )}
-        </Table.Container>
-        <AddTransactionsContainer>
-          <HyperLink $color={Colors.blue} $fontSize="14" $width="180px">
+        </Table>
+        <FooterContainer>
+          <HyperLink
+            $color={Colors.blue}
+            $fontSize="14"
+            $width="180px"
+            onClick={handleRedirect}
+          >
             Add transactions
           </HyperLink>
-        </AddTransactionsContainer>
+        </FooterContainer>
       </TransactionCard>
     </Container>
   );
 };
 
-export default TransactionsTable;
+export default List;

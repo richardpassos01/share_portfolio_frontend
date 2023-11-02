@@ -3,13 +3,13 @@ import { AppBar } from '@components/AppBar';
 import HeaderPages from '@constants/HeaderPages';
 import Transactions from '@components/Transactions';
 
-const ListTransactions: React.FC = () => {
+const AddTransactions: React.FC = () => {
   return (
     <div>
       <AppBar currentPage={HeaderPages.TRANSACTIONS} />
-      <Transactions.List />
+      <Transactions.Add />
     </div>
   );
 };
 
-export default ListTransactions;
+export default AddTransactions;

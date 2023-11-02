@@ -3,6 +3,7 @@ enum Routes {
   SIGNUP = '/auth/signup',
   DASHBOARD = '/dashboard',
   TRANSACTIONS = '/transactions',
+  ADD_TRANSACTIONS = '/transactions/add',
   HOME = '/',
 }
 
