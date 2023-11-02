@@ -30,7 +30,7 @@ const useInfiniteFetch = (
     },
   );
 
-  const newData = useMemo(() => {
+  const newData: Record<string, string>[] = useMemo(() => {
     setLoading(false);
 
     if (data) {

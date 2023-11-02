@@ -20,8 +20,8 @@ const institutionId = 'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2';
 
 const TransactionsTable: React.FC = () => {
   const [sortOrder, setSortOrder] = useState('asc');
-  const [monthYearFilter, setMonthYearFilter] = useState([]);
-  const [tickerFilter, setTickerFilter] = useState([]);
+  const [monthYearFilter, setMonthYearFilter] = useState<string[]>([]);
+  const [tickerFilter, setTickerFilter] = useState<string[]>([]);
   const typeColors = {
     Compra: Colors.green,
     Venda: Colors.pink,
@@ -29,7 +29,8 @@ const TransactionsTable: React.FC = () => {
 
   useEffect(() => {
     console.log(monthYearFilter);
-  }, [monthYearFilter]);
+    console.log(tickerFilter);
+  }, [monthYearFilter, tickerFilter]);
 
   const {
     data: newData,

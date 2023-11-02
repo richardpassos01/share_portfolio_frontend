@@ -74,14 +74,3 @@ export const StickyTableCell = styled(Cell)`
     background: ${(props) => props.theme.colors.white};
   }
 `;
-
-export const Pagination = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-`;
-
-export const PageButton = styled.button<{ active?: any }>`
-  margin: 0 5px;
-  background-color: ${(props) => (props.active ? 'gray' : 'transparent')};
-`;

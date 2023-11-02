@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import {
   Overlay,
   Menu,
@@ -13,17 +13,14 @@ import Image from 'next/image';
 import { Icons } from '../../index';
 import CheckBox from '../Input/CheckBox';
 
-export function Item({
-  label,
-  items,
-  filter,
-  setFilter,
-}: {
+type Props = {
   label: string;
   items: string[];
   filter: string[];
-  setFilter: any;
-}) {
+  setFilter: Dispatch<SetStateAction<string[]>>;
+};
+
+export function Item({ label, items, filter, setFilter }: Props) {
   const onChange = (isChecked: boolean, value: string) => {
     const newFilter = new Set(filter);
     if (isChecked) {

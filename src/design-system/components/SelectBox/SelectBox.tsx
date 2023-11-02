@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  Dispatch,
+  SetStateAction,
+} from 'react';
 import { Arrow } from '../Arrow';
 import {
   SelectBoxButton,
@@ -8,13 +14,11 @@ import {
   OptionList,
 } from './SelectBox.styles';
 
-type Option = string;
-
 type Props = {
-  options: Option[];
+  options: string[];
   label: string;
-  selectedOptions: Option[];
-  setSelectedOptions: any;
+  selectedOptions: string[];
+  setSelectedOptions: Dispatch<SetStateAction<string[]>>;
   $width?: string;
 };
 
@@ -26,7 +30,6 @@ export const SelectBox: React.FC<Props> = ({
   $width,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  // const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
 
   const selectRef = useRef<HTMLDivElement | null>(null);
 
@@ -52,13 +55,12 @@ export const SelectBox: React.FC<Props> = ({
     setIsOpen(!isOpen);
   };
 
-  const selectOption = (option: Option) => {
-    setSelectedOptions((prevOptions: Option[]) => {
-      if (prevOptions.includes(option)) {
-        return prevOptions.filter((item) => item !== option);
-      }
-      return [...prevOptions, option];
-    });
+  const selectOption = (option: string) => {
+    const updatedOptions = selectedOptions.includes(option)
+      ? selectedOptions.filter((item) => item !== option)
+      : [...selectedOptions, option];
+
+    setSelectedOptions(updatedOptions);
   };
 
   return (
