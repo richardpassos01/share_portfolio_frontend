@@ -5,12 +5,12 @@ import { Container } from './HideStyles';
 interface Props {
   on: Tokens;
   children?: React.ReactNode;
-  $width?: string;
+  width?: string;
 }
 
-export default function Hide({ on, children, $width }: Props) {
+export default function Hide({ on, children, width }: Props) {
   return (
-    <Container $token={on} $width={$width}>
+    <Container $token={on} $width={width}>
       {children}
     </Container>
   );
