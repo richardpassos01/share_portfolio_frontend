@@ -21,7 +21,9 @@ export const Header = styled.thead`
   z-index: 1;
 `;
 
-export const Body = styled.tbody``;
+export const Body = styled.tbody`
+  width: 100%;
+`;
 
 export const HeaderCell = styled.th`
   padding: 18px 30px;

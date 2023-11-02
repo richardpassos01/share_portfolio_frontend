@@ -8,6 +8,11 @@ export const Container = styled.div`
   margin-top: 20px;
 `;
 
+export const LoaderContainer = styled(Container)`
+  margin: 0;
+  justify-content: center;
+`;
+
 export const Header = styled.div`
   width: 100%;
   display: flex;
@@ -26,8 +31,11 @@ export const MobileFilterContainer = styled.div`
 `;
 
 export const TransactionCard = styled(Card)`
-  width: 1000px;
+  width: auto;
   height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
     width: 96%;

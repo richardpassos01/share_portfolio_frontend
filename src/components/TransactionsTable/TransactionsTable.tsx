@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { SelectBox, Colors, Filter, Hide, Table, Tokens } from '@designSystem';
+import {
+  SelectBox,
+  Colors,
+  Filter,
+  Hide,
+  Table,
+  Tokens,
+  Loader,
+} from '@designSystem';
 import {
   Container,
   TransactionCard,
   Header,
   FilterButtonsContainer,
   MobileFilterContainer,
+  LoaderContainer,
 } from './TransactionsTable.stytes';
 import FetcherKeys from '@constants/FetcherKeys';
 import useInfiniteFetch from '@hooks/useInfiniteFetch';
@@ -131,9 +140,13 @@ const TransactionsTable: React.FC = () => {
                   <Table.Cell>{item.totalCost}</Table.Cell>
                 </Table.Row>
               ))}
-              <div ref={lastDataRendered}>{!fetchedAll && 'loading'}</div>
             </Table.Body>
           </Table.Wrapper>
+          {!fetchedAll && (
+            <LoaderContainer ref={lastDataRendered}>
+              <Loader $size={30} />
+            </LoaderContainer>
+          )}
         </Table.Container>
       </TransactionCard>
     </Container>
