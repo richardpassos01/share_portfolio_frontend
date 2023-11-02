@@ -108,10 +108,7 @@ const TransactionsTable: React.FC = () => {
             <Table.Header>
               <Table.Row>
                 <Table.HeaderFixedCell>Tipo</Table.HeaderFixedCell>
-                <Table.HeaderCell
-                  onClick={() => handleDateSort()}
-                  style={{ cursor: 'pointer' }}
-                >
+                <Table.HeaderCell onClick={() => handleDateSort()} $clickable>
                   {sortOrder === 'asc' ? '↑' : '↓'} Data
                 </Table.HeaderCell>
                 <Table.HeaderCell>Movimentação</Table.HeaderCell>

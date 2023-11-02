@@ -25,7 +25,7 @@ export const Body = styled.tbody`
   width: 100%;
 `;
 
-export const HeaderCell = styled.th`
+export const HeaderCell = styled.th<{ $clickable?: boolean }>`
   padding: 18px 30px;
   border-bottom: 1px solid ${(props) => props.theme.colors.gray};
   font-size: 14px;
@@ -33,6 +33,7 @@ export const HeaderCell = styled.th`
   color: ${(props) => props.theme.colors.darkGray};
   text-align: left;
   vertical-align: middle;
+  cursor: ${(props) => (props.$clickable ? 'pointer' : 'default')};
 `;
 
 export const HeaderFixedCell = styled(HeaderCell)`
