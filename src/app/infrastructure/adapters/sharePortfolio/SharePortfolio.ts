@@ -15,10 +15,10 @@ export default class SharePortfolio {
     return SharePortfolio.instance;
   }
 
-  public static createInstituion(data: Record<string, string>) {
+  public static createInstituion(body: Record<string, string>) {
     return SharePortfolio.getInstance().post(
       Endpoints.CREATE_INSTITUTION,
-      data,
+      body,
     );
   }
 
@@ -42,14 +42,14 @@ export default class SharePortfolio {
 
   public static listTransactions(
     institutionId: string,
-    page: number,
-    limit: number,
+    page: string,
+    limit: string,
     order: string,
   ): Promise<Pagination<Transaction>> {
     return SharePortfolio.getInstance().get(
       Endpoints.LIST_TRANSACTIONS.replace(':institutionId', institutionId)
-        .replace(':page', String(page))
-        .replace(':limit', String(limit))
+        .replace(':page', page)
+        .replace(':limit', limit)
         .replace(':order', order),
     );
   }

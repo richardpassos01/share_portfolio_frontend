@@ -7,16 +7,16 @@ import {
   FilterButtonsContainer,
   MobileFilterContainer,
 } from './TransactionsTable.stytes';
-import bff from '@bff';
 import FetcherKeys from '@constants/FetcherKeys';
 import useInfiniteFetch from '@hooks/useInfiniteFetch';
-
-const PAGE_LIMIT = 100;
+import BffEndpoints from '@constants/BffEndpoints';
 
 const availableFilters = {
   tickers: ['ABV', 'TSLA'],
   monthYear: ['01/2022'],
 };
+
+const institutionId = 'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2';
 
 const TransactionsTable: React.FC = () => {
   const [sortOrder, setSortOrder] = useState('asc');
@@ -31,21 +31,17 @@ const TransactionsTable: React.FC = () => {
     console.log(monthYearFilter);
   }, [monthYearFilter]);
 
-  function fetcher(page: number, sortOrder: string) {
-    return bff.listTransactions(
-      'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2',
-      page,
-      PAGE_LIMIT,
-      sortOrder,
-    );
-  }
-
   const {
     data: newData,
     isLoading,
     lastDataRendered,
     fetchedAll,
-  } = useInfiniteFetch(fetcher, FetcherKeys.LIST_TRANSACTIONS, sortOrder);
+  } = useInfiniteFetch(
+    BffEndpoints.LIST_TRANSACTIONS,
+    FetcherKeys.LIST_TRANSACTIONS,
+    institutionId,
+    sortOrder,
+  );
 
   const handleDateSort = () => {
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');

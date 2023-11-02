@@ -26,7 +26,7 @@ export const MobileFilterContainer = styled.div`
 `;
 
 export const TransactionCard = styled(Card)`
-  width: auto;
+  width: 1000px;
   height: 500px;
 
   @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {

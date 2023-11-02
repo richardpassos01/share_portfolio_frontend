@@ -1,11 +1,12 @@
+import { NextResponse, type NextRequest } from 'next/server';
+
 import { dateStringYYYYMMDDToDDMMYYYY, formatterMoney } from '../../../helpers';
-import { HttpClient } from '../../providers';
-import SharePortfolio from '../sharePortfolio/SharePortfolio';
 import {
+  SharePortfolioAdapter,
   TRANSACTION_TYPE,
   TRANSACTION_CATEGORY,
-} from '../sharePortfolio/types';
-import Endpoints from './Endpoints';
+} from '../../../infrastructure/adapters/sharePortfolio';
+import { Context, InstitutionId } from '../../../types';
 
 const typeMapper = (type: TRANSACTION_TYPE) => {
   const mapper = {
@@ -34,36 +35,25 @@ const categoryMapper = (category: TRANSACTION_CATEGORY) => {
   return mapper[category];
 };
 
-export default class Bff {
-  private static instance: HttpClient;
-  private static baseURL: string = process.env.NEXT_PUBLIC_BFF_API ?? '';
+export async function GET(
+  request: NextRequest,
+  context: Context<InstitutionId>,
+) {
+  try {
+    const institutionId = context.params.institutionId;
+    const searchParams = request.nextUrl.searchParams;
+    const page = searchParams.get('page') || '1';
+    const limit = searchParams.get('limit') || '100';
+    const order = searchParams.get('order') || 'desc';
 
-  private static getInstance(): HttpClient {
-    if (!Bff.instance) {
-      Bff.instance = new HttpClient(this.baseURL);
-    }
-
-    return Bff.instance;
-  }
-
-  public static signup(data: Record<string, string>) {
-    return Bff.getInstance().post(Endpoints.SIGNUP, data);
-  }
-
-  public static async listTransactions(
-    institutionId: string,
-    page: number,
-    limit: number,
-    order = 'desc',
-  ) {
-    const { totalItems, items } = await SharePortfolio.listTransactions(
+    const { totalItems, items } = await SharePortfolioAdapter.listTransactions(
       institutionId,
       page,
       limit,
       order,
     );
 
-    return {
+    const result = {
       totalItems,
       items: items.map(
         ({ date, totalCost, type, category, unitPrice, ...rest }) => ({
@@ -76,5 +66,14 @@ export default class Bff {
         }),
       ),
     };
+
+    return NextResponse.json(result, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
+}
+
+export async function POST(request) {
+  return NextResponse.json({ message: 'Hello World' }, { status: 200 });
 }

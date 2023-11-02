@@ -6,7 +6,7 @@ export default class HttpClient {
   private async request(
     endpoint: string,
     method: string,
-    data?: Record<string, string>,
+    body?: Record<string, string>,
   ) {
     const requestConfig = {
       method,
@@ -18,8 +18,8 @@ export default class HttpClient {
       referrerPolicy: 'no-referrer',
     } as RequestInit;
 
-    if (data) {
-      requestConfig.body = JSON.stringify(data);
+    if (body) {
+      requestConfig.body = JSON.stringify(body);
     }
 
     const response = await fetch(`${this.baseURL}${endpoint}`, requestConfig);
@@ -30,16 +30,16 @@ export default class HttpClient {
     return this.request(endpoint, 'GET');
   }
 
-  async post(endpoint: string, data = {}) {
-    return this.request(endpoint, 'POST', data);
+  async post(endpoint: string, body = {}) {
+    return this.request(endpoint, 'POST', body);
   }
 
-  async put(endpoint: string, data = {}) {
-    return this.request(endpoint, 'PUT', data);
+  async put(endpoint: string, body = {}) {
+    return this.request(endpoint, 'PUT', body);
   }
 
-  async patch(endpoint: string, data = {}) {
-    return this.request(endpoint, 'PATCH', data);
+  async patch(endpoint: string, body = {}) {
+    return this.request(endpoint, 'PATCH', body);
   }
 
   async delete(endpoint: string) {

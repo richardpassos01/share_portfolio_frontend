@@ -17,7 +17,10 @@ type Props = {
   submitError: string;
   setSubmitError: Function;
   target: 'signIn' | 'signUp';
-  submit: (username: string, password: string) => Promise<void>;
+  submit: (
+    username: string,
+    password: string,
+  ) => Promise<void | React.JSX.Element>;
 };
 
 const RedirectTexts = {
