@@ -28,11 +28,18 @@ export const FilterButtonsContainer = styled.div`
 
 export const MobileFilterContainer = styled.div`
   margin: 25px 15px 25px 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  @media ${(props) => props.theme.tokens.MIN_WIDTH_TABLET} {
+    display: none;
+  }
 `;
 
 export const TransactionCard = styled(Card)`
   width: auto;
-  height: 500px;
+  height: 550px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,5 +47,17 @@ export const TransactionCard = styled(Card)`
   @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
     width: 96%;
     height: 90%;
+  }
+`;
+
+export const AddTransactionsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 2%;
+  border-top: 1px solid ${(props) => props.theme.colors.gray};
+
+  @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
+    display: none;
   }
 `;

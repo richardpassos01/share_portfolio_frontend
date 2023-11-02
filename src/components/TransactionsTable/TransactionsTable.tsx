@@ -7,6 +7,7 @@ import {
   Table,
   Tokens,
   Loader,
+  HyperLink,
 } from '@designSystem';
 import {
   Container,
@@ -15,6 +16,7 @@ import {
   FilterButtonsContainer,
   MobileFilterContainer,
   LoaderContainer,
+  AddTransactionsContainer,
 } from './TransactionsTable.stytes';
 import FetcherKeys from '@constants/FetcherKeys';
 import useInfiniteFetch from '@hooks/useInfiniteFetch';
@@ -84,24 +86,25 @@ const TransactionsTable: React.FC = () => {
               ></SelectBox>
             </FilterButtonsContainer>
           </Hide>
-          <Hide on={Tokens.MIN_WIDTH_MOBILE}>
-            <MobileFilterContainer>
-              <Filter.Menu>
-                <Filter.Item
-                  label={'Ticker'}
-                  items={availableFilters.tickers}
-                  filter={tickerFilter}
-                  setFilter={setTickerFilter}
-                />
-                <Filter.Item
-                  label={'Mês'}
-                  items={availableFilters.monthYear}
-                  filter={monthYearFilter}
-                  setFilter={setMonthYearFilter}
-                />
-              </Filter.Menu>
-            </MobileFilterContainer>
-          </Hide>
+          <MobileFilterContainer>
+            <HyperLink $color={Colors.blue} $fontSize="14" $width="180px">
+              Add transactions
+            </HyperLink>
+            <Filter.Menu>
+              <Filter.Item
+                label={'Ticker'}
+                items={availableFilters.tickers}
+                filter={tickerFilter}
+                setFilter={setTickerFilter}
+              />
+              <Filter.Item
+                label={'Mês'}
+                items={availableFilters.monthYear}
+                filter={monthYearFilter}
+                setFilter={setMonthYearFilter}
+              />
+            </Filter.Menu>
+          </MobileFilterContainer>
         </Header>
         <Table.Container>
           <Table.Wrapper>
@@ -146,6 +149,11 @@ const TransactionsTable: React.FC = () => {
             </LoaderContainer>
           )}
         </Table.Container>
+        <AddTransactionsContainer>
+          <HyperLink $color={Colors.blue} $fontSize="14" $width="180px">
+            Add transactions
+          </HyperLink>
+        </AddTransactionsContainer>
       </TransactionCard>
     </Container>
   );

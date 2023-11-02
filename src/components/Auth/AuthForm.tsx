@@ -135,7 +135,7 @@ const AuthForm: React.FC<Props> = ({
         <Paragraph $color={Colors.darkGray}>
           {RedirectTexts[target].paragraph}
         </Paragraph>
-        <HyperLink color={Colors.blue} fontSize="14" onClick={handleSignUp}>
+        <HyperLink $color={Colors.blue} $fontSize="14" onClick={handleSignUp}>
           {RedirectTexts[target].link}
         </HyperLink>
       </RedirectContainer>
