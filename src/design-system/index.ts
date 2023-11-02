@@ -28,6 +28,7 @@ export { Paragraph } from './components/Paragraph';
 export { Table } from './components/Table';
 export { Card } from './components/Card';
 export { Loader } from './components/Loader';
+export { Skeleton } from './components/Skeleton';
 
 export const Icons = {
   Icon,

@@ -19,6 +19,7 @@ import {
 import FetcherKeys from '@constants/FetcherKeys';
 import useInfiniteFetch from '@hooks/useInfiniteFetch';
 import BffEndpoints from '@constants/BffEndpoints';
+import Loading from './Loading';
 
 const availableFilters = {
   tickers: ['ABV', 'TSLA'],
@@ -58,7 +59,7 @@ const TransactionsTable: React.FC = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

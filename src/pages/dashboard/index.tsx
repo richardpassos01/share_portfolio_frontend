@@ -1,5 +1,4 @@
 import React from 'react';
-import { Table } from '@designSystem';
 import { AppBar } from '@components/AppBar';
 import HeaderPages from '@constants/HeaderPages';
 
