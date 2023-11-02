@@ -1,5 +1,5 @@
 import { Colors } from './Colors';
-import Tokens from './Tokens';
+import { Tokens } from './Tokens';
 
 export const Theme = {
   colors: Colors,

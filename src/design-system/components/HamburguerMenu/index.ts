@@ -1,8 +1,6 @@
 import { HamburguerMenu, Item } from './HamburguerMenu';
 
-const Hamburger = {
+export const Hamburger = {
   Menu: HamburguerMenu,
   Item,
 };
-
-export default Hamburger;

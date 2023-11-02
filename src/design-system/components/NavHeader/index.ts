@@ -1,8 +1,6 @@
-import { default as NavHeader, Item } from './NavHeader';
+import NavHeader, { Item } from './NavHeader';
 
-const Nav = {
+export const Nav = {
   Header: NavHeader,
   Item,
 };
-
-export default Nav;
