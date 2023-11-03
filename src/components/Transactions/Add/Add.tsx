@@ -8,15 +8,13 @@ import {
 import Table from '../Table/Table';
 
 import readXlsx from '@utils/readXlsx';
-import { formatterMoney } from '@utils/formatters';
 import {
   Button,
   Colors,
-  Hide,
   HyperLink,
   Icons,
   Input,
-  Tokens,
+  ProgressBar,
 } from '@designSystem';
 import {
   IconContainer,
@@ -28,6 +26,8 @@ import {
 import Image from 'next/image';
 import Routes from '@constants/Routes';
 import { useRouter } from 'next/router';
+import fetchBff from '@utils/fetchBff';
+import BffEndpoints from '@constants/BffEndpoints';
 
 type TransactionType = {
   'Entrada/Saída': string;
@@ -47,10 +47,35 @@ const transactionType: Record<string, string> = {
 const Add: React.FC = () => {
   const router = useRouter();
   const [data, setData] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isReadingFile, setReadingFile] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleRedirect = () => {
     router.push(Routes.TRANSACTIONS);
+  };
+
+  const handleSubmit = async () => {
+    if (isSubmitting) return;
+    try {
+      setIsSubmitting(true);
+      const institutionId = 'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2';
+
+      await fetchBff(
+        BffEndpoints.CREATE_TRANSACTIONS.replace(
+          ':parentId',
+          institutionId,
+        ) as BffEndpoints,
+        'POST',
+        data,
+      );
+
+      handleRedirect();
+    } catch (error) {
+      // Toastify
+      setIsSubmitting(false);
+      setData([]);
+      console.log(error);
+    }
   };
 
   const handleFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -58,13 +83,13 @@ const Add: React.FC = () => {
 
     if (files && files[0]) {
       try {
-        setIsLoading(true);
+        setReadingFile(true);
 
         await readFile(files[0]);
-
-        setIsLoading(false);
       } catch (error) {
-        setIsLoading(false);
+        console.log('error');
+      } finally {
+        setReadingFile(false);
       }
     }
   };
@@ -92,102 +117,105 @@ const Add: React.FC = () => {
   };
 
   return (
-    <Container>
-      <TransactionCard>
-        {data.length ? (
-          <>
-            <Header>
-              <SubmitContainer>
-                <HyperLink
-                  $color={Colors.blue}
-                  $fontSize="14"
-                  $width="140px"
-                  $border={Colors.blue}
+    <>
+      {isSubmitting && <ProgressBar isLoading={isSubmitting} />}
+      <Container>
+        <TransactionCard>
+          {data.length ? (
+            <>
+              <Header>
+                <SubmitContainer>
+                  <HyperLink
+                    $color={Colors.blue}
+                    $fontSize="14"
+                    $width="140px"
+                    $border={Colors.blue}
+                    onClick={() => setData([])}
+                  >
+                    Cancelar
+                  </HyperLink>
+                  <HyperLink
+                    $color={Colors.blue}
+                    $fontSize="14"
+                    $width="140px"
+                    $border={Colors.blue}
+                    onClick={handleSubmit}
+                  >
+                    Salvar
+                  </HyperLink>
+                </SubmitContainer>
+              </Header>
+              <Table data={data}></Table>
+              <FooterContainer>
+                <Button
+                  $width="100"
+                  $height="42"
+                  $backgroundColor={Colors.white}
+                  $color={Colors.darkBlue}
+                  $borderColor={Colors.darkBlue}
+                  onClick={handleSubmit}
+                >
+                  Salvar
+                </Button>
+                <Button
+                  $width="100"
+                  $height="42"
+                  $backgroundColor={Colors.white}
+                  $color={Colors.darkBlue}
+                  $borderColor={Colors.darkBlue}
                   onClick={() => setData([])}
                 >
                   Cancelar
-                </HyperLink>
+                </Button>
+              </FooterContainer>
+            </>
+          ) : (
+            <>
+              <UploadFileHeader>
                 <HyperLink
                   $color={Colors.blue}
                   $fontSize="14"
-                  $width="140px"
-                  $border={Colors.blue}
-                  onClick={() => console.log()}
+                  $width="180px"
+                  href="/b3-model.xlsx"
                 >
-                  Adicionar
+                  Baixar o modelo
                 </HyperLink>
-              </SubmitContainer>
-            </Header>
-            <Table data={data}></Table>
-            <FooterContainer>
-              <Button
-                $width="100"
-                $height="42"
-                $backgroundColor={Colors.white}
-                $color={Colors.darkBlue}
-                $borderColor={Colors.darkBlue}
-                onClick={() => console.log('a')}
-              >
-                Adicionar
-              </Button>
-              <Button
-                $width="100"
-                $height="42"
-                $backgroundColor={Colors.white}
-                $color={Colors.darkBlue}
-                $borderColor={Colors.darkBlue}
-                onClick={() => setData([])}
-              >
-                Cancelar
-              </Button>
-            </FooterContainer>
-          </>
-        ) : (
-          <>
-            <UploadFileHeader>
-              <HyperLink
-                $color={Colors.blue}
-                $fontSize="14"
-                $width="180px"
-                href="/b3-model.xlsx"
-              >
-                Baixar o modelo
-              </HyperLink>
-            </UploadFileHeader>
-            <UploadFileContainer>
-              <IconContainer>
-                <Image
-                  src={Icons.Xlsx}
-                  alt="xlsx-icon"
-                  width={100}
-                  height={100}
-                />
-              </IconContainer>
+              </UploadFileHeader>
+              <UploadFileContainer>
+                <IconContainer>
+                  <Image
+                    src={Icons.Xlsx}
+                    alt="xlsx-icon"
+                    width={100}
+                    height={100}
+                  />
+                </IconContainer>
 
-              <Input.File
-                label="Escolher arquivo"
-                $width={190}
-                $height={40}
-                isLoading={isLoading}
-                onChange={handleFileUpload}
-              />
-            </UploadFileContainer>
-            <Footer>
-              <Button
-                $width="100"
-                $height="42"
-                $backgroundColor={Colors.white}
-                $color={Colors.darkBlue}
-                $borderColor={Colors.darkBlue}
-                onClick={handleRedirect}
-              >
-                Voltar
-              </Button>
-            </Footer>
-          </>
-        )}
-      </TransactionCard>
-    </Container>
+                <Input.File
+                  label="Escolher arquivo"
+                  $width={190}
+                  $height={40}
+                  isLoading={isReadingFile}
+                  onChange={handleFileUpload}
+                />
+              </UploadFileContainer>
+              <Footer>
+                <Button
+                  $width="100"
+                  $height="42"
+                  $backgroundColor={Colors.white}
+                  $color={Colors.darkBlue}
+                  $borderColor={Colors.darkBlue}
+                  onClick={handleRedirect}
+                >
+                  Voltar
+                </Button>
+              </Footer>
+            </>
+          )}
+        </TransactionCard>
+      </Container>
+    </>
   );
 };
 

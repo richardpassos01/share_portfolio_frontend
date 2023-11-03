@@ -12,7 +12,6 @@ export enum TRANSACTION_CATEGORY {
 }
 
 export type Transaction = {
-  institutionId: string;
   ticketSymbol: string;
   quantity: number;
   unitPrice: number;
@@ -20,7 +19,7 @@ export type Transaction = {
   type: TRANSACTION_TYPE;
   category: TRANSACTION_CATEGORY;
   date: string;
-  id: string;
+  id?: string;
 };
 
 export type Pagination<T> = {

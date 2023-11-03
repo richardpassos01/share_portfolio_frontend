@@ -54,9 +54,13 @@ export default class SharePortfolio {
     );
   }
 
-  public static createTransactions(institutionId: string) {
+  public static createTransactions(
+    institutionId: string,
+    transactions: Transaction[],
+  ) {
     return SharePortfolio.getInstance().post(
       Endpoints.CREATE_TRANSACTIONS.replace(':institutionId', institutionId),
+      transactions,
     );
   }
 

@@ -3,7 +3,7 @@ import BffEndpoints from '@constants/BffEndpoints';
 const fetchBff = async (
   endpoint: BffEndpoints,
   method: string,
-  body?: Record<string, string>,
+  body?: Record<string, string> | Record<string, string>[],
 ) => {
   const requestConfig: RequestInit = {
     method,
