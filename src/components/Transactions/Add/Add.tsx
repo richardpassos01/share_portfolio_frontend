@@ -15,6 +15,7 @@ import {
   Icons,
   Input,
   ProgressBar,
+  Notification,
 } from '@designSystem';
 import {
   IconContainer,
@@ -49,6 +50,7 @@ const Add: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
   const [isReadingFile, setReadingFile] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [toast, setToast] = useState<Record<string, string>>({});
 
   const handleRedirect = () => {
     router.push(Routes.TRANSACTIONS);
@@ -69,12 +71,21 @@ const Add: React.FC = () => {
         data,
       );
 
-      handleRedirect();
+      setToast({
+        message: 'Transactions criadas!',
+        type: 'success',
+      });
+
+      setTimeout(() => {
+        handleRedirect();
+      }, 2500);
     } catch (error) {
-      // Toastify
       setIsSubmitting(false);
       setData([]);
-      console.log(error);
+      setToast({
+        message: 'Alguma coisa deu errada!',
+        type: 'error',
+      });
     }
   };
 
@@ -118,6 +129,9 @@ const Add: React.FC = () => {
 
   return (
     <>
+      <div>
+        <Notification toast={toast} />
+      </div>
       {isSubmitting && <ProgressBar isLoading={isSubmitting} />}
       <Container>
         <TransactionCard>
