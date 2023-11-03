@@ -5,6 +5,7 @@ import ArrowRight from './icons/arrowRight.svg';
 import Eye from './icons/eye.svg';
 import EyeSlash from './icons/eyeSlash.svg';
 import Filter from './icons/filter.svg';
+import Xlsx from './icons/xlsx.png';
 
 export { GlobalStyles } from './styles/GlobalStyles';
 export { Colors } from './styles/Colors';
@@ -38,4 +39,5 @@ export const Icons = {
   Eye,
   EyeSlash,
   Filter,
+  Xlsx,
 };

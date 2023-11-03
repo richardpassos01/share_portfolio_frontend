@@ -2,7 +2,7 @@ import { useState, useRef, useMemo } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import BffEndpoints from '@constants/BffEndpoints';
-import { fetchBff } from './useBff';
+import fetchBff from '@utils/fetchBff';
 
 const useInfiniteFetch = (
   bffEndpoint: BffEndpoints,

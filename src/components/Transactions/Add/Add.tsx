@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import {
   Container,
   Header,
@@ -9,8 +9,24 @@ import Table from '../Table/Table';
 
 import readXlsx from '@utils/readXlsx';
 import { formatterMoney } from '@utils/formatters';
-import { Button, Colors, Hide, HyperLink, Tokens } from '@designSystem';
-import { SubmitContainer } from './Add.styles';
+import {
+  Button,
+  Colors,
+  Hide,
+  HyperLink,
+  Icons,
+  Input,
+  Tokens,
+} from '@designSystem';
+import {
+  IconContainer,
+  SubmitContainer,
+  UploadFileContainer,
+  Footer,
+} from './Add.styles';
+import Image from 'next/image';
+import Routes from '@constants/Routes';
+import { useRouter } from 'next/router';
 
 type TransactionType = {
   'Entrada/Saída': string;
@@ -28,12 +44,32 @@ const transactionType: Record<string, string> = {
 };
 
 const Add: React.FC = () => {
+  const router = useRouter();
   const [sortOrder, setSortOrder] = useState('asc');
   const [data, setData] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const readFile = async (file: File | null) => {
-    if (!file) return;
+  const handleRedirect = () => {
+    router.push(Routes.TRANSACTIONS);
+  };
 
+  const handleFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event?.target?.files;
+
+    if (files && files[0]) {
+      try {
+        setIsLoading(true);
+
+        await readFile(files[0]);
+
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  const readFile = async (file: File) => {
     const data = await readXlsx(file);
     if (data) {
       const formattedData = data.map((item: TransactionType) => ({
@@ -107,13 +143,37 @@ const Add: React.FC = () => {
           </>
         ) : (
           <>
-            <input
-              type="file"
-              onChange={(e) => {
-                const file = e.target?.files;
-                readFile(file && file[0]);
-              }}
-            />
+            <UploadFileContainer>
+              {/* <DownloadButton href="#">Download modelo do arquivo</DownloadButton> */}
+              <IconContainer>
+                <Image
+                  src={Icons.Xlsx}
+                  alt="xlsx-icon"
+                  width={100}
+                  height={100}
+                />
+              </IconContainer>
+
+              <Input.File
+                label="Escolher arquivo"
+                $width={190}
+                $height={40}
+                isLoading={isLoading}
+                onChange={handleFileUpload}
+              />
+            </UploadFileContainer>
+            <Footer>
+              <Button
+                $width="100"
+                $height="42"
+                $backgroundColor={Colors.white}
+                $color={Colors.darkBlue}
+                $borderColor={Colors.darkBlue}
+                onClick={handleRedirect}
+              >
+                Voltar
+              </Button>
+            </Footer>
           </>
         )}
       </TransactionCard>

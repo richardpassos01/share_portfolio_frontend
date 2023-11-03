@@ -8,7 +8,7 @@ import Messages from '@constants/Messages';
 import Routes from '@constants/Routes';
 import Providers from '@constants/Providers';
 import BffEndpoints from '@constants/BffEndpoints';
-import { fetchBff } from '@hooks/useBff';
+import fetchBff from '@utils/fetchBff';
 
 const SignUp: React.FC = () => {
   const [submitError, setSubmitError] = useState('');

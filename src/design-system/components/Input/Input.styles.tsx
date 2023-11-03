@@ -59,6 +59,34 @@ export const CheckInputLabel = styled.label`
   color: ${(props) => props.theme.colors.darkGray};
 `;
 
+export const FileInput = styled.input`
+  display: none;
+`;
+
+export const CustomFileButton = styled.label<{
+  $backgroundColor?: string;
+  $color?: string;
+  $borderColor?: string;
+  $width?: number;
+  $height?: number;
+}>`
+  background-color: ${(props) =>
+    props.$backgroundColor ?? props.theme.colors.darkBlue};
+  color: ${(props) => props.$color ?? props.theme.colors.white};
+  width: ${(props) => (props.$width ? `${props.$width}px` : '100%')};
+  height: ${(props) => (props.$height ? `${props.$height}px` : '100%')};
+  font-size: 90%;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: ${(props) =>
+    props.$borderColor ? `1px solid ${props.$borderColor}` : 'none'};
+`;
+
 export const Input = styled.input<{ $error: string }>`
   width: 100%;
   font-size: 15px;

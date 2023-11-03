@@ -10,6 +10,7 @@ export const Container = styled.div`
 
 export const TransactionCard = styled(Card)`
   width: auto;
+  min-width: 1000px;
   height: 550px;
   display: flex;
   align-items: center;

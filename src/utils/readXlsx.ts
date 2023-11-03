@@ -6,7 +6,7 @@ const readXlsx = async (file: File): Promise<any[] | undefined> => {
     const data = parseExcelData(bufferArray);
     return data;
   } catch (error) {
-    console.error('Error reading Excel file:', error);
+    throw new Error('Error reading file');
   }
 };
 
