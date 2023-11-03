@@ -1,10 +1,11 @@
-import React from 'react';
-import { Table, Loader, Colors } from '@designSystem';
+import React, { useState } from 'react';
+import { Table, Colors } from '@designSystem';
+import { formatterMoney } from '@utils/formatters';
 
 type Props = {
   data: any[];
-  sortOrder: string;
-  setSortOrder: any;
+  sortOrder?: string;
+  setSortOrder?: any;
   children?: React.ReactNode;
 };
 
@@ -18,8 +19,12 @@ export default function TransactionsTable({
     Compra: Colors.green,
     Venda: Colors.pink,
   };
+  const [sortIcon, setSortIcon] = useState(sortOrder ? '↑' : '');
 
   const handleDateSort = () => {
+    if (!sortOrder) return;
+
+    setSortIcon(sortOrder === 'asc' ? '↑' : '↓');
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
 
@@ -29,8 +34,11 @@ export default function TransactionsTable({
         <Table.Header>
           <Table.Row>
             <Table.HeaderFixedCell>Tipo</Table.HeaderFixedCell>
-            <Table.HeaderCell onClick={() => handleDateSort()} $clickable>
-              {sortOrder === 'asc' ? '↑' : '↓'} Data
+            <Table.HeaderCell
+              onClick={() => handleDateSort()}
+              $clickable={Boolean(sortOrder)}
+            >
+              {sortIcon} Data
             </Table.HeaderCell>
             <Table.HeaderCell>Movimentação</Table.HeaderCell>
             <Table.HeaderCell>Produto</Table.HeaderCell>
@@ -53,8 +61,8 @@ export default function TransactionsTable({
               <Table.Cell>{item.category}</Table.Cell>
               <Table.Cell>{item.ticketSymbol}</Table.Cell>
               <Table.Cell>{item.quantity}</Table.Cell>
-              <Table.Cell>{item.unitPrice}</Table.Cell>
-              <Table.Cell>{item.totalCost}</Table.Cell>
+              <Table.Cell>{formatterMoney(item.unitPrice)}</Table.Cell>
+              <Table.Cell>{formatterMoney(item.totalCost)}</Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

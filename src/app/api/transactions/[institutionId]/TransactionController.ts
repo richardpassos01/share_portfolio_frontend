@@ -1,4 +1,4 @@
-import { dateStringYYYYMMDDToDDMMYYYY, formatterMoney } from '@helpers';
+import { dateStringYYYYMMDDToDDMMYYYY } from '@helpers';
 import { SharePortfolioAdapter } from '@adapters/sharePortfolio';
 import { categoryMapper, typeMapper } from './mappers';
 
@@ -18,16 +18,12 @@ export default class TransactionController {
 
     return {
       totalItems,
-      items: items.map(
-        ({ date, totalCost, type, category, unitPrice, ...rest }) => ({
-          category: categoryMapper(category),
-          type: typeMapper(type),
-          date: dateStringYYYYMMDDToDDMMYYYY(date),
-          unitPrice: formatterMoney(unitPrice),
-          totalCost: formatterMoney(totalCost),
-          ...rest,
-        }),
-      ),
+      items: items.map(({ date, type, category, ...rest }) => ({
+        category: categoryMapper(category),
+        type: typeMapper(type),
+        date: dateStringYYYYMMDDToDDMMYYYY(date),
+        ...rest,
+      })),
     };
   }
 }

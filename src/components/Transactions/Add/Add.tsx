@@ -23,6 +23,7 @@ import {
   SubmitContainer,
   UploadFileContainer,
   Footer,
+  UploadFileHeader,
 } from './Add.styles';
 import Image from 'next/image';
 import Routes from '@constants/Routes';
@@ -34,8 +35,8 @@ type TransactionType = {
   Movimentação: string;
   Produto: string;
   Quantidade: number;
-  'Preço unitário': number;
-  'Valor da Operação': number;
+  'Preço unitário': number | string;
+  'Valor da Operação': number | string;
 };
 
 const transactionType: Record<string, string> = {
@@ -45,7 +46,6 @@ const transactionType: Record<string, string> = {
 
 const Add: React.FC = () => {
   const router = useRouter();
-  const [sortOrder, setSortOrder] = useState('asc');
   const [data, setData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -71,16 +71,21 @@ const Add: React.FC = () => {
 
   const readFile = async (file: File) => {
     const data = await readXlsx(file);
+
     if (data) {
-      const formattedData = data.map((item: TransactionType) => ({
-        type: transactionType[item['Entrada/Saída']],
-        date: item['Data'],
-        category: item['Movimentação'],
-        ticketSymbol: item['Produto'].split('-')[0].trim(),
-        quantity: item['Quantidade'],
-        unitPrice: formatterMoney(item['Preço unitário']),
-        totalCost: formatterMoney(item['Valor da Operação']),
-      }));
+      const formattedData = data.map((item: TransactionType) => {
+        const unitPrice = item['Preço unitário'];
+        const totalCost = item['Valor da Operação'];
+        return {
+          type: transactionType[item['Entrada/Saída']],
+          date: item['Data'],
+          category: item['Movimentação'],
+          ticketSymbol: item['Produto'].split('-')[0].trim(),
+          quantity: item['Quantidade'],
+          unitPrice: unitPrice !== '-' ? unitPrice : 0,
+          totalCost: totalCost !== '-' ? totalCost : 0,
+        };
+      });
 
       setData(formattedData);
     }
@@ -113,11 +118,7 @@ const Add: React.FC = () => {
                 </HyperLink>
               </SubmitContainer>
             </Header>
-            <Table
-              data={data}
-              sortOrder={sortOrder}
-              setSortOrder={setSortOrder}
-            ></Table>
+            <Table data={data}></Table>
             <FooterContainer>
               <Button
                 $width="100"
@@ -143,8 +144,17 @@ const Add: React.FC = () => {
           </>
         ) : (
           <>
+            <UploadFileHeader>
+              <HyperLink
+                $color={Colors.blue}
+                $fontSize="14"
+                $width="180px"
+                href="/b3-model.xlsx"
+              >
+                Baixar o modelo
+              </HyperLink>
+            </UploadFileHeader>
             <UploadFileContainer>
-              {/* <DownloadButton href="#">Download modelo do arquivo</DownloadButton> */}
               <IconContainer>
                 <Image
                   src={Icons.Xlsx}

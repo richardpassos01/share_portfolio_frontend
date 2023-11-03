@@ -18,6 +18,7 @@ export const TransactionCard = styled(Card)`
 
   @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
     width: 96%;
+    min-width: 0;
     height: 90%;
   }
 `;

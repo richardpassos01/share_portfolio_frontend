@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Header } from '../Transactions.styles';
 
 export const SubmitContainer = styled.div`
   display: flex;
@@ -19,6 +20,10 @@ export const UploadFileContainer = styled.div`
   padding: 20px;
   height: 70%;
   justify-content: center;
+
+  @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
+    height: 400px;
+  }
 `;
 
 export const IconContainer = styled.div`
@@ -32,4 +37,10 @@ export const Footer = styled.div`
   width: 100%;
   display: flex;
   padding: 2%;
+`;
+
+export const UploadFileHeader = styled(Header)`
+  @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
+    margin-top: 17px;
+  }
 `;
