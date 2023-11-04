@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, Toast } from './Notification.style';
 
-type Toast = {
+export type Toast = {
   message: string;
-  type: 'sucess' | 'error';
+  type: 'success' | 'error';
 };
 
 type Props = {

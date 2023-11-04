@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Table, Colors } from '@designSystem';
 import { formatterMoney } from '@utils/formatters';
 
 type Props = {
-  data: any[];
+  data: Record<string, string | number>[];
   sortOrder?: string;
-  setSortOrder?: any;
+  setSortOrder?: Dispatch<SetStateAction<string>>;
   children?: React.ReactNode;
 };
 
@@ -25,7 +25,8 @@ export default function TransactionsTable({
     if (!sortOrder) return;
 
     setSortIcon(sortOrder === 'asc' ? '↑' : '↓');
-    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+
+    if (setSortOrder) setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
 
   return (
@@ -61,8 +62,12 @@ export default function TransactionsTable({
               <Table.Cell>{item.category}</Table.Cell>
               <Table.Cell>{item.ticketSymbol}</Table.Cell>
               <Table.Cell>{item.quantity}</Table.Cell>
-              <Table.Cell>{formatterMoney(item.unitPrice)}</Table.Cell>
-              <Table.Cell>{formatterMoney(item.totalCost)}</Table.Cell>
+              <Table.Cell>
+                {formatterMoney(item.unitPrice as number)}
+              </Table.Cell>
+              <Table.Cell>
+                {formatterMoney(item.totalCost as number)}
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

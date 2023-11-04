@@ -16,6 +16,7 @@ import {
   Input,
   ProgressBar,
   Notification,
+  Toast,
 } from '@designSystem';
 import {
   IconContainer,
@@ -50,7 +51,7 @@ const Add: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
   const [isReadingFile, setReadingFile] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [toast, setToast] = useState<Record<string, string>>({});
+  const [toast, setToast] = useState<Toast | {}>({});
 
   const handleRedirect = () => {
     router.push(Routes.TRANSACTIONS);
@@ -98,7 +99,7 @@ const Add: React.FC = () => {
 
         await readFile(files[0]);
       } catch (error) {
-        console.log('error');
+        console.error('error');
       } finally {
         setReadingFile(false);
       }
@@ -130,7 +131,7 @@ const Add: React.FC = () => {
   return (
     <>
       <div>
-        <Notification toast={toast} />
+        <Notification toast={toast as Toast} />
       </div>
       {isSubmitting && <ProgressBar isLoading={isSubmitting} />}
       <Container>

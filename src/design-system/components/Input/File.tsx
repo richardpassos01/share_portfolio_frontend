@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { FileInput, CustomFileButton } from './Input.styles';
 import { Loader } from '../Loader';
 
@@ -10,7 +10,7 @@ interface Props {
   $borderColor?: string;
   $width?: number;
   $height?: number;
-  onChange: any;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const File: React.FC<Props> = ({

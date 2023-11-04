@@ -1,1 +1,3 @@
-export { default as Notification } from './Notification';
+import Notification, { Toast } from './Notification';
+
+export { Notification, type Toast };
