@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Container } from '../Transactions.styles';
+import Container from '@components/Container';
 
 export const LoaderContainer = styled(Container)`
   margin: 0;

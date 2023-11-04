@@ -28,3 +28,14 @@ export type Pagination<T> = {
   totalItems: number;
   items: T[];
 };
+
+export type Portfolio = {
+  netEarning: number;
+  totalLoss: number;
+};
+
+export type Institution = {
+  name: string;
+  userId: string;
+  id: string;
+};

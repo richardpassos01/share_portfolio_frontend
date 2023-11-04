@@ -1,13 +1,6 @@
 import { Card } from '@designSystem';
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-`;
-
 export const TransactionCard = styled(Card)`
   width: auto;
   min-width: 1000px;

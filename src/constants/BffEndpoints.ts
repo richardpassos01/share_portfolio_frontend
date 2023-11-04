@@ -1,6 +1,8 @@
 enum BffEndpoints {
-  CREATE_TRANSACTIONS = '/api/transactions/:parentId',
-  LIST_TRANSACTIONS = '/api/transactions/:parentId?page=:page&limit=:limit&order=:order',
+  GET_PORTFOLIO = '/api/:parentId/portfolio',
+  RESYNC_PORTFOLIO = '/api/:parentId/portfolio',
+  CREATE_TRANSACTIONS = '/api/:parentId/transactions',
+  LIST_TRANSACTIONS = '/api/:parentId/transactions?page=:page&limit=:limit&order=:order',
   SIGN_UP = '/api/auth/signup',
 }
 

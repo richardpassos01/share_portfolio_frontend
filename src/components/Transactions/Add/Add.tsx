@@ -1,12 +1,11 @@
 import React, { ChangeEvent, useState } from 'react';
 import {
-  Container,
   Header,
   FooterContainer,
   TransactionCard,
 } from '../Transactions.styles';
 import Table from '../Table/Table';
-
+import Container from '@components/Container';
 import readXlsx from '@utils/readXlsx';
 import {
   Button,

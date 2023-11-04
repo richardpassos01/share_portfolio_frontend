@@ -20,12 +20,12 @@ import Loading from './Loading';
 import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
 import {
-  Container,
   FooterContainer,
   Header,
   TransactionCard,
 } from '../Transactions.styles';
 import Table from '../Table/Table';
+import Container from '@components/Container';
 
 const availableFilters = {
   tickers: ['ABV', 'TSLA'],
