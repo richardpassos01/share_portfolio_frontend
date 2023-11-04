@@ -26,7 +26,7 @@ export const ToastContainer = styled.div<{ $visible: boolean }>`
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: 1000;
+  z-index: ${({ $visible }) => ($visible ? '1000' : '0')};
   width: 300px;
   max-width: 100%;
   animation: ${({ $visible }) =>
