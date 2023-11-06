@@ -23,7 +23,11 @@ export default class HttpClient {
     }
 
     const response = await fetch(`${this.baseURL}${endpoint}`, requestConfig);
-    return response.json();
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw { message: response.statusText, status: response.status };
+    }
   }
 
   async get(endpoint: string) {

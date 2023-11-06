@@ -20,10 +20,7 @@ export async function GET(
       order,
     ).then((result) => NextResponse.json(result, { status: 200 }));
   } catch (error: any) {
-    return NextResponse.json(
-      { message: error.message },
-      { status: error.status },
-    );
+    return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
 
@@ -39,9 +36,6 @@ export async function POST(
 
     return NextResponse.json({ message: 'ok' }, { status: 201 });
   } catch (error: any) {
-    return NextResponse.json(
-      { message: error.message },
-      { status: error.status },
-    );
+    return new NextResponse(error.message, { status: error.status ?? 500 });
   }
 }

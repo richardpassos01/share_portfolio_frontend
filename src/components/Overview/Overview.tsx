@@ -2,27 +2,24 @@ import React, { useState } from 'react';
 import FetcherKeys from '@constants/FetcherKeys';
 import BffEndpoints from '@constants/BffEndpoints';
 import Container from '@components/Container';
-import { PortfolioCard } from './Portfolio.styles';
+import { OverviewCard } from './Overview.styles';
 import useFetch from '@hooks/useFetch';
 import fetchBff from '@utils/fetchBff';
 import { Notification, Toast } from '@designSystem';
 
 const institutionId = 'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2';
 
-const Portfolio: React.FC = () => {
+const Overview: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState<Toast | {}>({});
 
-  const handleResyncPortfolio = async () => {
+  const handleResync = async () => {
     if (isSubmitting) return;
     try {
       setIsSubmitting(true);
 
       await fetchBff(
-        BffEndpoints.RESYNC_PORTFOLIO.replace(
-          ':parentId',
-          institutionId,
-        ) as BffEndpoints,
+        BffEndpoints.RESYNC.replace(':parentId', institutionId) as BffEndpoints,
         'POST',
         data,
       );
@@ -41,11 +38,11 @@ const Portfolio: React.FC = () => {
   };
 
   const { data, isLoading } = useFetch(
-    BffEndpoints.GET_PORTFOLIO.replace(
+    BffEndpoints.GET_OVERVIEW.replace(
       ':parentId',
       institutionId,
     ) as BffEndpoints,
-    FetcherKeys.GET_PORTFOLIO,
+    FetcherKeys.GET_OVERVIEW,
   );
 
   if (isLoading) {
@@ -56,14 +53,14 @@ const Portfolio: React.FC = () => {
     <>
       <Notification toast={toast as Toast} />
       <Container>
-        <PortfolioCard>
+        <OverviewCard>
           <h1>{data.totalLoss}</h1>
 
-          <button onClick={handleResyncPortfolio}>Resync</button>
-        </PortfolioCard>
+          <button onClick={handleResync}>Resync</button>
+        </OverviewCard>
       </Container>
     </>
   );
 };
 
-export default Portfolio;
+export default Overview;

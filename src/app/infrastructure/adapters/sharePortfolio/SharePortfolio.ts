@@ -1,6 +1,12 @@
 import { HttpClient } from '../../providers';
 import Endpoints from './Endpoints';
-import { Institution, Pagination, Portfolio, Transaction } from './types';
+import {
+  Institution,
+  MonthlyBalance,
+  Pagination,
+  TotalBalance,
+  Transaction,
+} from './types';
 
 export default class SharePortfolio {
   private static instance: HttpClient;
@@ -28,15 +34,31 @@ export default class SharePortfolio {
     );
   }
 
-  public static getPortfolio(institutionId: string): Promise<Portfolio> {
+  public static getTotalBalance(institutionId: string): Promise<TotalBalance> {
     return SharePortfolio.getInstance().get(
-      Endpoints.GET_PORTFOLIO.replace(':institutionId', institutionId),
+      Endpoints.GET_TOTAL_BALANCE.replace(':institutionId', institutionId),
     );
   }
 
-  public static resyncPortfolio(institutionId: string): Promise<void> {
+  public static listMonthlyBalances(
+    institutionId: string,
+    limit?: number,
+  ): Promise<MonthlyBalance[]> {
+    let endpoint = Endpoints.LIST_MONTHLY_BALANCES.replace(
+      ':institutionId',
+      institutionId,
+    );
+
+    if (limit) {
+      endpoint = `${endpoint}?limit=${limit}`;
+    }
+
+    return SharePortfolio.getInstance().get(endpoint);
+  }
+
+  public static resync(institutionId: string): Promise<void> {
     return SharePortfolio.getInstance().post(
-      Endpoints.RESYNC_PORTFOLIO.replace(':institutionId', institutionId),
+      Endpoints.RESYNC.replace(':institutionId', institutionId),
     );
   }
 

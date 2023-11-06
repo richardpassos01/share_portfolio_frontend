@@ -1,7 +1,7 @@
 import { Card } from '@designSystem';
 import styled from 'styled-components';
 
-export const PortfolioCard = styled(Card)`
+export const OverviewCard = styled(Card)`
   width: auto;
   min-width: 1000px;
   height: 550px;

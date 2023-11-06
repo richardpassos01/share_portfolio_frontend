@@ -29,9 +29,25 @@ export type Pagination<T> = {
   items: T[];
 };
 
-export type Portfolio = {
+export type TotalBalance = {
   netEarning: number;
-  totalLoss: number;
+  loss: number;
+};
+
+export enum MONTHLY_BALANCE_TYPE {
+  DAY_TRADE = 'DAY_TRADE',
+  SWING_TRADE = 'SWING_TRADE',
+}
+
+export type MonthlyBalance = {
+  institutionId: string;
+  yearMonth: string;
+  tradeEarning: number;
+  dividendEarning: number;
+  tax: number;
+  taxWithholding: number;
+  loss: number;
+  type: MONTHLY_BALANCE_TYPE;
 };
 
 export type Institution = {
