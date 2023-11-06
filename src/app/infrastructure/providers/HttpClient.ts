@@ -24,7 +24,12 @@ export default class HttpClient {
 
     const response = await fetch(`${this.baseURL}${endpoint}`, requestConfig);
     if (response.ok) {
-      return response.json();
+      try {
+        const data = await response.json();
+        return data;
+      } catch {
+        return null;
+      }
     } else {
       throw { message: response.statusText, status: response.status };
     }
