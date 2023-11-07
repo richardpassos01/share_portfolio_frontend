@@ -1,13 +1,13 @@
 import React from 'react';
-import { Hide, Table, Tokens, Loader, Skeleton } from '@designSystem';
+import { Hide, Table, Tokens, Card, Skeleton } from '@designSystem';
 import { FilterButtonsContainer, MobileFilterContainer } from './List.stytes';
-import { TransactionCard, Header } from '../Transactions.styles';
+import { Header } from '../Transactions.styles';
 import Container from '@components/Container';
 
 const Loading: React.FC = () => {
   return (
     <Container>
-      <TransactionCard>
+      <Card>
         <Header>
           <Hide on={Tokens.MAX_WIDTH_MOBILE}>
             <FilterButtonsContainer>
@@ -47,7 +47,7 @@ const Loading: React.FC = () => {
             </Table.Body>
           </Table.Wrapper>
         </Table.Container>
-      </TransactionCard>
+      </Card>
     </Container>
   );
 };

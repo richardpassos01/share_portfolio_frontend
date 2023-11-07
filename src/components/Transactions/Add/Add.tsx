@@ -1,9 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
-import {
-  Header,
-  FooterContainer,
-  TransactionCard,
-} from '../Transactions.styles';
+import { Header, FooterContainer } from '../Transactions.styles';
 import Table from '../Table/Table';
 import Container from '@components/Container';
 import readXlsx from '@utils/readXlsx';
@@ -16,6 +12,7 @@ import {
   ProgressBar,
   Notification,
   Toast,
+  Card,
 } from '@designSystem';
 import {
   IconContainer,
@@ -134,7 +131,7 @@ const Add: React.FC = () => {
       </div>
       {isSubmitting && <ProgressBar isLoading={isSubmitting} />}
       <Container>
-        <TransactionCard>
+        <Card>
           {data.length ? (
             <>
               <Header>
@@ -227,7 +224,7 @@ const Add: React.FC = () => {
               </Footer>
             </>
           )}
-        </TransactionCard>
+        </Card>
       </Container>
     </>
   );

@@ -7,6 +7,7 @@ import {
   Tokens,
   Loader,
   HyperLink,
+  Card,
 } from '@designSystem';
 import {
   FilterButtonsContainer,
@@ -19,11 +20,7 @@ import BffEndpoints from '@constants/BffEndpoints';
 import Loading from './Loading';
 import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
-import {
-  FooterContainer,
-  Header,
-  TransactionCard,
-} from '../Transactions.styles';
+import { FooterContainer, Header } from '../Transactions.styles';
 import Table from '../Table/Table';
 import Container from '@components/Container';
 
@@ -67,7 +64,7 @@ const List: React.FC = () => {
 
   return (
     <Container>
-      <TransactionCard>
+      <Card>
         <Header>
           <Hide on={Tokens.MAX_WIDTH_MOBILE}>
             <FilterButtonsContainer>
@@ -129,7 +126,7 @@ const List: React.FC = () => {
             Add transactions
           </HyperLink>
         </FooterContainer>
-      </TransactionCard>
+      </Card>
     </Container>
   );
 };

@@ -8,11 +8,17 @@ import {
   HeaderDescription,
   HeaderTitle,
   HeaderMoney,
-  OverviewCard,
 } from './Overview.styles';
 import useFetch from '@hooks/useFetch';
 import fetchBff from '@utils/fetchBff';
-import { Button, Colors, HyperLink, Notification, Toast } from '@designSystem';
+import {
+  Button,
+  Colors,
+  HyperLink,
+  Notification,
+  Toast,
+  Card,
+} from '@designSystem';
 import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
 import { Balance } from '@components/Balance';
@@ -68,7 +74,7 @@ const Overview: React.FC = () => {
     <>
       <Notification toast={toast as Toast} />
       <Container>
-        <OverviewCard>
+        <Card>
           <Header>
             <HeaderTitle>
               <HeaderDescription>Perda total</HeaderDescription>
@@ -107,7 +113,7 @@ const Overview: React.FC = () => {
               Visualizar tudo
             </HyperLink>
           </Footer>
-        </OverviewCard>
+        </Card>
       </Container>
     </>
   );
