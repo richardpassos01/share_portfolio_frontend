@@ -3,11 +3,11 @@ import FetcherKeys from '@constants/FetcherKeys';
 import BffEndpoints from '@constants/BffEndpoints';
 import Container from '@components/Container';
 import {
-  Body,
-  BodyItem,
   Footer,
   Header,
+  HeaderDescription,
   HeaderTitle,
+  HeaderMoney,
   OverviewCard,
 } from './Overview.styles';
 import useFetch from '@hooks/useFetch';
@@ -15,6 +15,7 @@ import fetchBff from '@utils/fetchBff';
 import { Button, Colors, HyperLink, Notification, Toast } from '@designSystem';
 import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
+import { Balance } from '@components/Balance';
 
 const institutionId = 'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2';
 
@@ -70,53 +71,21 @@ const Overview: React.FC = () => {
         <OverviewCard>
           <Header>
             <HeaderTitle>
-              <span>Perda total:</span>
-              <span>{data.totalLoss}</span>
+              <HeaderDescription>Perda total</HeaderDescription>
+              <HeaderMoney>{data.totalLoss}</HeaderMoney>
             </HeaderTitle>
 
             <HeaderTitle>
-              <span>Lucro total:</span>
-              <span>{data.totalNetEarning}</span>
+              <HeaderDescription>Lucro total</HeaderDescription>
+              <HeaderMoney>{data.totalNetEarning}</HeaderMoney>
             </HeaderTitle>
 
             <HeaderTitle>
-              <span>Lucro desse mês:</span>
-              <span>{data.currentNetEarning}</span>
+              <HeaderDescription>Lucro desse mês</HeaderDescription>
+              <HeaderMoney>{data.currentNetEarning}</HeaderMoney>
             </HeaderTitle>
           </Header>
-          <Body>
-            <h1>Situação do mes {data.previousMonthBalance.yearMonth}</h1>
-            <BodyItem>
-              <span>Lucro: </span>
-              <span>{data.previousMonthBalance.netEarning}</span>
-            </BodyItem>
-
-            <BodyItem>
-              <span>Perda: </span>
-              <span>{data.previousMonthBalance.loss}</span>
-            </BodyItem>
-
-            <BodyItem>
-              <span>Ganhos com compra/venda </span>
-              <span>{data.previousMonthBalance.tradeEarning}</span>
-            </BodyItem>
-
-            <BodyItem>
-              <span>Ganhos com dividendos</span>
-              <span>{data.previousMonthBalance.dividendEarning}</span>
-            </BodyItem>
-
-            <BodyItem>
-              <span>Imposto retido na fonte: </span>
-              <span>{data.previousMonthBalance.taxWithholding}</span>
-            </BodyItem>
-
-            <BodyItem>
-              <span>Imposto restante devido: </span>
-              <span>{data.previousMonthBalance.tax}</span>
-            </BodyItem>
-          </Body>
-
+          <Balance balance={data.previousMonthBalance} />
           <Footer>
             <Button
               $width="150"
