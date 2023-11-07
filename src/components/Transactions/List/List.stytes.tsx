@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Container from '@components/Container';
+import { Containers } from '@designSystem';
 
-export const LoaderContainer = styled(Container)`
+export const LoaderContainer = styled(Containers.CardContainer)`
   margin: 0;
   justify-content: center;
 `;

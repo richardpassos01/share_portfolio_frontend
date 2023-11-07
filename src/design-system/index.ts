@@ -31,6 +31,7 @@ export { Card } from './components/Card';
 export { Loader } from './components/Loader';
 export { Skeleton } from './components/Skeleton';
 export { Notification } from './components/Notification';
+export { Containers } from './components/Containers';
 
 export type { Toast } from './components/Notification';
 

@@ -37,6 +37,7 @@ export const ToastContainer = styled.div<{ $visible: boolean }>`
       : 'none'};
   animation-delay: ${({ $visible }) => ($visible ? '0s, 0.15s' : 'none')};
   opacity: ${({ $visible }) => ($visible ? '1' : '0')};
+  display: ${({ $visible }) => ($visible ? 'fixed' : 'none')};
 `;
 
 const ToastBackgroundColor = {

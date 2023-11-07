@@ -1,13 +1,8 @@
 import styled from 'styled-components';
+import { OverflowContainer } from '../Containers/Containers.style';
 
-export const Container = styled.div`
-  width: 100%;
-  overflow-x: auto;
-  height: 100%;
-
-  @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
-    overflow: scroll;
-  }
+export const Container = styled(OverflowContainer)`
+  align-items: baseline;
 `;
 
 export const Wrapper = styled.table`

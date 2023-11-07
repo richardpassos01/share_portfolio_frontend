@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Header, FooterContainer } from '../Transactions.styles';
 import Table from '../Table/Table';
-import Container from '@components/Container';
 import readXlsx from '@utils/readXlsx';
 import {
   Button,
@@ -13,6 +12,7 @@ import {
   Notification,
   Toast,
   Card,
+  Containers,
 } from '@designSystem';
 import {
   IconContainer,
@@ -130,7 +130,7 @@ const Add: React.FC = () => {
         <Notification toast={toast as Toast} />
       </div>
       {isSubmitting && <ProgressBar isLoading={isSubmitting} />}
-      <Container>
+      <Containers.CardContainer>
         <Card>
           {data.length ? (
             <>
@@ -225,7 +225,7 @@ const Add: React.FC = () => {
             </>
           )}
         </Card>
-      </Container>
+      </Containers.CardContainer>
     </>
   );
 };

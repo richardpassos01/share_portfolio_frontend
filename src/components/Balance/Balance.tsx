@@ -7,7 +7,7 @@ import {
   ItemMoney,
 } from './Balance.styles';
 
-type Balance = {
+export type BalanceProps = {
   yearMonth: string;
   netEarning: string;
   loss: string;
@@ -18,7 +18,7 @@ type Balance = {
 };
 
 type Props = {
-  balance: Balance;
+  balance: BalanceProps;
 };
 
 const Balance: React.FC<Props> = ({ balance }) => {

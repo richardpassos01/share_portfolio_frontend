@@ -8,6 +8,7 @@ import {
   Loader,
   HyperLink,
   Card,
+  Containers,
 } from '@designSystem';
 import {
   FilterButtonsContainer,
@@ -22,7 +23,6 @@ import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
 import { FooterContainer, Header } from '../Transactions.styles';
 import Table from '../Table/Table';
-import Container from '@components/Container';
 
 const availableFilters = {
   tickers: ['ABV', 'TSLA'],
@@ -63,7 +63,7 @@ const List: React.FC = () => {
   }
 
   return (
-    <Container>
+    <Containers.CardContainer>
       <Card>
         <Header>
           <Hide on={Tokens.MAX_WIDTH_MOBILE}>
@@ -127,7 +127,7 @@ const List: React.FC = () => {
           </HyperLink>
         </FooterContainer>
       </Card>
-    </Container>
+    </Containers.CardContainer>
   );
 };
 

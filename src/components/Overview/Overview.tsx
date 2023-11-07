@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import FetcherKeys from '@constants/FetcherKeys';
 import BffEndpoints from '@constants/BffEndpoints';
-import Container from '@components/Container';
 import {
   Footer,
   Header,
@@ -18,6 +17,7 @@ import {
   Notification,
   Toast,
   Card,
+  Containers,
 } from '@designSystem';
 import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
@@ -73,7 +73,7 @@ const Overview: React.FC = () => {
   return (
     <>
       <Notification toast={toast as Toast} />
-      <Container>
+      <Containers.CardContainer>
         <Card>
           <Header>
             <HeaderTitle>
@@ -114,7 +114,7 @@ const Overview: React.FC = () => {
             </HyperLink>
           </Footer>
         </Card>
-      </Container>
+      </Containers.CardContainer>
     </>
   );
 };

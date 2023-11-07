@@ -1,12 +1,11 @@
 import React from 'react';
-import { Hide, Table, Tokens, Card, Skeleton } from '@designSystem';
+import { Hide, Table, Tokens, Card, Skeleton, Containers } from '@designSystem';
 import { FilterButtonsContainer, MobileFilterContainer } from './List.stytes';
 import { Header } from '../Transactions.styles';
-import Container from '@components/Container';
 
 const Loading: React.FC = () => {
   return (
-    <Container>
+    <Containers.CardContainer>
       <Card>
         <Header>
           <Hide on={Tokens.MAX_WIDTH_MOBILE}>
@@ -48,7 +47,7 @@ const Loading: React.FC = () => {
           </Table.Wrapper>
         </Table.Container>
       </Card>
-    </Container>
+    </Containers.CardContainer>
   );
 };
 

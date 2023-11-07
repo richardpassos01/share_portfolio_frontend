@@ -3,7 +3,12 @@ import {
   SharePortfolioAdapter,
   TotalBalance,
 } from '@adapters/sharePortfolio';
-import { formatterMoney } from '@helpers';
+import {
+  calculateBalanceNetEarning,
+  formatterMoney,
+  getCurrentYearMonth,
+} from '@helpers';
+import Balance from '../../../entities/Balance';
 
 export default class OverviewController {
   public static async get(institutionId: string) {
@@ -38,7 +43,7 @@ export default class OverviewController {
     let currentNetEarning = 0;
     let previousMonthBalance: any = {};
 
-    const currentYearMonth = new Date().toISOString().slice(0, 7);
+    const currentYearMonth = getCurrentYearMonth();
 
     if (monthlyBalances.length > 0) {
       const currentMonth = monthlyBalances[0];
@@ -46,30 +51,18 @@ export default class OverviewController {
         monthlyBalances.length > 1 ? monthlyBalances[1] : monthlyBalances[0];
 
       if (currentMonth.yearMonth === currentYearMonth) {
-        currentNetEarning =
-          currentMonth.tradeEarning +
-          currentMonth.dividendEarning -
-          currentMonth.tax -
-          currentMonth.taxWithholding -
-          currentMonth.loss;
+        currentNetEarning = calculateBalanceNetEarning(currentMonth);
       }
 
       if (previousMonth) {
-        previousMonthBalance = {
-          yearMonth: previousMonth.yearMonth.split('-').reverse().join('/'),
-          netEarning: formatterMoney(
-            previousMonth.tradeEarning +
-              previousMonth.dividendEarning -
-              previousMonth.tax -
-              previousMonth.taxWithholding -
-              previousMonth.loss,
-          ),
-          loss: formatterMoney(previousMonth.loss),
-          taxWithholding: formatterMoney(previousMonth.taxWithholding),
-          tax: formatterMoney(previousMonth.tax),
-          tradeEarning: formatterMoney(previousMonth.tradeEarning),
-          dividendEarning: formatterMoney(previousMonth.dividendEarning),
-        };
+        previousMonthBalance = new Balance(
+          previousMonth.yearMonth,
+          previousMonth.loss,
+          previousMonth.taxWithholding,
+          previousMonth.tax,
+          previousMonth.tradeEarning,
+          previousMonth.dividendEarning,
+        );
       }
     }
 
