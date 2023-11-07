@@ -3,6 +3,7 @@ import {
   SharePortfolioAdapter,
   TotalBalance,
 } from '@adapters/sharePortfolio';
+import { formatterMoney } from '@helpers';
 
 export default class OverviewController {
   public static async get(institutionId: string) {
@@ -26,9 +27,9 @@ export default class OverviewController {
       this.calculateResult(monthlyBalances);
 
     return {
-      totalNetEarning: totalBalance.netEarning,
-      totalLoss: totalBalance.loss,
-      currentNetEarning,
+      totalNetEarning: formatterMoney(totalBalance.netEarning),
+      totalLoss: formatterMoney(totalBalance.loss),
+      currentNetEarning: formatterMoney(currentNetEarning),
       previousMonthBalance,
     };
   }
@@ -55,18 +56,19 @@ export default class OverviewController {
 
       if (previousMonth) {
         previousMonthBalance = {
-          yearMonth: previousMonth.yearMonth.split('/').reverse().join(''),
-          netEarning:
+          yearMonth: previousMonth.yearMonth.split('-').reverse().join('/'),
+          netEarning: formatterMoney(
             previousMonth.tradeEarning +
-            previousMonth.dividendEarning -
-            previousMonth.tax -
-            previousMonth.taxWithholding -
-            previousMonth.loss,
-          loss: previousMonth.loss,
-          taxWithholding: previousMonth.taxWithholding,
-          tax: previousMonth.tax,
-          tradeEarning: previousMonth.tradeEarning,
-          dividendEarning: previousMonth.dividendEarning,
+              previousMonth.dividendEarning -
+              previousMonth.tax -
+              previousMonth.taxWithholding -
+              previousMonth.loss,
+          ),
+          loss: formatterMoney(previousMonth.loss),
+          taxWithholding: formatterMoney(previousMonth.taxWithholding),
+          tax: formatterMoney(previousMonth.tax),
+          tradeEarning: formatterMoney(previousMonth.tradeEarning),
+          dividendEarning: formatterMoney(previousMonth.dividendEarning),
         };
       }
     }

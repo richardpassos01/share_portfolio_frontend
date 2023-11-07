@@ -15,3 +15,28 @@ export const OverviewCard = styled(Card)`
     height: 90%;
   }
 `;
+
+export const Header = styled.div`
+  width: 100%;
+  display: flex;
+`;
+
+export const HeaderTitle = styled.div`
+  display: flex;
+`;
+
+export const Body = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const BodyItem = styled.div`
+  display: flex;
+`;
+
+export const Footer = styled.div`
+  width: 100%;
+  display: flex;
+  padding: 2%;
+`;
