@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
-import { Header, FooterContainer } from '../Transactions.styles';
+import { TransactionHeader, FooterContainer } from '../Transactions.styles';
 import Table from '../Table/Table';
 import readXlsx from '@utils/readXlsx';
 import {
@@ -26,6 +26,7 @@ import Routes from '@constants/Routes';
 import { useRouter } from 'next/router';
 import fetchBff from '@utils/fetchBff';
 import BffEndpoints from '@constants/BffEndpoints';
+import { ToastMessages } from '@constants/ToastMessages';
 
 type TransactionType = {
   'Entrada/Saída': string;
@@ -69,7 +70,7 @@ const Add: React.FC = () => {
       );
 
       setToast({
-        message: 'Transactions criadas!',
+        message: ToastMessages.SUCCESS,
         type: 'success',
       });
 
@@ -80,7 +81,7 @@ const Add: React.FC = () => {
       setIsSubmitting(false);
       setData([]);
       setToast({
-        message: 'Alguma coisa deu errada!',
+        message: ToastMessages.ERROR,
         type: 'error',
       });
     }
@@ -134,7 +135,7 @@ const Add: React.FC = () => {
         <Card>
           {data.length ? (
             <>
-              <Header>
+              <TransactionHeader>
                 <SubmitContainer>
                   <HyperLink
                     $color={Colors.blue}
@@ -155,7 +156,7 @@ const Add: React.FC = () => {
                     Salvar
                   </HyperLink>
                 </SubmitContainer>
-              </Header>
+              </TransactionHeader>
               <Table data={data}></Table>
               <FooterContainer>
                 <Button

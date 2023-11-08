@@ -14,7 +14,11 @@ const Notification = ({ toast }: Props) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setIsVisible(toast.message ? true : false);
+    setIsVisible(true);
+
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 2500);
   }, [toast]);
 
   return (

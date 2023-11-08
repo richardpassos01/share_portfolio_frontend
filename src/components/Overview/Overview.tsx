@@ -22,6 +22,7 @@ import {
 import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
 import { Balance } from '@components/Balance';
+import { ToastMessages } from '@constants/ToastMessages';
 
 const institutionId = 'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2';
 
@@ -46,13 +47,13 @@ const Overview: React.FC = () => {
       );
 
       setToast({
-        message: 'Deu tudo certo!',
+        message: ToastMessages.SUCCESS,
         type: 'success',
       });
     } catch (error) {
       setIsSubmitting(false);
       setToast({
-        message: 'Alguma coisa deu errada!',
+        message: ToastMessages.ERROR,
         type: 'error',
       });
     }
