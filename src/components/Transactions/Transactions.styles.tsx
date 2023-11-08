@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Header = styled.div`
+export const TransactionHeader = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row-reverse;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Header } from '../Transactions.styles';
+import { TransactionHeader } from '../Transactions.styles';
 
 export const SubmitContainer = styled.div`
   display: flex;
@@ -39,7 +39,7 @@ export const Footer = styled.div`
   padding: 2%;
 `;
 
-export const UploadFileHeader = styled(Header)`
+export const UploadFileHeader = styled(TransactionHeader)`
   @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
     margin-top: 17px;
   }

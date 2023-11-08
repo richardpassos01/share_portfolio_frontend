@@ -21,7 +21,7 @@ import BffEndpoints from '@constants/BffEndpoints';
 import Loading from './Loading';
 import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
-import { FooterContainer, Header } from '../Transactions.styles';
+import { FooterContainer, TransactionHeader } from '../Transactions.styles';
 import Table from '../Table/Table';
 
 const availableFilters = {
@@ -65,7 +65,7 @@ const List: React.FC = () => {
   return (
     <Containers.CardContainer>
       <Card>
-        <Header>
+        <TransactionHeader>
           <Hide on={Tokens.MAX_WIDTH_MOBILE}>
             <FilterButtonsContainer>
               <SelectBox
@@ -108,7 +108,7 @@ const List: React.FC = () => {
               />
             </Filter.Menu>
           </MobileFilterContainer>
-        </Header>
+        </TransactionHeader>
         <Table data={newData} sortOrder={sortOrder} setSortOrder={setSortOrder}>
           {!fetchedAll && (
             <LoaderContainer ref={lastDataRendered}>

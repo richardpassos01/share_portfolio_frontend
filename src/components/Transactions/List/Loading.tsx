@@ -1,13 +1,13 @@
 import React from 'react';
 import { Hide, Table, Tokens, Card, Skeleton, Containers } from '@designSystem';
 import { FilterButtonsContainer, MobileFilterContainer } from './List.stytes';
-import { Header } from '../Transactions.styles';
+import { TransactionHeader } from '../Transactions.styles';
 
 const Loading: React.FC = () => {
   return (
     <Containers.CardContainer>
       <Card>
-        <Header>
+        <TransactionHeader>
           <Hide on={Tokens.MAX_WIDTH_MOBILE}>
             <FilterButtonsContainer>
               <Skeleton $width={80} $height={30} />
@@ -19,7 +19,7 @@ const Loading: React.FC = () => {
               <Skeleton $width={20} $height={20} $circular />
             </MobileFilterContainer>
           </Hide>
-        </Header>
+        </TransactionHeader>
         <Table.Container>
           <Table.Wrapper>
             <Table.Header>
