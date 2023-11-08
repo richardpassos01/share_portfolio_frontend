@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-const Loading = styled.div<{ $size: number }>`
+const Loading = styled.div<{ $size: number; $color?: string }>`
   width: ${(props) => props.$size || '80'}px;
   height: ${(props) => props.$size || '80'}px;
   background: transparent;
   border-radius: 50%;
-  border: 2px solid ${(props) => props.theme.colors.gray};
+  border: 2px solid ${(props) => props.$color ?? props.theme.colors.gray};
   border-bottom-color: transparent;
   animation: screen-loading 700ms linear infinite;
 

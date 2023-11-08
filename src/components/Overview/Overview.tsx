@@ -51,11 +51,12 @@ const Overview: React.FC = () => {
         type: 'success',
       });
     } catch (error) {
-      setIsSubmitting(false);
       setToast({
         message: ToastMessages.ERROR,
         type: 'error',
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -101,6 +102,7 @@ const Overview: React.FC = () => {
               $color={Colors.darkBlue}
               $borderColor={Colors.darkBlue}
               onClick={handleResync}
+              $isLoading={isSubmitting}
             >
               Sincronizar
             </Button>
