@@ -6,6 +6,7 @@ import Eye from './icons/eye.svg';
 import EyeSlash from './icons/eyeSlash.svg';
 import Filter from './icons/filter.svg';
 import Xlsx from './icons/xlsx.png';
+import NotFoundIcon from './icons/notFound.png';
 
 export { GlobalStyles } from './styles/GlobalStyles';
 export { Colors } from './styles/Colors';
@@ -32,6 +33,7 @@ export { Loader } from './components/Loader';
 export { Skeleton } from './components/Skeleton';
 export { Notification } from './components/Notification';
 export { Containers } from './components/Containers';
+export { NotFound } from './components/NotFound';
 
 export type { Toast } from './components/Notification';
 
@@ -44,4 +46,5 @@ export const Icons = {
   EyeSlash,
   Filter,
   Xlsx,
+  NotFound: NotFoundIcon,
 };

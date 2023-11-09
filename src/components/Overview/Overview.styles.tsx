@@ -27,10 +27,20 @@ export const Footer = styled.div`
     padding: 10% 0 10% 0;
     flex-direction: column-reverse;
     align-items: center;
+  }
+`;
 
-    a {
-      margin-bottom: 1em;
-    }
+export const LinkContainer = styled.div`
+  @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
+    margin-bottom: 1em;
+  }
+`;
+
+export const LoadingLinkContainer = styled.div`
+  margin: 0 30px 0 0;
+
+  @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
+    margin: 0 0 1em 0;
   }
 `;
 

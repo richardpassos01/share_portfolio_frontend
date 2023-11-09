@@ -7,6 +7,7 @@ import {
   HeaderDescription,
   HeaderTitle,
   HeaderMoney,
+  LinkContainer,
 } from './Overview.styles';
 import useFetch from '@hooks/useFetch';
 import fetchBff from '@utils/fetchBff';
@@ -18,11 +19,13 @@ import {
   Toast,
   Card,
   Containers,
+  NotFound,
 } from '@designSystem';
 import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
 import { Balance } from '@components/Balance';
 import { ToastMessages } from '@constants/ToastMessages';
+import Loading from './Loading';
 
 const institutionId = 'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2';
 
@@ -69,11 +72,7 @@ const Overview: React.FC = () => {
   );
 
   if (isLoading) {
-    return <>loading</>;
-  }
-
-  if (!data) {
-    return <>empty state</>;
+    return <Loading />;
   }
 
   return (
@@ -81,23 +80,29 @@ const Overview: React.FC = () => {
       <Notification toast={toast as Toast} />
       <Containers.CardContainer>
         <Card>
-          <Header>
-            <HeaderTitle>
-              <HeaderDescription>Perda total</HeaderDescription>
-              <HeaderMoney>{data.totalLoss}</HeaderMoney>
-            </HeaderTitle>
+          {data ? (
+            <>
+              <Header>
+                <HeaderTitle>
+                  <HeaderDescription>Perda total</HeaderDescription>
+                  <HeaderMoney>{data.totalLoss}</HeaderMoney>
+                </HeaderTitle>
 
-            <HeaderTitle>
-              <HeaderDescription>Lucro total</HeaderDescription>
-              <HeaderMoney>{data.totalNetEarning}</HeaderMoney>
-            </HeaderTitle>
+                <HeaderTitle>
+                  <HeaderDescription>Lucro total</HeaderDescription>
+                  <HeaderMoney>{data.totalNetEarning}</HeaderMoney>
+                </HeaderTitle>
 
-            <HeaderTitle>
-              <HeaderDescription>Lucro desse mês</HeaderDescription>
-              <HeaderMoney>{data.currentNetEarning}</HeaderMoney>
-            </HeaderTitle>
-          </Header>
-          <Balance balance={data.previousMonthBalance} />
+                <HeaderTitle>
+                  <HeaderDescription>Lucro desse mês</HeaderDescription>
+                  <HeaderMoney>{data.currentNetEarning}</HeaderMoney>
+                </HeaderTitle>
+              </Header>
+              <Balance balance={data.previousMonthBalance} />
+            </>
+          ) : (
+            <NotFound width={180} height={140} mobileMarginTop={50} />
+          )}
           <Footer>
             <Button
               $width="150"
@@ -111,14 +116,16 @@ const Overview: React.FC = () => {
               Sincronizar
             </Button>
 
-            <HyperLink
-              $color={Colors.blue}
-              $fontSize="14"
-              $width="180px"
-              onClick={handleRedirect}
-            >
-              Visualizar tudo
-            </HyperLink>
+            <LinkContainer>
+              <HyperLink
+                $color={Colors.blue}
+                $fontSize="14"
+                $width="180px"
+                onClick={handleRedirect}
+              >
+                Visualizar tudo
+              </HyperLink>
+            </LinkContainer>
           </Footer>
         </Card>
       </Containers.CardContainer>
