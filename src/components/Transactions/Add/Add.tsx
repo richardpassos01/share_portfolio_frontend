@@ -166,6 +166,7 @@ const Add: React.FC = () => {
                   $color={Colors.darkBlue}
                   $borderColor={Colors.darkBlue}
                   onClick={handleSubmit}
+                  $isLoading={isSubmitting}
                 >
                   Salvar
                 </Button>

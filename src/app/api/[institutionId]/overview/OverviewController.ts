@@ -47,8 +47,10 @@ export default class OverviewController {
 
     if (monthlyBalances.length > 0) {
       const currentMonth = monthlyBalances[0];
-      const previousMonth =
-        monthlyBalances.length > 1 ? monthlyBalances[1] : monthlyBalances[0];
+      const previousMonth = this.getPreviousMonthBalance(
+        monthlyBalances,
+        currentYearMonth,
+      );
 
       if (currentMonth.yearMonth === currentYearMonth) {
         currentNetEarning = calculateBalanceNetEarning(currentMonth);
@@ -70,5 +72,18 @@ export default class OverviewController {
       currentNetEarning,
       previousMonthBalance,
     };
+  }
+
+  private static getPreviousMonthBalance(
+    monthlyBalances: MonthlyBalance[],
+    currentYearMonth: string,
+  ): MonthlyBalance {
+    if (monthlyBalances.length > 1) {
+      return monthlyBalances[0].yearMonth === currentYearMonth
+        ? monthlyBalances[1]
+        : monthlyBalances[0];
+    }
+
+    return monthlyBalances[0];
   }
 }
