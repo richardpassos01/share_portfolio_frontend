@@ -72,6 +72,10 @@ const Overview: React.FC = () => {
     return <>loading</>;
   }
 
+  if (!data) {
+    return <>empty state</>;
+  }
+
   return (
     <>
       <Notification toast={toast as Toast} />

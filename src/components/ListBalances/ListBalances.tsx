@@ -7,28 +7,7 @@ import BffEndpoints from '@constants/BffEndpoints';
 import FetcherKeys from '@constants/FetcherKeys';
 import { Balance, BalanceProps } from '@components/Balance';
 
-import styled from 'styled-components';
-import { Space } from './ListBalances.styles';
-
-export const Header = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2em 2em 1em 2em;
-`;
-
-export const Footer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 3% 2% 4% 2%;
-
-  @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
-    padding: 10% 0 10% 0;
-    justify-content: center;
-  }
-`;
+import { Footer, Header, Space } from './ListBalances.styles';
 
 const institutionId = 'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2';
 
@@ -49,6 +28,10 @@ const ListBalances: React.FC = () => {
 
   if (isLoading) {
     return <>loading</>;
+  }
+
+  if (!data?.length) {
+    return <>empty state</>;
   }
 
   return (
