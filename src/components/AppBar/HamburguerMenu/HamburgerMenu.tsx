@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Hamburger } from '@designSystem';
 import Routes from '@constants/Routes';
 import { Hide, Tokens } from '@designSystem';
@@ -12,11 +12,18 @@ interface props {
 }
 
 const HamburgerMenu: React.FC<props> = ({ session, currentPage }) => {
+  const [selectedOptions, setSelectedOptions] = useState(['Banco Inter']);
+
   return (
     <Hide on={Tokens.MIN_WIDTH_TABLET}>
       <Hamburger.Menu>
         {session?.user ? (
           <>
+            <Hamburger.MultiLevelItem
+              name={selectedOptions[0]}
+              items={selectedOptions.map((name) => ({ name }))}
+              activated={currentPage}
+            />
             <Hamburger.Item
               name={HeaderPages.DASHBOARD}
               href={Routes.DASHBOARD}

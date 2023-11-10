@@ -4,6 +4,47 @@ import Image from 'next/image';
 import { Icons } from '../../index';
 import { ItemName, StyledMenu } from './HamburguerMenu.styles';
 
+export function MultiLevelItem({
+  name,
+  items,
+  activated,
+}: {
+  name: string;
+  items: { name: string; href?: string }[];
+  activated?: string;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSubMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const isCurrentItemActivate = name === activated;
+
+  return (
+    <li
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'baseline',
+        cursor: 'pointer',
+      }}
+    >
+      <ItemName onClick={toggleSubMenu} $isActivate={isCurrentItemActivate}>
+        {name}{' '}
+        <Image src={Icons.ArrowRight} alt="arrowRight" width={12} height={12} />
+      </ItemName>
+      {isOpen && (
+        <ul>
+          {items.map((item) => (
+            <Item key={item.name} name={item.name} href={item.href} />
+          ))}
+        </ul>
+      )}
+    </li>
+  );
+}
+
 export function Item({
   name,
   href,
@@ -11,21 +52,26 @@ export function Item({
   activated,
 }: {
   name: string;
-  href: string;
+  href?: string;
   onClick?: () => void;
   activated?: string;
 }) {
   const isCurrentItemActivate = name === activated;
 
-  return (
+  return href ? (
     <Link href={href} style={{ textDecoration: 'none', width: '89%' }}>
       <li>
         <ItemName onClick={onClick} $isActivate={isCurrentItemActivate}>
           {name}
         </ItemName>
-        <Image src={Icons.ArrowRight} alt="arrowRight" width={12} height={12} />
       </li>
     </Link>
+  ) : (
+    <li>
+      <ItemName onClick={onClick} $isActivate={isCurrentItemActivate}>
+        {name}
+      </ItemName>
+    </li>
   );
 }
 

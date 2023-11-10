@@ -8,6 +8,6 @@ export const LoggedOutContainer = styled.div`
 
 export const LoggedContainer = styled.div`
   display: flex;
-  width: 10em;
+  width: 17em;
   justify-content: space-between;
 `;
