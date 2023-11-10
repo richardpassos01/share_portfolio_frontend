@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, Colors } from '@designSystem';
+import React, { useState } from 'react';
+import { Button, Colors, SelectBox } from '@designSystem';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
@@ -12,6 +12,7 @@ interface props {
 
 const SignInOutButton: React.FC<props> = ({ session }) => {
   const router = useRouter();
+  const [selectedOptions, setSelectedOptions] = useState(['Banco Inter']);
 
   const handleClick = (route: Routes) => {
     router.push(route);
@@ -30,6 +31,13 @@ const SignInOutButton: React.FC<props> = ({ session }) => {
         >
           Logout
         </Button>
+        <SelectBox
+          label={selectedOptions[0]}
+          options={['Banco Inter']}
+          selectedOptions={selectedOptions}
+          setSelectedOptions={setSelectedOptions}
+          $width="150"
+        />
       </LoggedContainer>
     );
   }

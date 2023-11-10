@@ -13,11 +13,10 @@ export const SelectBoxButton = styled.button<{ $isOpen: boolean }>`
   color: ${(props) => props.theme.colors.darkBlue};
   width: 100%;
   height: 42px;
-  border-radius: 1.5em;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border: 1px solid ${(props) => props.theme.colors.darkBlue};
+  border: none;
 
   ${(props) =>
     props.$isOpen &&
@@ -25,21 +24,24 @@ export const SelectBoxButton = styled.button<{ $isOpen: boolean }>`
       border-bottom: 0;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
-    `}
+    `};
 `;
-
 export const OptionList = styled.div<{ $isOpen: boolean }>`
   position: absolute;
   background-color: white;
-  border: 1px solid ${(props) => props.theme.colors.darkBlue};
   top: 100%;
   left: 0;
   right: 0;
   z-index: 99;
-  border-top: 0;
+  box-shadow: 16px 24px 56px 0 rgba(7, 24, 126, 0.16);
+  border-top: 1px solid ${(props) => props.theme.colors.softBlue};
   border-bottom-right-radius: 15px;
   border-bottom-left-radius: 15px;
   display: ${(props) => (props.$isOpen ? 'block' : 'none')};
+
+  & > *:first-child {
+    margin-top: 10px;
+  }
 `;
 
 export const OptionItem = styled.div<{ $selected: boolean }>`
