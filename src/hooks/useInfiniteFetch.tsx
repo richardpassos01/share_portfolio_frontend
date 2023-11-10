@@ -1,26 +1,36 @@
 import { useState, useRef, useMemo } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
+import BffEndpoints from '@constants/BffEndpoints';
+import fetchBff from '@utils/fetchBff';
 
-const useInfiniteFetch = (fetcher: Function, key: string, ...sortKeys: any) => {
+const useInfiniteFetch = (
+  bffEndpoint: BffEndpoints,
+  key: string,
+  parentId: string = '',
+  sortOrder: string = 'asc',
+  limit: Number = 100,
+) => {
   const [loading, setLoading] = useState(false);
   const [totalItems, setTotalItems] = useState(0);
   const observer = useRef(null);
 
   const { data, setSize, size, isLoading } = useSWRInfinite(
-    (index) => [key, ...sortKeys, index + 1],
-    (key) => {
+    (index) => [key, sortOrder, index + 1],
+    async (key) => {
       const page = key[key.length - 1];
 
-      if (sortKeys) {
-        return fetcher(page, ...sortKeys);
-      }
+      const endpoint = bffEndpoint
+        .replace(':parentId', parentId)
+        .replace(':page', String(page))
+        .replace(':limit', String(limit))
+        .replace(':order', sortOrder) as BffEndpoints;
 
-      return fetcher(page);
+      return fetchBff(endpoint, 'GET');
     },
   );
 
-  const newData = useMemo(() => {
+  const newData: Record<string, string>[] = useMemo(() => {
     setLoading(false);
 
     if (data) {

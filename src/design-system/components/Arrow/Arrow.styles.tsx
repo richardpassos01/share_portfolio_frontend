@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const ArrowButton = styled.div`
+export const ArrowButton = styled.div<{ $isOpen: boolean }>`
   display: block;
   position: relative;
   cursor: pointer;
@@ -49,11 +49,15 @@ export const ArrowButton = styled.div`
     }
   }
 
-  &.open .left-bar:after {
-    transform: rotate(-80deg);
-  }
+  ${(props) =>
+    props.$isOpen &&
+    css`
+      .left-bar:after {
+        transform: rotate(-80deg);
+      }
 
-  &.open .right-bar:after {
-    transform: rotate(80deg);
-  }
+      .right-bar:after {
+        transform: rotate(80deg);
+      }
+    `}
 `;

@@ -8,7 +8,7 @@ export const SelectBoxContainer = styled.div<{ $width?: string }>`
   width: ${(props) => (props.$width ? `${props.$width}px` : '100%')};
 `;
 
-export const SelectBoxButton = styled.button<{ isOpen: boolean }>`
+export const SelectBoxButton = styled.button<{ $isOpen: boolean }>`
   background-color: white;
   color: ${(props) => props.theme.colors.darkBlue};
   width: 100%;
@@ -20,7 +20,7 @@ export const SelectBoxButton = styled.button<{ isOpen: boolean }>`
   border: 1px solid ${(props) => props.theme.colors.darkBlue};
 
   ${(props) =>
-    props.isOpen &&
+    props.$isOpen &&
     css`
       border-bottom: 0;
       border-bottom-left-radius: 0;
@@ -28,7 +28,7 @@ export const SelectBoxButton = styled.button<{ isOpen: boolean }>`
     `}
 `;
 
-export const OptionList = styled.div<{ isOpen: boolean }>`
+export const OptionList = styled.div<{ $isOpen: boolean }>`
   position: absolute;
   background-color: white;
   border: 1px solid ${(props) => props.theme.colors.darkBlue};
@@ -39,7 +39,7 @@ export const OptionList = styled.div<{ isOpen: boolean }>`
   border-top: 0;
   border-bottom-right-radius: 15px;
   border-bottom-left-radius: 15px;
-  display: ${(props) => (props.isOpen ? 'block' : 'none')};
+  display: ${(props) => (props.$isOpen ? 'block' : 'none')};
 `;
 
 export const OptionItem = styled.div<{ $selected: boolean }>`

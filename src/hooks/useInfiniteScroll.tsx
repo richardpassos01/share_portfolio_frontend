@@ -7,7 +7,7 @@ const useInfiniteScroll = (
   size: number,
   loading: boolean,
   totalItems: number,
-  newData: any[],
+  newData: Record<string, string>[],
 ) => {
   const fetchedAll = totalItems === newData.length;
 

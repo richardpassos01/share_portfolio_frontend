@@ -20,8 +20,10 @@
       }
     ],
     "paths": {
-      "@api/*": ["./src/app/api/*"],
-      "@bff": ["./src/app/infrastructure/adapters/bff/Bff"],
+      "@helpers": ["./src/app/helpers/index.ts"],
+      "@types": ["./src/app/types/index.ts"],
+      "@adapters/*": ["./src/app/infrastructure/adapters/*"],
+      "@utils/*": ["./src/utils/*"],
       "@components/*": ["./src/components/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@designSystem": ["./src/design-system/index"],

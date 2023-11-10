@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 
-interface Props {
+export type Props = {
   $backgroundColor?: string;
   $color?: string;
   $borderColor?: string;
   $width?: string;
   $height?: string;
-}
+  $isLoading?: boolean;
+};
 
-export const Button = styled.button<Props>`
+export const ButtonStyle = styled.button<Props>`
   background-color: ${(props) =>
     props.$backgroundColor ?? props.theme.colors.darkBlue};
   color: ${(props) => props.$color ?? props.theme.colors.white};
@@ -21,13 +22,13 @@ export const Button = styled.button<Props>`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  display: flex;
   border: ${(props) =>
     props.$borderColor ? `1px solid ${props.$borderColor}` : 'none'};
 
   &:disabled {
-    background-color: ${(props) => props.theme.colors.disabled};
+    background-color: ${(props) =>
+      props.$isLoading ? props.$backgroundColor : props.theme.colors.disabled};
     cursor: not-allowed;
   }
 `;
-
-export default Button;

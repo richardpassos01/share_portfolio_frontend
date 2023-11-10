@@ -1,15 +1,15 @@
 import React from 'react';
 import { AppBar } from '@components/AppBar';
 import HeaderPages from '@constants/HeaderPages';
-import { TransactionsTable } from '@components/TransactionsTable';
+import Transactions from '@components/Transactions';
 
-const Transactions: React.FC = () => {
+const ListTransactions: React.FC = () => {
   return (
     <div>
       <AppBar currentPage={HeaderPages.TRANSACTIONS} />
-      <TransactionsTable />
+      <Transactions.List />
     </div>
   );
 };
 
-export default Transactions;
+export default ListTransactions;

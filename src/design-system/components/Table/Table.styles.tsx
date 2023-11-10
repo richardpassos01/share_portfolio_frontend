@@ -1,13 +1,8 @@
 import styled from 'styled-components';
+import { OverflowContainer } from '../Containers/Containers.style';
 
-export const Container = styled.div`
-  width: 100%;
-  overflow-x: auto;
-  height: 100%;
-
-  @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
-    overflow: scroll;
-  }
+export const Container = styled(OverflowContainer)`
+  align-items: baseline;
 `;
 
 export const Wrapper = styled.table`
@@ -21,16 +16,19 @@ export const Header = styled.thead`
   z-index: 1;
 `;
 
-export const Body = styled.tbody``;
+export const Body = styled.tbody`
+  width: 100%;
+`;
 
-export const HeaderCell = styled.th`
-  padding: 18px 30px;
+export const HeaderCell = styled.th<{ $clickable?: boolean }>`
+  padding: 18px 20px;
   border-bottom: 1px solid ${(props) => props.theme.colors.gray};
   font-size: 14px;
   font-weight: 600;
   color: ${(props) => props.theme.colors.darkGray};
   text-align: left;
   vertical-align: middle;
+  cursor: ${(props) => (props.$clickable ? 'pointer' : 'default')};
 `;
 
 export const HeaderFixedCell = styled(HeaderCell)`
@@ -50,8 +48,8 @@ export const SortIcon = styled.span`
 
 export const Row = styled.tr``;
 
-export const BackgroundColor = styled.td<{ backgroundColor?: string }>`
-  background: ${(props) => props.backgroundColor};
+export const BackgroundColor = styled.td<{ $backgroundColor?: string }>`
+  background: ${(props) => props.$backgroundColor};
   border-radius: 16px;
   padding: 2px 16px;
   font-weight: 600;
@@ -73,15 +71,4 @@ export const StickyTableCell = styled(Cell)`
     left: 0;
     background: ${(props) => props.theme.colors.white};
   }
-`;
-
-export const Pagination = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-`;
-
-export const PageButton = styled.button<{ active?: any }>`
-  margin: 0 5px;
-  background-color: ${(props) => (props.active ? 'gray' : 'transparent')};
 `;

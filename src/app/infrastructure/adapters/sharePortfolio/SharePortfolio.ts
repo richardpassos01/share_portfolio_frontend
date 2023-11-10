@@ -1,6 +1,12 @@
 import { HttpClient } from '../../providers';
 import Endpoints from './Endpoints';
-import { Pagination, Transaction } from './types';
+import {
+  Institution,
+  MonthlyBalance,
+  Pagination,
+  TotalBalance,
+  Transaction,
+} from './types';
 
 export default class SharePortfolio {
   private static instance: HttpClient;
@@ -15,52 +21,72 @@ export default class SharePortfolio {
     return SharePortfolio.instance;
   }
 
-  public static createInstituion(data: Record<string, string>) {
+  public static createInstituion(body: Record<string, string>): Promise<void> {
     return SharePortfolio.getInstance().post(
       Endpoints.CREATE_INSTITUTION,
-      data,
+      body,
     );
   }
 
-  public static getInstituion(institutionId: string) {
+  public static getInstituion(institutionId: string): Promise<Institution> {
     return SharePortfolio.getInstance().get(
       Endpoints.GET_INSTITUTION.replace(':institutionId', institutionId),
     );
   }
 
-  public static getPortfolio(institutionId: string) {
+  public static getTotalBalance(institutionId: string): Promise<TotalBalance> {
     return SharePortfolio.getInstance().get(
-      Endpoints.GET_PORTFOLIO.replace(':institutionId', institutionId),
+      Endpoints.GET_TOTAL_BALANCE.replace(':institutionId', institutionId),
     );
   }
 
-  public static resyncPortfolio(institutionId: string) {
+  public static listMonthlyBalances(
+    institutionId: string,
+    limit?: number,
+  ): Promise<MonthlyBalance[]> {
+    let endpoint = Endpoints.LIST_MONTHLY_BALANCES.replace(
+      ':institutionId',
+      institutionId,
+    );
+
+    if (limit) {
+      endpoint = `${endpoint}?limit=${limit}`;
+    }
+
+    return SharePortfolio.getInstance().get(endpoint);
+  }
+
+  public static resync(institutionId: string): Promise<void> {
     return SharePortfolio.getInstance().post(
-      Endpoints.RESYNC_PORTFOLIO.replace(':institutionId', institutionId),
+      Endpoints.RESYNC.replace(':institutionId', institutionId),
     );
   }
 
   public static listTransactions(
     institutionId: string,
-    page: number,
-    limit: number,
+    page: string,
+    limit: string,
     order: string,
   ): Promise<Pagination<Transaction>> {
     return SharePortfolio.getInstance().get(
       Endpoints.LIST_TRANSACTIONS.replace(':institutionId', institutionId)
-        .replace(':page', String(page))
-        .replace(':limit', String(limit))
+        .replace(':page', page)
+        .replace(':limit', limit)
         .replace(':order', order),
     );
   }
 
-  public static createTransactions(institutionId: string) {
+  public static createTransactions(
+    institutionId: string,
+    transactions: Transaction[],
+  ): Promise<void> {
     return SharePortfolio.getInstance().post(
       Endpoints.CREATE_TRANSACTIONS.replace(':institutionId', institutionId),
+      transactions,
     );
   }
 
-  public static deleteTransactions(institutionId: string) {
+  public static deleteTransactions(institutionId: string): Promise<void> {
     return SharePortfolio.getInstance().delete(
       Endpoints.DELETE_TRANSACTIONS.replace(':institutionId', institutionId),
     );

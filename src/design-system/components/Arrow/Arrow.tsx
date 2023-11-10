@@ -3,7 +3,7 @@ import { ArrowButton } from './Arrow.styles';
 
 const Arrow: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
   return (
-    <ArrowButton className={`arrow-icon ${isOpen ? 'open' : ''}`}>
+    <ArrowButton $isOpen={isOpen}>
       <span className="left-bar"></span>
       <span className="right-bar"></span>
     </ArrowButton>

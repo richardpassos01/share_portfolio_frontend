@@ -12,7 +12,6 @@ export enum TRANSACTION_CATEGORY {
 }
 
 export type Transaction = {
-  institutionId: string;
   ticketSymbol: string;
   quantity: number;
   unitPrice: number;
@@ -20,7 +19,7 @@ export type Transaction = {
   type: TRANSACTION_TYPE;
   category: TRANSACTION_CATEGORY;
   date: string;
-  id: string;
+  id?: string;
 };
 
 export type Pagination<T> = {
@@ -28,4 +27,31 @@ export type Pagination<T> = {
   totalPages: number;
   totalItems: number;
   items: T[];
+};
+
+export type TotalBalance = {
+  netEarning: number;
+  loss: number;
+};
+
+export enum MONTHLY_BALANCE_TYPE {
+  DAY_TRADE = 'DAY_TRADE',
+  SWING_TRADE = 'SWING_TRADE',
+}
+
+export type MonthlyBalance = {
+  institutionId: string;
+  yearMonth: string;
+  tradeEarning: number;
+  dividendEarning: number;
+  tax: number;
+  taxWithholding: number;
+  loss: number;
+  type: MONTHLY_BALANCE_TYPE;
+};
+
+export type Institution = {
+  name: string;
+  userId: string;
+  id: string;
 };

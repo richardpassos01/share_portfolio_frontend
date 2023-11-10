@@ -5,15 +5,19 @@ import { ImageContainer, Container, FormContainer } from './Auth.styles';
 import { Hide, Icons, Tokens, Input, Title } from '@designSystem';
 import AuthForm from './AuthForm';
 import Messages from '@constants/Messages';
-import bff from '@bff';
 import Routes from '@constants/Routes';
 import Providers from '@constants/Providers';
+import BffEndpoints from '@constants/BffEndpoints';
+import fetchBff from '@utils/fetchBff';
 
 const SignUp: React.FC = () => {
   const [submitError, setSubmitError] = useState('');
 
   const onSubmit = async (username: string, password: string) => {
-    const user = await bff.signup({ username, password });
+    const user = await fetchBff(BffEndpoints.SIGN_UP, 'POST', {
+      username,
+      password,
+    });
 
     if (!user) {
       return setSubmitError(Messages.SIGNUP_FAILURE);

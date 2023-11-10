@@ -1,8 +1,6 @@
 import { FilterMenu, Item } from './FilterMenu';
 
-const Filter = {
+export const Filter = {
   Menu: FilterMenu,
   Item,
 };
-
-export default Filter;

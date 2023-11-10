@@ -1,9 +1,11 @@
 import Username from './Username';
 import Password from './Password';
+import CheckBox from './CheckBox';
+import File from './File';
 
-const Input = {
+export const Input = {
   Username,
   Password,
+  CheckBox,
+  File,
 };
-
-export default Input;
