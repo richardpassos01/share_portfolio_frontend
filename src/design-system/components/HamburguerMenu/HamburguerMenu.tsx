@@ -2,16 +2,22 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Icons } from '../../index';
-import { ItemName, StyledMenu } from './HamburguerMenu.styles';
+import {
+  ItemName,
+  MultiLevelItemList,
+  StyledMenu,
+} from './HamburguerMenu.styles';
 
 export function MultiLevelItem({
   name,
   items,
   activated,
+  strong,
 }: {
   name: string;
   items: { name: string; href?: string }[];
   activated?: string;
+  strong?: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,16 +28,13 @@ export function MultiLevelItem({
   const isCurrentItemActivate = name === activated;
 
   return (
-    <li
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'baseline',
-        cursor: 'pointer',
-      }}
-    >
-      <ItemName onClick={toggleSubMenu} $isActivate={isCurrentItemActivate}>
-        {name}{' '}
+    <MultiLevelItemList>
+      <ItemName
+        onClick={toggleSubMenu}
+        $isActivate={isCurrentItemActivate}
+        $strong={strong}
+      >
+        {name}
         <Image src={Icons.ArrowRight} alt="arrowRight" width={12} height={12} />
       </ItemName>
       {isOpen && (
@@ -41,7 +44,7 @@ export function MultiLevelItem({
           ))}
         </ul>
       )}
-    </li>
+    </MultiLevelItemList>
   );
 }
 

@@ -1,17 +1,17 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { Context, InstitutionId } from '@types';
-import OverviewController from './OverviewController';
+import ResyncController from './ResyncController';
 
-export async function GET(
+export async function POST(
   _request: NextRequest,
   context: Context<InstitutionId>,
 ) {
   try {
-    const institutionId = context.params.institutionId;
+    const institutionId = context.params.contextId;
 
-    return OverviewController.get(institutionId).then((result) =>
-      NextResponse.json(result, { status: 200 }),
-    );
+    await ResyncController.resync(institutionId);
+
+    return NextResponse.json({ message: 'ok' }, { status: 200 });
   } catch (error: any) {
     return new NextResponse(error.message, { status: error?.status ?? 500 });
   }

@@ -21,16 +21,16 @@ export default class SharePortfolio {
     return SharePortfolio.instance;
   }
 
-  public static createInstituion(body: Record<string, string>): Promise<void> {
+  public static createInstituion(institution: Institution): Promise<void> {
     return SharePortfolio.getInstance().post(
       Endpoints.CREATE_INSTITUTION,
-      body,
+      institution,
     );
   }
 
-  public static getInstituion(institutionId: string): Promise<Institution> {
+  public static listInstitutions(userId: string): Promise<Institution[]> {
     return SharePortfolio.getInstance().get(
-      Endpoints.GET_INSTITUTION.replace(':institutionId', institutionId),
+      Endpoints.LIST_INSTITUTIONS.replace(':userId', userId),
     );
   }
 

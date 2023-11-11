@@ -62,7 +62,7 @@ const Add: React.FC = () => {
 
       await fetchBff(
         BffEndpoints.CREATE_TRANSACTIONS.replace(
-          ':parentId',
+          ':institutionId',
           institutionId,
         ) as BffEndpoints,
         'POST',

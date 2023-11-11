@@ -23,6 +23,7 @@ const HamburgerMenu: React.FC<props> = ({ session, currentPage }) => {
               name={selectedOptions[0]}
               items={selectedOptions.map((name) => ({ name }))}
               activated={currentPage}
+              strong
             />
             <Hamburger.Item
               name={HeaderPages.DASHBOARD}

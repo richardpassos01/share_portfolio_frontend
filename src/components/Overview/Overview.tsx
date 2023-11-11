@@ -44,7 +44,10 @@ const Overview: React.FC = () => {
       setIsSubmitting(true);
 
       await fetchBff(
-        BffEndpoints.RESYNC.replace(':parentId', institutionId) as BffEndpoints,
+        BffEndpoints.RESYNC.replace(
+          ':institutionId',
+          institutionId,
+        ) as BffEndpoints,
         'POST',
         data,
       );
@@ -65,7 +68,7 @@ const Overview: React.FC = () => {
 
   const { data, isLoading } = useFetch(
     BffEndpoints.GET_OVERVIEW.replace(
-      ':parentId',
+      ':institutionId',
       institutionId,
     ) as BffEndpoints,
     FetcherKeys.GET_OVERVIEW,

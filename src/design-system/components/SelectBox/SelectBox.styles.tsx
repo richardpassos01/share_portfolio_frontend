@@ -1,11 +1,21 @@
 import styled, { css } from 'styled-components';
 
-export const SelectBoxContainer = styled.div<{ $width?: string }>`
+export const SelectBoxContainer = styled.div<{
+  $width?: string;
+  $mobileWidth?: string;
+  $optionsSize?: number;
+}>`
   position: relative;
-  font-size: 13px;
+  font-size: ${(props) =>
+    props.$optionsSize ? `${props.$optionsSize}px` : '13px'};
   font-weight: 600;
   font-family: 'Poppins', sans-serif;
   width: ${(props) => (props.$width ? `${props.$width}px` : '100%')};
+
+  @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
+    width: ${(props) =>
+      props.$mobileWidth ? `${props.$mobileWidth}px` : '100%'};
+  }
 `;
 
 export const SelectBoxButton = styled.button<{ $isOpen: boolean }>`
@@ -59,13 +69,14 @@ export const OptionItem = styled.div<{ $selected: boolean }>`
     props.$selected ? props.theme.colors.gray : 'transparent'};
 `;
 
-export const LabelContainer = styled.div`
+export const LabelContainer = styled.div<{ $labelSize?: number }>`
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
+  font-size: ${(props) =>
+    props.$labelSize ? `${props.$labelSize}px` : '15px'};
   font-weight: 600;
   font-family: 'Poppins', sans-serif;
-  justify-content: space-around;
+  justify-content: space-between;
 `;

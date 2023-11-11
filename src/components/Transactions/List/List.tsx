@@ -73,14 +73,14 @@ const List: React.FC = () => {
                 options={availableFilters.tickers}
                 selectedOptions={tickerFilter}
                 setSelectedOptions={setTickerFilter}
-                $width="110"
+                $width="100"
               />
               <SelectBox
                 label={'Mês'}
                 options={availableFilters.monthYear}
                 selectedOptions={monthYearFilter}
                 setSelectedOptions={setMonthYearFilter}
-                $width="110"
+                $width="85"
               ></SelectBox>
             </FilterButtonsContainer>
           </Hide>

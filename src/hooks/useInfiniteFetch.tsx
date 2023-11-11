@@ -21,7 +21,7 @@ const useInfiniteFetch = (
       const page = key[key.length - 1];
 
       const endpoint = bffEndpoint
-        .replace(':parentId', parentId)
+        .replace(':institutionId', parentId)
         .replace(':page', String(page))
         .replace(':limit', String(limit))
         .replace(':order', sortOrder) as BffEndpoints;

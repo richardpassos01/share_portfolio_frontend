@@ -18,8 +18,12 @@ type Props = {
   options: string[];
   label: string;
   selectedOptions: string[];
-  setSelectedOptions: Dispatch<SetStateAction<string[]>>;
+  setSelectedOptions?: Dispatch<SetStateAction<string[]>>;
+  handleOptions?: (option: string) => void;
   $width?: string;
+  $mobileWidth?: string;
+  $optionsSize?: number;
+  $labelSize?: number;
 };
 
 export const SelectBox: React.FC<Props> = ({
@@ -27,7 +31,11 @@ export const SelectBox: React.FC<Props> = ({
   label,
   selectedOptions,
   setSelectedOptions,
+  handleOptions,
   $width,
+  $mobileWidth,
+  $optionsSize,
+  $labelSize,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -56,17 +64,26 @@ export const SelectBox: React.FC<Props> = ({
   };
 
   const selectOption = (option: string) => {
-    const updatedOptions = selectedOptions.includes(option)
-      ? selectedOptions.filter((item) => item !== option)
-      : [...selectedOptions, option];
+    if (setSelectedOptions) {
+      const updatedOptions = selectedOptions.includes(option)
+        ? selectedOptions.filter((item) => item !== option)
+        : [...selectedOptions, option];
 
-    setSelectedOptions(updatedOptions);
+      setSelectedOptions(updatedOptions);
+    } else if (handleOptions) {
+      handleOptions(option);
+    }
   };
 
   return (
-    <SelectBoxContainer ref={selectRef} $width={$width}>
+    <SelectBoxContainer
+      ref={selectRef}
+      $width={$width}
+      $mobileWidth={$mobileWidth}
+      $optionsSize={$optionsSize}
+    >
       <SelectBoxButton $isOpen={isOpen} onClick={toggleSelect}>
-        <LabelContainer>
+        <LabelContainer $labelSize={$labelSize}>
           {label}
           <Arrow isOpen={isOpen} />
         </LabelContainer>

@@ -1,9 +1,11 @@
 enum BffEndpoints {
-  GET_OVERVIEW = '/api/:parentId/overview',
-  LIST_MONTHLY_BALANCES = '/api/:parentId/monthlyBalance',
-  RESYNC = '/api/:parentId/resync',
-  CREATE_TRANSACTIONS = '/api/:parentId/transactions',
-  LIST_TRANSACTIONS = '/api/:parentId/transactions?page=:page&limit=:limit&order=:order',
+  GET_OVERVIEW = '/api/:institutionId/overview',
+  LIST_MONTHLY_BALANCES = '/api/:institutionId/monthlyBalance',
+  RESYNC = '/api/:institutionId/resync',
+  CREATE_TRANSACTIONS = '/api/:institutionId/transactions',
+  LIST_TRANSACTIONS = '/api/:institutionId/transactions?page=:page&limit=:limit&order=:order',
+  LIST_INSTITUTIONS = '/api/:userId/institution',
+  CREATE_INSTITUTION = '/api/:userId/institution',
   SIGN_UP = '/api/auth/signup',
 }
 

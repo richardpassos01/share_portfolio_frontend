@@ -14,7 +14,13 @@ const SignInOutButton: React.FC<props> = ({ session }) => {
   const router = useRouter();
   const [selectedOptions, setSelectedOptions] = useState(['Banco Inter']);
 
-  const handleClick = (route: Routes) => {
+  const handleOptions = (option: string) => {
+    if (option === 'Add instituição') {
+      return handleRedirect(Routes.INSTITUTION);
+    }
+  };
+
+  const handleRedirect = (route: Routes) => {
     router.push(route);
   };
 
@@ -33,9 +39,9 @@ const SignInOutButton: React.FC<props> = ({ session }) => {
         </Button>
         <SelectBox
           label={selectedOptions[0]}
-          options={['Banco Inter']}
+          options={['Banco Inter', 'Add instituição']}
           selectedOptions={selectedOptions}
-          setSelectedOptions={setSelectedOptions}
+          handleOptions={handleOptions}
           $width="150"
         />
       </LoggedContainer>
@@ -50,14 +56,14 @@ const SignInOutButton: React.FC<props> = ({ session }) => {
         $backgroundColor={Colors.white}
         $color={Colors.darkBlue}
         $borderColor={Colors.darkBlue}
-        onClick={() => handleClick(Routes.SIGNIN)}
+        onClick={() => handleRedirect(Routes.SIGNIN)}
       >
         Entrar
       </Button>
       <Button
         $width="130"
         $height="42"
-        onClick={() => handleClick(Routes.SIGNUP)}
+        onClick={() => handleRedirect(Routes.SIGNUP)}
       >
         Cadastrar
       </Button>

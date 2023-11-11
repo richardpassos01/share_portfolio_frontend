@@ -21,7 +21,7 @@ const ListBalances: React.FC = () => {
 
   const { data, isLoading } = useFetch(
     BffEndpoints.LIST_MONTHLY_BALANCES.replace(
-      ':parentId',
+      ':institutionId',
       institutionId,
     ) as BffEndpoints,
     FetcherKeys.LIST_MONTHLY_BALANCES,
