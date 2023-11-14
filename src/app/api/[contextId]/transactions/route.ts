@@ -1,11 +1,8 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { Context, InstitutionId } from '@types';
+import { Context } from '@types';
 import TransactionController from './TransactionController';
 
-export async function GET(
-  request: NextRequest,
-  context: Context<InstitutionId>,
-) {
+export async function GET(request: NextRequest, context: Context) {
   try {
     const institutionId = context.params.contextId;
     const searchParams = request.nextUrl.searchParams;
@@ -24,10 +21,7 @@ export async function GET(
   }
 }
 
-export async function POST(
-  request: NextRequest,
-  context: Context<InstitutionId>,
-) {
+export async function POST(request: NextRequest, context: Context) {
   try {
     const institutionId = context.params.contextId;
     const data = await request.json();

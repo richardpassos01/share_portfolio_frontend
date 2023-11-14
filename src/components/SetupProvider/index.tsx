@@ -9,8 +9,7 @@ function SetupProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (
-      session &&
-      !session.user?.institutions?.length &&
+      session?.user?.institutions?.length === 0 &&
       router.pathname !== Routes.INSTITUTION
     ) {
       router.push(Routes.INSTITUTION);

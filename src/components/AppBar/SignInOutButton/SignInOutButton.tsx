@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
 import { LoggedOutContainer, LoggedContainer } from './styles';
 import { Session } from 'next-auth';
+import { useInstitution } from '@hooks/useInstitution';
 
 interface props {
   session: Session | null;
@@ -12,12 +13,15 @@ interface props {
 
 const SignInOutButton: React.FC<props> = ({ session }) => {
   const router = useRouter();
-  const [selectedOptions, setSelectedOptions] = useState(['Banco Inter']);
+  const { institution, setInstitution } = useInstitution();
 
-  const handleOptions = (option: string) => {
-    if (option === 'Add instituição') {
+  const handleOptions = (option: Record<string, string>, close: () => void) => {
+    if (option.name === 'Add instituição') {
       return handleRedirect(Routes.INSTITUTION);
     }
+
+    setInstitution(option);
+    return close();
   };
 
   const handleRedirect = (route: Routes) => {
@@ -38,9 +42,11 @@ const SignInOutButton: React.FC<props> = ({ session }) => {
           Logout
         </Button>
         <SelectBox
-          label={selectedOptions[0]}
-          options={['Banco Inter', 'Add instituição']}
-          selectedOptions={selectedOptions}
+          label={institution.name}
+          recordOptions={[
+            ...session?.user?.institutions,
+            { name: 'Add instituição' },
+          ]}
           handleOptions={handleOptions}
           $width="150"
         />

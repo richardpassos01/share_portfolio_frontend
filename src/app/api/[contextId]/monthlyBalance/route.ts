@@ -1,11 +1,8 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { Context, InstitutionId } from '@types';
+import { Context } from '@types';
 import MonthlyBalanceController from './MonthlyBalanceController';
 
-export async function GET(
-  _request: NextRequest,
-  context: Context<InstitutionId>,
-) {
+export async function GET(_request: NextRequest, context: Context) {
   try {
     const institutionId = context.params.contextId;
 

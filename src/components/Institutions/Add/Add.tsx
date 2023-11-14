@@ -4,7 +4,6 @@ import {
   AddContainer,
   Footer,
   Header,
-  HeaderDescription,
   HeaderTitle,
   LinkContainer,
 } from './Add.styles';
@@ -17,21 +16,23 @@ import {
   Toast,
   Card,
   Containers,
-  SelectBox,
   Input,
 } from '@designSystem';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 import Routes from '@constants/Routes';
 import { ToastMessages } from '@constants/ToastMessages';
 
 const Add: React.FC = () => {
   const router = useRouter();
+  const { data: session } = useSession();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState<Toast | {}>({});
   const [institutionName, setInstitutionName] = useState('');
 
   const handleRedirect = () => {
     router.push(Routes.DASHBOARD);
+    router.reload();
   };
 
   const handleSubmit = async () => {
@@ -42,7 +43,7 @@ const Add: React.FC = () => {
       await fetchBff(
         BffEndpoints.CREATE_INSTITUTION.replace(
           ':userId',
-          'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2',
+          session?.user.id ?? '',
         ) as BffEndpoints,
         'POST',
         { name: institutionName },
@@ -52,6 +53,7 @@ const Add: React.FC = () => {
         message: ToastMessages.SUCCESS,
         type: 'success',
       });
+      handleRedirect();
     } catch (error) {
       setToast({
         message: ToastMessages.ERROR,
@@ -59,7 +61,6 @@ const Add: React.FC = () => {
       });
     } finally {
       setIsSubmitting(false);
-      // handleRedirect();
     }
   };
 

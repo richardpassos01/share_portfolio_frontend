@@ -5,6 +5,7 @@ import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'styled-components';
 import Layout from '@components/Layout';
 import SetupProvider from '@components/SetupProvider';
+import { InstitutionProvider } from '@contexts/InstitituionContext';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -12,10 +13,12 @@ export default function App({ Component, pageProps }: AppProps) {
       <SessionProvider>
         <ThemeProvider theme={Theme}>
           <SetupProvider>
-            <GlobalStyles />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
+            <InstitutionProvider>
+              <GlobalStyles />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </InstitutionProvider>
           </SetupProvider>
           <NextScript />
         </ThemeProvider>

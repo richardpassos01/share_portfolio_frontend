@@ -1,11 +1,8 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { Context, InstitutionId } from '@types';
+import { Context } from '@types';
 import InstitutionController from './InstitutionController';
 
-export async function GET(
-  _request: NextRequest,
-  context: Context<InstitutionId>,
-) {
+export async function GET(_request: NextRequest, context: Context) {
   try {
     const userId = context.params.contextId;
 
@@ -17,10 +14,7 @@ export async function GET(
   }
 }
 
-export async function POST(
-  request: NextRequest,
-  context: Context<InstitutionId>,
-) {
+export async function POST(request: NextRequest, context: Context) {
   try {
     const userId = context.params.contextId;
     const data = await request.json();

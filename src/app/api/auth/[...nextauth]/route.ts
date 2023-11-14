@@ -1,12 +1,12 @@
 import { SharePortfolioAdapter } from '@adapters/sharePortfolio';
 import Providers from '@constants/Providers';
-import NextAuth, { User } from 'next-auth';
+import NextAuth, { NextAuthOptions, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 const MINUTE = 60;
 const HOUR = 60 * MINUTE;
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       id: Providers.SIGNUP_PROVIDER,
@@ -73,6 +73,8 @@ const handler = NextAuth({
       return session;
     },
   },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
