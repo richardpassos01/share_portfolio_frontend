@@ -10,12 +10,14 @@ import {
 
 export default class SharePortfolio {
   private static instance: HttpClient;
-  private static baseURL: string =
-    process.env.NEXT_PUBLIC_SHARE_PORTFOLIO_API ?? '';
+  private static baseURL: string = process.env
+    .NEXT_PUBLIC_SHARE_PORTFOLIO_API as string;
+  private static apiKey: string = process.env
+    .NEXT_PUBLIC_SHARE_PORTFOLIO_API_KEY as string;
 
   private static getInstance(): HttpClient {
     if (!SharePortfolio.instance) {
-      SharePortfolio.instance = new HttpClient(this.baseURL);
+      SharePortfolio.instance = new HttpClient(this.baseURL, this.apiKey);
     }
 
     return SharePortfolio.instance;

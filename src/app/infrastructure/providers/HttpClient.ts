@@ -1,7 +1,8 @@
 export default class HttpClient {
-  private headers = { 'Content-Type': 'application/json' };
-
-  constructor(private readonly baseURL: string) {}
+  constructor(
+    private readonly baseURL: string,
+    private readonly apiKey: string,
+  ) {}
 
   private async request(
     endpoint: string,
@@ -13,7 +14,10 @@ export default class HttpClient {
       mode: 'cors',
       cache: 'no-cache',
       credentials: 'same-origin',
-      headers: this.headers,
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': this.apiKey,
+      },
       redirect: 'follow',
       referrerPolicy: 'no-referrer',
     } as RequestInit;

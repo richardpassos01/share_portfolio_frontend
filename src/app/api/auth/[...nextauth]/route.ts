@@ -1,11 +1,10 @@
+import { SharePortfolioAdapter } from '@adapters/sharePortfolio';
 import Providers from '@constants/Providers';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-export interface User {
-  id: string;
-  username: string;
-}
+const MINUTE = 60;
+const HOUR = 60 * MINUTE;
 
 const handler = NextAuth({
   providers: [
@@ -17,10 +16,12 @@ const handler = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials, req) {
+        const userId = 'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2';
+
         return {
-          id: '1',
-          username: credentials?.username,
-        } as User;
+          id: userId,
+          name: credentials?.username,
+        } as any;
       },
     }),
     CredentialsProvider({
@@ -30,21 +31,48 @@ const handler = NextAuth({
         username: { label: 'Username', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials, req) {
+      async authorize(
+        credentials: Record<'username' | 'password', string> | undefined,
+        req,
+      ) {
         if (
           credentials?.username === 'user' &&
           credentials.password === 'pass'
         ) {
+          const userId = 'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2';
+
           return {
-            id: '1',
-            username: credentials.username,
-          } as User;
+            id: userId,
+            name: credentials?.username,
+          } as any;
         }
 
         return null;
       },
     }),
   ],
+  session: {
+    maxAge: 8 * HOUR, // 8 hours
+  },
+  callbacks: {
+    async session({ session, token }) {
+      let institutions = [];
+
+      if (token.sub) {
+        institutions = await SharePortfolioAdapter.listInstitutions(token.sub);
+
+        const user = {
+          id: token.sub,
+          username: token.name,
+          institutions,
+        };
+
+        session.user = user as any;
+      }
+
+      return session;
+    },
+  },
 });
 
 export { handler as GET, handler as POST };
