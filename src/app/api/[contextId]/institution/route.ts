@@ -19,9 +19,9 @@ export async function POST(request: NextRequest, context: Context) {
     const userId = context.params.contextId;
     const data = await request.json();
 
-    await InstitutionController.create(userId, data);
-
-    return NextResponse.json({ message: 'ok' }, { status: 201 });
+    return InstitutionController.create(userId, data).then((result) =>
+      NextResponse.json(result, { status: 201 }),
+    );
   } catch (error: any) {
     return new NextResponse(error.message, { status: error.status ?? 500 });
   }

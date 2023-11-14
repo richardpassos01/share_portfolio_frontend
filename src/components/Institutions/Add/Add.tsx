@@ -22,6 +22,7 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import Routes from '@constants/Routes';
 import { ToastMessages } from '@constants/ToastMessages';
+import { useInstitution } from '@hooks/useInstitution';
 
 const Add: React.FC = () => {
   const router = useRouter();
@@ -29,10 +30,10 @@ const Add: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState<Toast | {}>({});
   const [institutionName, setInstitutionName] = useState('');
+  const { setInstitution } = useInstitution();
 
   const handleRedirect = () => {
     router.push(Routes.DASHBOARD);
-    router.reload();
   };
 
   const handleSubmit = async () => {
@@ -40,7 +41,7 @@ const Add: React.FC = () => {
     try {
       setIsSubmitting(true);
 
-      await fetchBff(
+      const result = await fetchBff(
         BffEndpoints.CREATE_INSTITUTION.replace(
           ':userId',
           session?.user.id ?? '',
@@ -53,13 +54,18 @@ const Add: React.FC = () => {
         message: ToastMessages.SUCCESS,
         type: 'success',
       });
-      handleRedirect();
+
+      setInstitution({
+        id: result.id,
+        name: institutionName,
+      });
+
+      return handleRedirect();
     } catch (error) {
       setToast({
         message: ToastMessages.ERROR,
         type: 'error',
       });
-    } finally {
       setIsSubmitting(false);
     }
   };

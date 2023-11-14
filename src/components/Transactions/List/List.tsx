@@ -23,19 +23,19 @@ import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
 import { FooterContainer, TransactionHeader } from '../Transactions.styles';
 import Table from '../Table/Table';
+import { useInstitution } from '@hooks/useInstitution';
 
 const availableFilters = {
   tickers: ['ABV', 'TSLA'],
   monthYear: ['01/2022'],
 };
 
-const institutionId = 'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2';
-
 const List: React.FC = () => {
   const router = useRouter();
   const [sortOrder, setSortOrder] = useState('asc');
   const [monthYearFilter, setMonthYearFilter] = useState<string[]>([]);
   const [tickerFilter, setTickerFilter] = useState<string[]>([]);
+  const { institution } = useInstitution();
 
   useEffect(() => {
     console.log(monthYearFilter);
@@ -50,7 +50,7 @@ const List: React.FC = () => {
   } = useInfiniteFetch(
     BffEndpoints.LIST_TRANSACTIONS,
     FetcherKeys.LIST_TRANSACTIONS,
-    institutionId,
+    institution.id,
     sortOrder,
   );
 
@@ -70,14 +70,14 @@ const List: React.FC = () => {
             <FilterButtonsContainer>
               <SelectBox
                 label={'Ticker'}
-                options={availableFilters.tickers}
+                stringOptions={availableFilters.tickers}
                 selectedOptions={tickerFilter}
                 setSelectedOptions={setTickerFilter}
                 $width="100"
               />
               <SelectBox
                 label={'Mês'}
-                options={availableFilters.monthYear}
+                stringOptions={availableFilters.monthYear}
                 selectedOptions={monthYearFilter}
                 setSelectedOptions={setMonthYearFilter}
                 $width="85"
