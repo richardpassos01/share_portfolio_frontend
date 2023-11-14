@@ -22,15 +22,13 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import Routes from '@constants/Routes';
 import { ToastMessages } from '@constants/ToastMessages';
-import { useInstitution } from '@hooks/useInstitution';
 
 const Add: React.FC = () => {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState<Toast | {}>({});
   const [institutionName, setInstitutionName] = useState('');
-  const { setInstitution } = useInstitution();
 
   const handleRedirect = () => {
     router.push(Routes.DASHBOARD);
@@ -55,10 +53,7 @@ const Add: React.FC = () => {
         type: 'success',
       });
 
-      setInstitution({
-        id: result.id,
-        name: institutionName,
-      });
+      await update();
 
       return handleRedirect();
     } catch (error) {

@@ -65,6 +65,10 @@ export const OptionItem = styled.div<{ $selected: boolean }>`
   border-radius: 38px;
   margin: 0px 5px 6px 4px;
 
+  &:hover {
+    background-color: ${(props) => props.theme.colors.gray};
+  }
+
   background-color: ${(props) =>
     props.$selected ? props.theme.colors.gray : 'transparent'};
 `;

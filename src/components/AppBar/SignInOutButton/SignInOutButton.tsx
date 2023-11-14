@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Colors, SelectBox } from '@designSystem';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
