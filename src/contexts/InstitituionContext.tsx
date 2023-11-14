@@ -1,3 +1,4 @@
+import FetcherKeys from '@constants/FetcherKeys';
 import { useSession } from 'next-auth/react';
 import React, {
   Dispatch,
@@ -6,6 +7,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import useSWR, { useSWRConfig } from 'swr';
 
 export const initialState = {
   institution: {} as Record<string, string>,
@@ -30,6 +32,7 @@ export const InstitutionProvider = ({
 
   const [institution, setInstitution] =
     useState<Record<string, string>>(initialInstitution);
+  const { mutate } = useSWRConfig();
 
   useEffect(() => {
     setInstitution(
@@ -38,6 +41,11 @@ export const InstitutionProvider = ({
         : initialInstitution,
     );
   }, [session]);
+
+  useEffect(() => {
+    mutate(FetcherKeys.GET_OVERVIEW);
+    mutate(FetcherKeys.LIST_MONTHLY_BALANCES);
+  }, [mutate, institution]);
 
   return (
     <InstitutionContext.Provider value={{ institution, setInstitution }}>

@@ -42,17 +42,17 @@ const List: React.FC = () => {
     console.log(tickerFilter);
   }, [monthYearFilter, tickerFilter]);
 
-  const {
-    data: newData,
-    isLoading,
-    lastDataRendered,
-    fetchedAll,
-  } = useInfiniteFetch(
-    BffEndpoints.LIST_TRANSACTIONS,
-    FetcherKeys.LIST_TRANSACTIONS,
-    institution.id,
-    sortOrder,
-  );
+  const { data, refetch, isLoading, lastDataRendered, fetchedAll } =
+    useInfiniteFetch(
+      BffEndpoints.LIST_TRANSACTIONS,
+      FetcherKeys.LIST_TRANSACTIONS,
+      institution.id,
+      sortOrder,
+    );
+
+  useEffect(() => {
+    refetch();
+  }, [refetch, institution]);
 
   const handleRedirect = () => {
     router.push(Routes.ADD_TRANSACTIONS);
@@ -109,7 +109,7 @@ const List: React.FC = () => {
             </Filter.Menu>
           </MobileFilterContainer>
         </TransactionHeader>
-        <Table data={newData} sortOrder={sortOrder} setSortOrder={setSortOrder}>
+        <Table data={data} sortOrder={sortOrder} setSortOrder={setSortOrder}>
           {!fetchedAll && (
             <LoaderContainer ref={lastDataRendered}>
               <Loader $size={30} />

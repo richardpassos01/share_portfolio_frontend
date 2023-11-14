@@ -12,14 +12,14 @@ export default function App({ Component, pageProps }: AppProps) {
     <StyledComponentsRegistry>
       <SessionProvider>
         <ThemeProvider theme={Theme}>
-          <SetupProvider>
-            <InstitutionProvider>
+          <InstitutionProvider>
+            <SetupProvider>
               <GlobalStyles />
               <Layout>
                 <Component {...pageProps} />
               </Layout>
-            </InstitutionProvider>
-          </SetupProvider>
+            </SetupProvider>
+          </InstitutionProvider>
           <NextScript />
         </ThemeProvider>
       </SessionProvider>

@@ -30,7 +30,7 @@ const SignInOutButton: React.FC<props> = ({ session }) => {
 
   if (session?.user) {
     return (
-      <LoggedContainer>
+      <LoggedContainer $hasInstitutions={Boolean(institution.name)}>
         <Button
           $width="100"
           $height="42"
@@ -41,15 +41,19 @@ const SignInOutButton: React.FC<props> = ({ session }) => {
         >
           Logout
         </Button>
-        <SelectBox
-          label={institution.name}
-          recordOptions={[
-            ...session?.user?.institutions,
-            { name: 'Add instituição' },
-          ]}
-          handleOptions={handleOptions}
-          $width="150"
-        />
+        {institution.name ? (
+          <SelectBox
+            label={institution.name}
+            recordOptions={[
+              ...session?.user?.institutions,
+              { name: 'Add instituição' },
+            ]}
+            handleOptions={handleOptions}
+            $width="150"
+          />
+        ) : (
+          <></>
+        )}
       </LoggedContainer>
     );
   }
