@@ -1,6 +1,6 @@
 import { SharePortfolioAdapter } from '@adapters/sharePortfolio';
 import Providers from '@constants/Providers';
-import NextAuth from 'next-auth';
+import NextAuth, { User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 const MINUTE = 60;
@@ -44,7 +44,7 @@ const handler = NextAuth({
           return {
             id: userId,
             name: credentials?.username,
-          } as any;
+          } as User;
         }
 
         return null;
@@ -67,7 +67,7 @@ const handler = NextAuth({
           institutions,
         };
 
-        session.user = user as any;
+        session.user = user as User;
       }
 
       return session;

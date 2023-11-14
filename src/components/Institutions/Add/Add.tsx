@@ -18,6 +18,7 @@ import {
   Card,
   Containers,
   SelectBox,
+  Input,
 } from '@designSystem';
 import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
@@ -27,14 +28,10 @@ const Add: React.FC = () => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState<Toast | {}>({});
-  const [selectedOption, setSelectedOption] = useState('');
+  const [institutionName, setInstitutionName] = useState('');
 
   const handleRedirect = () => {
     router.push(Routes.DASHBOARD);
-  };
-
-  const handleOptions = (option: string) => {
-    setSelectedOption(option);
   };
 
   const handleSubmit = async () => {
@@ -42,11 +39,14 @@ const Add: React.FC = () => {
     try {
       setIsSubmitting(true);
 
-      // await fetchBff(
-      //   BffEndpoints.RESYNC.replace(':institutionId') as BffEndpoints,
-      //   'POST',
-      //   data,
-      // );
+      await fetchBff(
+        BffEndpoints.CREATE_INSTITUTION.replace(
+          ':userId',
+          'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2',
+        ) as BffEndpoints,
+        'POST',
+        { name: institutionName },
+      );
 
       setToast({
         message: ToastMessages.SUCCESS,
@@ -59,7 +59,12 @@ const Add: React.FC = () => {
       });
     } finally {
       setIsSubmitting(false);
+      // handleRedirect();
     }
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInstitutionName(event.target.value);
   };
 
   return (
@@ -72,15 +77,10 @@ const Add: React.FC = () => {
           </Header>
 
           <AddContainer>
-            <SelectBox
-              label={selectedOption || 'Escolha a instituição'}
-              options={['Banco Inter', 'Banco Pan']}
-              selectedOptions={[selectedOption]}
-              handleOptions={handleOptions}
-              $width="250"
-              $mobileWidth="296"
-              $labelSize={16}
-              $optionsSize={14}
+            <Input.Inline
+              placeholder="Ex: Banco inter"
+              value={institutionName}
+              onChange={handleChange}
             />
           </AddContainer>
 
@@ -90,7 +90,7 @@ const Add: React.FC = () => {
                 $color={Colors.blue}
                 $fontSize="14"
                 $width="80px"
-                onClick={handleSubmit}
+                onClick={handleRedirect}
               >
                 Cancelar
               </HyperLink>
@@ -102,7 +102,7 @@ const Add: React.FC = () => {
               $backgroundColor={Colors.white}
               $color={Colors.darkBlue}
               $borderColor={Colors.darkBlue}
-              onClick={handleRedirect}
+              onClick={handleSubmit}
               $isLoading={isSubmitting}
             >
               Salvar

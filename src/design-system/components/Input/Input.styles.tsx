@@ -87,6 +87,21 @@ export const CustomFileButton = styled.label<{
     props.$borderColor ? `1px solid ${props.$borderColor}` : 'none'};
 `;
 
+export const Inline = styled.input`
+  border: none;
+  border-bottom: 2px solid blue;
+  outline: none;
+  transition: border-bottom 0.3s;
+  padding: 5px;
+  font-size: 16px;
+  width: 100%;
+  color: ${(props) => props.theme.colors.darkGray};
+
+  &:focus {
+    border-bottom: 2px solid darkblue;
+  }
+`;
+
 export const Input = styled.input<{ $error: string }>`
   width: 100%;
   font-size: 15px;
