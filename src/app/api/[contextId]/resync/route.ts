@@ -1,13 +1,10 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { Context, InstitutionId } from '@types';
+import { Context } from '@types';
 import ResyncController from './ResyncController';
 
-export async function POST(
-  _request: NextRequest,
-  context: Context<InstitutionId>,
-) {
+export async function POST(_request: NextRequest, context: Context) {
   try {
-    const institutionId = context.params.institutionId;
+    const institutionId = context.params.contextId;
 
     await ResyncController.resync(institutionId);
 

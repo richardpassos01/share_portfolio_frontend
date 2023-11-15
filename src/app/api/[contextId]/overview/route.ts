@@ -1,13 +1,10 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { Context, InstitutionId } from '@types';
+import { Context } from '@types';
 import OverviewController from './OverviewController';
 
-export async function GET(
-  _request: NextRequest,
-  context: Context<InstitutionId>,
-) {
+export async function GET(_request: NextRequest, context: Context) {
   try {
-    const institutionId = context.params.institutionId;
+    const institutionId = context.params.contextId;
 
     return OverviewController.get(institutionId).then((result) =>
       NextResponse.json(result, { status: 200 }),

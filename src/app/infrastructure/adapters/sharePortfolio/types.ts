@@ -53,5 +53,5 @@ export type MonthlyBalance = {
 export type Institution = {
   name: string;
   userId: string;
-  id: string;
+  id?: string;
 };

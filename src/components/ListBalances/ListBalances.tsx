@@ -9,11 +9,11 @@ import { Balance, BalanceProps } from '@components/Balance';
 
 import { Footer, Header, Space } from './ListBalances.styles';
 import Loading from './Loading';
-
-const institutionId = 'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2';
+import { useInstitution } from '@hooks/useInstitution';
 
 const ListBalances: React.FC = () => {
   const router = useRouter();
+  const { institution } = useInstitution();
 
   const handleRedirect = () => {
     router.push(Routes.DASHBOARD);
@@ -21,8 +21,8 @@ const ListBalances: React.FC = () => {
 
   const { data, isLoading } = useFetch(
     BffEndpoints.LIST_MONTHLY_BALANCES.replace(
-      ':parentId',
-      institutionId,
+      ':institutionId',
+      institution.id,
     ) as BffEndpoints,
     FetcherKeys.LIST_MONTHLY_BALANCES,
   );

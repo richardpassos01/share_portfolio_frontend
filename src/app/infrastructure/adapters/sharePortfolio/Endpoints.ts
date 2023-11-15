@@ -1,6 +1,6 @@
 enum Endpoints {
   CREATE_INSTITUTION = '/institution',
-  GET_INSTITUTION = '/institution/:institutionId',
+  LIST_INSTITUTIONS = '/institutions/:userId',
   GET_TOTAL_BALANCE = '/total-balance/:institutionId',
   LIST_MONTHLY_BALANCES = '/monthly-balances/:institutionId',
   RESYNC = '/resync/:institutionId',

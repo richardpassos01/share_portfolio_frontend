@@ -1,5 +1,3 @@
-export type InstitutionId = string;
-
-export interface Context<T> {
-  params: Record<string, T>;
+export interface Context {
+  params: Record<string, string>;
 }

@@ -6,8 +6,8 @@ export const LoggedOutContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const LoggedContainer = styled.div`
+export const LoggedContainer = styled.div<{ $hasInstitutions: boolean }>`
   display: flex;
-  width: 10em;
+  width: ${(props) => (props.$hasInstitutions ? '17em' : '10em')};
   justify-content: space-between;
 `;

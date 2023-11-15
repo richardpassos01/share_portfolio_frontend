@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo } from 'react';
+import { useState, useRef, useMemo, useEffect } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import useInfiniteScroll from '@hooks/useInfiniteScroll';
 import BffEndpoints from '@constants/BffEndpoints';
@@ -15,13 +15,13 @@ const useInfiniteFetch = (
   const [totalItems, setTotalItems] = useState(0);
   const observer = useRef(null);
 
-  const { data, setSize, size, isLoading } = useSWRInfinite(
+  const { data, mutate, setSize, size, isLoading } = useSWRInfinite(
     (index) => [key, sortOrder, index + 1],
     async (key) => {
       const page = key[key.length - 1];
 
       const endpoint = bffEndpoint
-        .replace(':parentId', parentId)
+        .replace(':institutionId', parentId)
         .replace(':page', String(page))
         .replace(':limit', String(limit))
         .replace(':order', sortOrder) as BffEndpoints;
@@ -52,7 +52,13 @@ const useInfiniteFetch = (
     newData,
   );
 
-  return { data: newData, isLoading, lastDataRendered, fetchedAll };
+  return {
+    data: newData,
+    refetch: mutate,
+    isLoading,
+    lastDataRendered,
+    fetchedAll,
+  };
 };
 
 export default useInfiniteFetch;

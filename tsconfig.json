@@ -28,7 +28,8 @@
       "@hooks/*": ["./src/hooks/*"],
       "@designSystem": ["./src/design-system/index"],
       "@pages/*": ["./src/pages/*"],
-      "@constants/*": ["./src/constants/*"]
+      "@constants/*": ["./src/constants/*"],
+      "@contexts/*": ["./src/contexts/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

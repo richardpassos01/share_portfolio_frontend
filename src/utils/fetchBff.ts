@@ -13,7 +13,10 @@ const fetchBff = async (
     requestConfig.body = JSON.stringify(body);
   }
 
-  const response = await fetch(endpoint, requestConfig);
+  const response = await fetch(
+    process.env.NEXT_PUBLIC_BFF_API + endpoint,
+    requestConfig,
+  );
   return response.json();
 };
 

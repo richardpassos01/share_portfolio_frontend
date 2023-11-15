@@ -27,6 +27,7 @@ import { useRouter } from 'next/router';
 import fetchBff from '@utils/fetchBff';
 import BffEndpoints from '@constants/BffEndpoints';
 import { ToastMessages } from '@constants/ToastMessages';
+import { useInstitution } from '@hooks/useInstitution';
 
 type TransactionType = {
   'Entrada/Saída': string;
@@ -49,6 +50,7 @@ const Add: React.FC = () => {
   const [isReadingFile, setReadingFile] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState<Toast | {}>({});
+  const { institution } = useInstitution();
 
   const handleRedirect = () => {
     router.push(Routes.TRANSACTIONS);
@@ -58,12 +60,11 @@ const Add: React.FC = () => {
     if (isSubmitting) return;
     try {
       setIsSubmitting(true);
-      const institutionId = 'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2';
 
       await fetchBff(
         BffEndpoints.CREATE_TRANSACTIONS.replace(
-          ':parentId',
-          institutionId,
+          ':institutionId',
+          institution.id,
         ) as BffEndpoints,
         'POST',
         data,

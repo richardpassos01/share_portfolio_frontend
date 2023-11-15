@@ -5,6 +5,7 @@ enum Routes {
   TRANSACTIONS = '/transactions',
   ADD_TRANSACTIONS = '/transactions/add',
   LIST_MONTHLY_BALANCES = '/dashboard/balances',
+  INSTITUTION = '/institution',
   HOME = '/',
 }
 

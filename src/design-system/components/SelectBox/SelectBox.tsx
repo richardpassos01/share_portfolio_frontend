@@ -15,19 +15,29 @@ import {
 } from './SelectBox.styles';
 
 type Props = {
-  options: string[];
+  stringOptions?: string[];
+  recordOptions?: Record<string, string>[];
   label: string;
-  selectedOptions: string[];
-  setSelectedOptions: Dispatch<SetStateAction<string[]>>;
+  selectedOptions?: string[];
+  setSelectedOptions?: Dispatch<SetStateAction<string[]>>;
+  handleOptions?: (option: Record<string, string>, close: () => void) => void;
   $width?: string;
+  $mobileWidth?: string;
+  $optionsSize?: number;
+  $labelSize?: number;
 };
 
 export const SelectBox: React.FC<Props> = ({
-  options,
+  stringOptions,
+  recordOptions,
   label,
   selectedOptions,
   setSelectedOptions,
+  handleOptions,
   $width,
+  $mobileWidth,
+  $optionsSize,
+  $labelSize,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -55,32 +65,57 @@ export const SelectBox: React.FC<Props> = ({
     setIsOpen(!isOpen);
   };
 
-  const selectOption = (option: string) => {
-    const updatedOptions = selectedOptions.includes(option)
-      ? selectedOptions.filter((item) => item !== option)
-      : [...selectedOptions, option];
+  const selectOption = (option: string | Record<string, string>) => {
+    if (handleOptions) {
+      return handleOptions(option as Record<string, string>, () =>
+        setIsOpen(false),
+      );
+    }
 
-    setSelectedOptions(updatedOptions);
+    if (setSelectedOptions) {
+      const updatedOptions = selectedOptions?.includes(option as string)
+        ? selectedOptions?.filter((item) => item !== option)
+        : ([...(selectedOptions as string[]), option] as string[]);
+
+      setSelectedOptions(updatedOptions);
+    }
   };
 
   return (
-    <SelectBoxContainer ref={selectRef} $width={$width}>
+    <SelectBoxContainer
+      ref={selectRef}
+      $width={$width}
+      $mobileWidth={$mobileWidth}
+      $optionsSize={$optionsSize}
+    >
       <SelectBoxButton $isOpen={isOpen} onClick={toggleSelect}>
-        <LabelContainer>
+        <LabelContainer $labelSize={$labelSize}>
           {label}
           <Arrow isOpen={isOpen} />
         </LabelContainer>
       </SelectBoxButton>
       <OptionList $isOpen={isOpen}>
-        {options.map((option, index) => (
-          <OptionItem
-            key={index}
-            onClick={() => selectOption(option)}
-            $selected={Boolean(selectedOptions.includes(option))}
-          >
-            {option}
-          </OptionItem>
-        ))}
+        {stringOptions &&
+          stringOptions.map((option, index) => (
+            <OptionItem
+              key={index}
+              onClick={() => selectOption(option)}
+              $selected={Boolean(selectedOptions?.includes(option))}
+            >
+              {option}
+            </OptionItem>
+          ))}
+
+        {recordOptions &&
+          recordOptions.map((option, index) => (
+            <OptionItem
+              key={index}
+              onClick={() => selectOption(option)}
+              $selected={false}
+            >
+              {option.name}
+            </OptionItem>
+          ))}
       </OptionList>
     </SelectBoxContainer>
   );

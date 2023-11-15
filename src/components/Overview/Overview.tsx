@@ -26,13 +26,13 @@ import Routes from '@constants/Routes';
 import { Balance } from '@components/Balance';
 import { ToastMessages } from '@constants/ToastMessages';
 import Loading from './Loading';
-
-const institutionId = 'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2';
+import { useInstitution } from '@hooks/useInstitution';
 
 const Overview: React.FC = () => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState<Toast | {}>({});
+  const { institution } = useInstitution();
 
   const handleRedirect = () => {
     router.push(Routes.LIST_MONTHLY_BALANCES);
@@ -44,7 +44,10 @@ const Overview: React.FC = () => {
       setIsSubmitting(true);
 
       await fetchBff(
-        BffEndpoints.RESYNC.replace(':parentId', institutionId) as BffEndpoints,
+        BffEndpoints.RESYNC.replace(
+          ':institutionId',
+          institution.id,
+        ) as BffEndpoints,
         'POST',
         data,
       );
@@ -65,8 +68,8 @@ const Overview: React.FC = () => {
 
   const { data, isLoading } = useFetch(
     BffEndpoints.GET_OVERVIEW.replace(
-      ':parentId',
-      institutionId,
+      ':institutionId',
+      institution.id,
     ) as BffEndpoints,
     FetcherKeys.GET_OVERVIEW,
   );

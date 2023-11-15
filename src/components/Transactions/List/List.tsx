@@ -23,36 +23,36 @@ import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
 import { FooterContainer, TransactionHeader } from '../Transactions.styles';
 import Table from '../Table/Table';
+import { useInstitution } from '@hooks/useInstitution';
 
 const availableFilters = {
   tickers: ['ABV', 'TSLA'],
   monthYear: ['01/2022'],
 };
 
-const institutionId = 'c1daef5f-4bd0-4616-bb62-794e9b5d8ca2';
-
 const List: React.FC = () => {
   const router = useRouter();
   const [sortOrder, setSortOrder] = useState('asc');
   const [monthYearFilter, setMonthYearFilter] = useState<string[]>([]);
   const [tickerFilter, setTickerFilter] = useState<string[]>([]);
+  const { institution } = useInstitution();
 
   useEffect(() => {
     console.log(monthYearFilter);
     console.log(tickerFilter);
   }, [monthYearFilter, tickerFilter]);
 
-  const {
-    data: newData,
-    isLoading,
-    lastDataRendered,
-    fetchedAll,
-  } = useInfiniteFetch(
-    BffEndpoints.LIST_TRANSACTIONS,
-    FetcherKeys.LIST_TRANSACTIONS,
-    institutionId,
-    sortOrder,
-  );
+  const { data, refetch, isLoading, lastDataRendered, fetchedAll } =
+    useInfiniteFetch(
+      BffEndpoints.LIST_TRANSACTIONS,
+      FetcherKeys.LIST_TRANSACTIONS,
+      institution.id,
+      sortOrder,
+    );
+
+  useEffect(() => {
+    refetch();
+  }, [refetch, institution]);
 
   const handleRedirect = () => {
     router.push(Routes.ADD_TRANSACTIONS);
@@ -70,17 +70,17 @@ const List: React.FC = () => {
             <FilterButtonsContainer>
               <SelectBox
                 label={'Ticker'}
-                options={availableFilters.tickers}
+                stringOptions={availableFilters.tickers}
                 selectedOptions={tickerFilter}
                 setSelectedOptions={setTickerFilter}
-                $width="110"
+                $width="100"
               />
               <SelectBox
                 label={'Mês'}
-                options={availableFilters.monthYear}
+                stringOptions={availableFilters.monthYear}
                 selectedOptions={monthYearFilter}
                 setSelectedOptions={setMonthYearFilter}
-                $width="110"
+                $width="85"
               ></SelectBox>
             </FilterButtonsContainer>
           </Hide>
@@ -109,7 +109,7 @@ const List: React.FC = () => {
             </Filter.Menu>
           </MobileFilterContainer>
         </TransactionHeader>
-        <Table data={newData} sortOrder={sortOrder} setSortOrder={setSortOrder}>
+        <Table data={data} sortOrder={sortOrder} setSortOrder={setSortOrder}>
           {!fetchedAll && (
             <LoaderContainer ref={lastDataRendered}>
               <Loader $size={30} />

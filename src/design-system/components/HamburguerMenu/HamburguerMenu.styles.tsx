@@ -84,7 +84,7 @@ export const StyledMenu = styled.nav<{ $isOpen: boolean }>`
     font-size: 18px;
     font-family: 'Poppins', sans-serif;
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
     color: ${(props) => props.theme.colors.dark};
   }
@@ -95,7 +95,15 @@ export const StyledMenu = styled.nav<{ $isOpen: boolean }>`
   }
 `;
 
-export const ItemName = styled.div<{ $isActivate: boolean }>`
+export const ItemName = styled.div<{ $isActivate: boolean; $strong?: boolean }>`
+  font-weight: ${(props) => (props.$strong ? 600 : 400)};
   color: ${(props) =>
     props.$isActivate ? props.theme.colors.blue : props.theme.colors.darkGray};
+`;
+
+export const MultiLevelItemList = styled.li`
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  cursor: pointer;
 `;
