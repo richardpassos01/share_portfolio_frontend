@@ -6,6 +6,7 @@ import Routes from '@constants/Routes';
 import { LoggedOutContainer, LoggedContainer } from './styles';
 import { Session } from 'next-auth';
 import { useInstitution } from '@hooks/useInstitution';
+import Labels from '@constants/Labels';
 
 interface props {
   session: Session | null;
@@ -16,7 +17,7 @@ const SignInOutButton: React.FC<props> = ({ session }) => {
   const { institution, setInstitution } = useInstitution();
 
   const handleOptions = (option: Record<string, string>, close: () => void) => {
-    if (option.name === 'Add instituição') {
+    if (option.name === Labels.ADD_INSTITUTION) {
       return handleRedirect(Routes.INSTITUTION);
     }
 
@@ -46,7 +47,7 @@ const SignInOutButton: React.FC<props> = ({ session }) => {
             label={institution.name}
             recordOptions={[
               ...session?.user?.institutions,
-              { name: 'Add instituição' },
+              { name: Labels.ADD_INSTITUTION },
             ]}
             handleOptions={handleOptions}
             $width="150"

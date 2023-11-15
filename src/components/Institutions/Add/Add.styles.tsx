@@ -5,6 +5,10 @@ export const Header = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
+    margin-top: 15px;
+  }
 `;
 
 export const HeaderTitle = styled.h1`
@@ -40,4 +44,10 @@ export const AddContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 350px;
+
+  @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
+    margin: 4em;
+    width: 70%;
+  }
 `;

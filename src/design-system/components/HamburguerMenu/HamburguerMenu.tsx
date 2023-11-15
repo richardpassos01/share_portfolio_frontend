@@ -11,12 +11,12 @@ import {
 export function MultiLevelItem({
   name,
   items,
-  activated,
   strong,
+  onClick,
 }: {
   name: string;
-  items: { name: string; href?: string }[];
-  activated?: string;
+  items: Record<string, string>[];
+  onClick: (item: Record<string, string>) => void;
   strong?: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,22 +25,20 @@ export function MultiLevelItem({
     setIsOpen(!isOpen);
   };
 
-  const isCurrentItemActivate = name === activated;
-
   return (
     <MultiLevelItemList>
-      <ItemName
-        onClick={toggleSubMenu}
-        $isActivate={isCurrentItemActivate}
-        $strong={strong}
-      >
+      <ItemName onClick={toggleSubMenu} $isActivate={false} $strong={strong}>
         {name}
         <Image src={Icons.ArrowRight} alt="arrowRight" width={12} height={12} />
       </ItemName>
       {isOpen && (
         <ul>
-          {items.map((item) => (
-            <Item key={item.name} name={item.name} href={item.href} />
+          {items.map((item, index) => (
+            <Item
+              key={index}
+              name={item.name}
+              onClick={() => onClick({ id: item.id, name: item.name })}
+            />
           ))}
         </ul>
       )}

@@ -5,6 +5,9 @@ import { Hide, Tokens } from '@designSystem';
 import { signOut } from 'next-auth/react';
 import { Session } from 'next-auth';
 import HeaderPages from '@constants/HeaderPages';
+import { useInstitution } from '@hooks/useInstitution';
+import { useRouter } from 'next/router';
+import Labels from '@constants/Labels';
 
 interface props {
   session: Session | null;
@@ -12,7 +15,16 @@ interface props {
 }
 
 const HamburgerMenu: React.FC<props> = ({ session, currentPage }) => {
-  const [selectedOptions, setSelectedOptions] = useState(['Banco Inter']);
+  const { institution, setInstitution } = useInstitution();
+  const router = useRouter();
+
+  const handleClick = (item: Record<string, string>) => {
+    if (item.name === Labels.ADD_INSTITUTION) {
+      return router.push(Routes.INSTITUTION);
+    }
+
+    setInstitution(item);
+  };
 
   return (
     <Hide on={Tokens.MIN_WIDTH_TABLET}>
@@ -20,9 +32,14 @@ const HamburgerMenu: React.FC<props> = ({ session, currentPage }) => {
         {session?.user ? (
           <>
             <Hamburger.MultiLevelItem
-              name={selectedOptions[0]}
-              items={selectedOptions.map((name) => ({ name }))}
-              activated={currentPage}
+              name={institution.name}
+              items={
+                [
+                  ...session?.user?.institutions,
+                  { name: Labels.ADD_INSTITUTION },
+                ] as Record<string, string>[]
+              }
+              onClick={handleClick}
               strong
             />
             <Hamburger.Item

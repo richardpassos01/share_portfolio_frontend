@@ -7,7 +7,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import useSWR, { useSWRConfig } from 'swr';
+import { useSWRConfig } from 'swr';
 
 export const initialState = {
   institution: {} as Record<string, string>,
