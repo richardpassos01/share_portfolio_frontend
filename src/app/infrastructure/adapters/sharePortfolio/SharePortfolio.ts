@@ -1,3 +1,4 @@
+import { createQueryParams } from '@helpers';
 import { HttpClient } from '../../providers';
 import Endpoints from './Endpoints';
 import {
@@ -82,13 +83,34 @@ export default class SharePortfolio {
     page: string,
     limit: string,
     order: string,
+    monthYear: string[],
+    ticker: string[],
   ): Promise<Pagination<Transaction>> {
-    return SharePortfolio.getInstance().get(
-      Endpoints.LIST_TRANSACTIONS.replace(':institutionId', institutionId)
-        .replace(':page', page)
-        .replace(':limit', limit)
-        .replace(':order', order),
-    );
+    let queryParams = '';
+
+    if (monthYear.length) {
+      const params = createQueryParams('monthYear', monthYear);
+      queryParams += params;
+    }
+
+    if (ticker.length) {
+      const params = createQueryParams('ticker', ticker);
+      queryParams += params;
+    }
+
+    const endpoint = Endpoints.LIST_TRANSACTIONS.replace(
+      ':institutionId',
+      institutionId,
+    )
+      .replace(':page', page)
+      .replace(':limit', limit)
+      .replace(':order', order);
+
+    const endpointWithParams = queryParams
+      ? `${endpoint}&${queryParams}`
+      : endpoint;
+
+    return SharePortfolio.getInstance().get(endpointWithParams);
   }
 
   public static createTransactions(

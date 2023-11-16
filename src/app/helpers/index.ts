@@ -30,3 +30,6 @@ export const formatterMoney = (amount: number): string =>
     style: 'currency',
     currency: 'BRL',
   }).format(amount);
+
+export const createQueryParams = (param: string, values: string[]) =>
+  values.map((value) => `${param}=${encodeURIComponent(value)}`).join('&');

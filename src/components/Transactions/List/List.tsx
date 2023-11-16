@@ -33,17 +33,17 @@ const List: React.FC = () => {
   const [tickerFilter, setTickerFilter] = useState<string[]>([]);
   const { institution } = useInstitution();
 
-  useEffect(() => {
-    console.log(monthYearFilter);
-    console.log(tickerFilter);
-  }, [monthYearFilter, tickerFilter]);
-
   const { data, refetch, isLoading, lastDataRendered, fetchedAll } =
     useInfiniteFetch(
-      BffEndpoints.LIST_TRANSACTIONS,
+      BffEndpoints.LIST_TRANSACTIONS.replace(':institutionId', institution.id)
+        .replace(':limit', '100')
+        .replace(':order', sortOrder)
+        .replace(':monthYear', monthYearFilter.toString())
+        .replace(':ticker', tickerFilter.toString()) as BffEndpoints,
       FetcherKeys.LIST_TRANSACTIONS,
-      institution.id,
       sortOrder,
+      monthYearFilter,
+      tickerFilter,
     );
 
   const { data: availableFilters, isLoading: isLoadingFilters } = useFetch(

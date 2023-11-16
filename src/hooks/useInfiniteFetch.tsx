@@ -7,24 +7,18 @@ import fetchBff from '@utils/fetchBff';
 const useInfiniteFetch = (
   bffEndpoint: BffEndpoints,
   key: string,
-  parentId: string = '',
-  sortOrder: string = 'asc',
-  limit: Number = 100,
+  ...queryParams: any
 ) => {
   const [loading, setLoading] = useState(false);
   const [totalItems, setTotalItems] = useState(0);
   const observer = useRef(null);
 
   const { data, mutate, setSize, size, isLoading } = useSWRInfinite(
-    (index) => [key, sortOrder, index + 1],
+    (index) => [key, ...queryParams, index + 1],
     async (key) => {
       const page = key[key.length - 1];
 
-      const endpoint = bffEndpoint
-        .replace(':institutionId', parentId)
-        .replace(':page', String(page))
-        .replace(':limit', String(limit))
-        .replace(':order', sortOrder) as BffEndpoints;
+      const endpoint = bffEndpoint.replace(':page', page) as BffEndpoints;
 
       return fetchBff(endpoint, 'GET');
     },
