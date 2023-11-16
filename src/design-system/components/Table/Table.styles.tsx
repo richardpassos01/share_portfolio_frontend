@@ -29,6 +29,10 @@ export const HeaderCell = styled.th<{ $clickable?: boolean }>`
   text-align: left;
   vertical-align: middle;
   cursor: ${(props) => (props.$clickable ? 'pointer' : 'default')};
+
+  @media ${(props) => props.theme.tokens.MAX_WIDTH_MOBILE} {
+    border: none;
+  }
 `;
 
 export const HeaderFixedCell = styled(HeaderCell)`

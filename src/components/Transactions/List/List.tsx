@@ -24,11 +24,7 @@ import Routes from '@constants/Routes';
 import { FooterContainer, TransactionHeader } from '../Transactions.styles';
 import Table from '../Table/Table';
 import { useInstitution } from '@hooks/useInstitution';
-
-const availableFilters = {
-  tickers: ['ABV', 'TSLA'],
-  monthYear: ['01/2022'],
-};
+import useFetch from '@hooks/useFetch';
 
 const List: React.FC = () => {
   const router = useRouter();
@@ -50,6 +46,14 @@ const List: React.FC = () => {
       sortOrder,
     );
 
+  const { data: availableFilters, isLoading: isLoadingFilters } = useFetch(
+    BffEndpoints.GET_TRANSACTION_TABLE_FILTERS.replace(
+      ':institutionId',
+      institution.id,
+    ) as BffEndpoints,
+    FetcherKeys.GET_TRANSACTION_TABLE_FILTERS,
+  );
+
   useEffect(() => {
     refetch();
   }, [refetch, institution]);
@@ -58,7 +62,7 @@ const List: React.FC = () => {
     router.push(Routes.ADD_TRANSACTIONS);
   };
 
-  if (isLoading) {
+  if (isLoading || isLoadingFilters) {
     return <Loading />;
   }
 
@@ -77,7 +81,7 @@ const List: React.FC = () => {
               />
               <SelectBox
                 label={'Mês'}
-                stringOptions={availableFilters.monthYear}
+                stringOptions={availableFilters.monthYears}
                 selectedOptions={monthYearFilter}
                 setSelectedOptions={setMonthYearFilter}
                 $width="85"
@@ -102,7 +106,7 @@ const List: React.FC = () => {
               />
               <Filter.Item
                 label={'Mês'}
-                items={availableFilters.monthYear}
+                items={availableFilters.monthYears}
                 filter={monthYearFilter}
                 setFilter={setMonthYearFilter}
               />

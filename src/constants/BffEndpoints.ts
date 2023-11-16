@@ -4,6 +4,7 @@ enum BffEndpoints {
   RESYNC = '/api/:institutionId/resync',
   CREATE_TRANSACTIONS = '/api/:institutionId/transactions',
   LIST_TRANSACTIONS = '/api/:institutionId/transactions?page=:page&limit=:limit&order=:order',
+  GET_TRANSACTION_TABLE_FILTERS = '/api/:institutionId/transactions/filters',
   LIST_INSTITUTIONS = '/api/:userId/institution',
   CREATE_INSTITUTION = '/api/:userId/institution',
   SIGN_UP = '/api/auth/signup',

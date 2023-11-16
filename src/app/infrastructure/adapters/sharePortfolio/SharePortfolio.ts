@@ -4,6 +4,7 @@ import {
   Institution,
   MonthlyBalance,
   Pagination,
+  Share,
   TotalBalance,
   Transaction,
 } from './types';
@@ -33,6 +34,18 @@ export default class SharePortfolio {
   public static listInstitutions(userId: string): Promise<Institution[]> {
     return SharePortfolio.getInstance().get(
       Endpoints.LIST_INSTITUTIONS.replace(':userId', userId),
+    );
+  }
+
+  public static listShares(institutionId: string): Promise<Share[]> {
+    return SharePortfolio.getInstance().get(
+      Endpoints.LIST_SHARES.replace(':institutionId', institutionId),
+    );
+  }
+
+  public static listMonthYears(institutionId: string): Promise<string[]> {
+    return SharePortfolio.getInstance().get(
+      Endpoints.LIST_MONTH_YEARS.replace(':institutionId', institutionId),
     );
   }
 
