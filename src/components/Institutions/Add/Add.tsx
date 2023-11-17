@@ -39,7 +39,7 @@ const Add: React.FC = () => {
     try {
       setIsSubmitting(true);
 
-      const result = await fetchBff(
+      await fetchBff(
         BffEndpoints.CREATE_INSTITUTION.replace(
           ':userId',
           session?.user.id ?? '',
@@ -54,8 +54,8 @@ const Add: React.FC = () => {
       });
 
       await update();
-
-      return handleRedirect();
+      setIsSubmitting(false);
+      handleRedirect();
     } catch (error) {
       setToast({
         message: ToastMessages.ERROR,

@@ -38,9 +38,11 @@ export default class SharePortfolio {
     );
   }
 
-  public static listShares(institutionId: string): Promise<Share[]> {
+  public static listTransactionsTicketSymbols(
+    institutionId: string,
+  ): Promise<string[]> {
     return SharePortfolio.getInstance().get(
-      Endpoints.LIST_SHARES.replace(':institutionId', institutionId),
+      Endpoints.LIST_TICKET_SYMBOLS.replace(':institutionId', institutionId),
     );
   }
 

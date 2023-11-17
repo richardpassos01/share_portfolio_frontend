@@ -15,12 +15,12 @@ export default class FiltersController {
       monthYears: [],
     };
 
-    const shares = await SharePortfolioAdapter.listShares(institutionId);
+    const ticketSymbols =
+      await SharePortfolioAdapter.listTransactionsTicketSymbols(institutionId);
     const monthYears =
       await SharePortfolioAdapter.listMonthYears(institutionId);
 
-    if (shares.length) {
-      const ticketSymbols = shares.map((share) => share.ticketSymbol);
+    if (ticketSymbols.length) {
       availableFilters.tickers.push(...ticketSymbols);
     }
 

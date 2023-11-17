@@ -8,7 +8,7 @@ enum Endpoints {
   CREATE_TRANSACTIONS = '/transactions/:institutionId',
   DELETE_TRANSACTIONS = '/transactions/:institutionId',
   LIST_MONTH_YEARS = '/transactions/:institutionId/list-month-years',
-  LIST_SHARES = '/shares/:institutionId',
+  LIST_TICKET_SYMBOLS = '/transactions/:institutionId/list-ticket-symbols',
 }
 
 export default Endpoints;
