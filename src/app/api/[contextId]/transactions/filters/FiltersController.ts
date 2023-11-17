@@ -1,4 +1,5 @@
 import { SharePortfolioAdapter } from '@adapters/sharePortfolio';
+import { yearMonthFormatter } from '@helpers';
 
 type Filter = {
   tickers: string[];
@@ -23,7 +24,12 @@ export default class FiltersController {
       availableFilters.tickers.push(...ticketSymbols);
     }
 
-    availableFilters.monthYears.push(...monthYears);
+    if (monthYears.length) {
+      const formattedMonthYears = monthYears.map((monthYear) =>
+        yearMonthFormatter(monthYear),
+      );
+      availableFilters.monthYears.push(...formattedMonthYears);
+    }
 
     return availableFilters;
   }

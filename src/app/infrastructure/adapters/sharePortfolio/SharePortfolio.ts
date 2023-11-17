@@ -90,12 +90,12 @@ export default class SharePortfolio {
 
     if (monthYear.length) {
       const params = createQueryParams('monthYear', monthYear);
-      queryParams += params;
+      queryParams += `&${params}`;
     }
 
     if (ticker.length) {
       const params = createQueryParams('ticker', ticker);
-      queryParams += params;
+      queryParams += `&${params}`;
     }
 
     const endpoint = Endpoints.LIST_TRANSACTIONS.replace(
@@ -106,9 +106,7 @@ export default class SharePortfolio {
       .replace(':limit', limit)
       .replace(':order', order);
 
-    const endpointWithParams = queryParams
-      ? `${endpoint}&${queryParams}`
-      : endpoint;
+    const endpointWithParams = endpoint + queryParams;
 
     return SharePortfolio.getInstance().get(endpointWithParams);
   }

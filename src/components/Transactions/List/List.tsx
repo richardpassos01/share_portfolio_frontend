@@ -55,6 +55,11 @@ const List: React.FC = () => {
   );
 
   useEffect(() => {
+    setTickerFilter([]);
+    setMonthYearFilter([]);
+  }, [institution]);
+
+  useEffect(() => {
     refetch();
   }, [refetch, institution]);
 

@@ -12,6 +12,9 @@ export const dateStringDDMMYYYYToYYYYMMDD = (dateString: string): string =>
 export const yearMonthFormatter = (yearMonth: string) =>
   yearMonth.split('-').reverse().join('/');
 
+export const yearMonthFormatterToApi = (yearMonth: string) =>
+  yearMonth.split('/').reverse().join('-');
+
 export const calculateBalanceNetEarning = (balance: {
   tradeEarning: number;
   dividendEarning: number;
