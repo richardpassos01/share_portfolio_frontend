@@ -15,8 +15,8 @@ import {
 } from './SelectBox.styles';
 
 type Props = {
-  stringOptions?: string[];
-  recordOptions?: Record<string, string>[];
+  arrayOfString?: string[];
+  arrayOfObjects?: Record<string, string>[];
   label: string;
   selectedOptions?: string[];
   setSelectedOptions?: Dispatch<SetStateAction<string[]>>;
@@ -28,8 +28,8 @@ type Props = {
 };
 
 export const SelectBox: React.FC<Props> = ({
-  stringOptions,
-  recordOptions,
+  arrayOfString = [],
+  arrayOfObjects = [],
   label,
   selectedOptions,
   setSelectedOptions,
@@ -95,27 +95,25 @@ export const SelectBox: React.FC<Props> = ({
         </LabelContainer>
       </SelectBoxButton>
       <OptionList $isOpen={isOpen}>
-        {stringOptions &&
-          stringOptions.map((option, index) => (
-            <OptionItem
-              key={index}
-              onClick={() => selectOption(option)}
-              $selected={Boolean(selectedOptions?.includes(option))}
-            >
-              {option}
-            </OptionItem>
-          ))}
+        {arrayOfString?.map((option, index) => (
+          <OptionItem
+            key={index}
+            onClick={() => selectOption(option)}
+            $selected={Boolean(selectedOptions?.includes(option))}
+          >
+            {option}
+          </OptionItem>
+        ))}
 
-        {recordOptions &&
-          recordOptions.map((option, index) => (
-            <OptionItem
-              key={index}
-              onClick={() => selectOption(option)}
-              $selected={false}
-            >
-              {option.name}
-            </OptionItem>
-          ))}
+        {arrayOfObjects?.map((option, index) => (
+          <OptionItem
+            key={index}
+            onClick={() => selectOption(option)}
+            $selected={false}
+          >
+            {option.name}
+          </OptionItem>
+        ))}
       </OptionList>
     </SelectBoxContainer>
   );

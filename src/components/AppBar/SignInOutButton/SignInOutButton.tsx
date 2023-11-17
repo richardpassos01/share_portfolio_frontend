@@ -45,7 +45,7 @@ const SignInOutButton: React.FC<props> = ({ session }) => {
         {institution.name ? (
           <SelectBox
             label={institution.name}
-            recordOptions={[
+            arrayOfObjects={[
               ...session?.user?.institutions,
               { name: Labels.ADD_INSTITUTION },
             ]}

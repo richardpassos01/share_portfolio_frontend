@@ -18,11 +18,11 @@ import {
 import FetcherKeys from '@constants/FetcherKeys';
 import useInfiniteFetch from '@hooks/useInfiniteFetch';
 import BffEndpoints from '@constants/BffEndpoints';
-import Loading from './Loading';
 import { useRouter } from 'next/router';
 import Routes from '@constants/Routes';
 import { FooterContainer, TransactionHeader } from '../Transactions.styles';
 import Table from '../Table/Table';
+import LoadingTable from '../Table/Loading';
 import { useInstitution } from '@hooks/useInstitution';
 import useFetch from '@hooks/useFetch';
 
@@ -67,9 +67,9 @@ const List: React.FC = () => {
     router.push(Routes.ADD_TRANSACTIONS);
   };
 
-  if (isLoading || isLoadingFilters) {
-    return <Loading />;
-  }
+  // if (isLoading || isLoadingFilters) {
+  //   return <Loading />;
+  // }
 
   return (
     <Containers.CardContainer>
@@ -79,14 +79,14 @@ const List: React.FC = () => {
             <FilterButtonsContainer>
               <SelectBox
                 label={'Ticker'}
-                stringOptions={availableFilters.tickers}
+                arrayOfString={availableFilters?.tickers}
                 selectedOptions={tickerFilter}
                 setSelectedOptions={setTickerFilter}
                 $width="100"
               />
               <SelectBox
                 label={'Mês'}
-                stringOptions={availableFilters.monthYears}
+                arrayOfString={availableFilters?.monthYears}
                 selectedOptions={monthYearFilter}
                 setSelectedOptions={setMonthYearFilter}
                 $width="85"
@@ -105,26 +105,30 @@ const List: React.FC = () => {
             <Filter.Menu>
               <Filter.Item
                 label={'Ticker'}
-                items={availableFilters.tickers}
+                items={availableFilters?.tickers}
                 filter={tickerFilter}
                 setFilter={setTickerFilter}
               />
               <Filter.Item
                 label={'Mês'}
-                items={availableFilters.monthYears}
+                items={availableFilters?.monthYears}
                 filter={monthYearFilter}
                 setFilter={setMonthYearFilter}
               />
             </Filter.Menu>
           </MobileFilterContainer>
         </TransactionHeader>
-        <Table data={data} sortOrder={sortOrder} setSortOrder={setSortOrder}>
-          {!fetchedAll && (
-            <LoaderContainer ref={lastDataRendered}>
-              <Loader $size={30} />
-            </LoaderContainer>
-          )}
-        </Table>
+        {isLoading || isLoadingFilters ? (
+          <LoadingTable />
+        ) : (
+          <Table data={data} sortOrder={sortOrder} setSortOrder={setSortOrder}>
+            {!fetchedAll && (
+              <LoaderContainer ref={lastDataRendered}>
+                <Loader $size={30} />
+              </LoaderContainer>
+            )}
+          </Table>
+        )}
         <FooterContainer>
           <HyperLink
             $color={Colors.blue}
