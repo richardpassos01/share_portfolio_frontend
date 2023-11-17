@@ -22,6 +22,10 @@ const useInfiniteFetch = (
 
       return fetchBff(endpoint, 'GET');
     },
+    {
+      initialSize: 1,
+      revalidateFirstPage: false,
+    },
   );
 
   const newData: Record<string, string>[] = useMemo(() => {
