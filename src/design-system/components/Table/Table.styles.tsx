@@ -7,6 +7,10 @@ export const Container = styled(OverflowContainer)`
 
 export const Wrapper = styled.table`
   width: 100%;
+
+  @media ${(props) => props.theme.tokens.MIN_WIDTH_TABLET} {
+    border-collapse: collapse;
+  }
 `;
 
 export const Header = styled.thead`

@@ -22,11 +22,14 @@ export const calculateBalanceNetEarning = (balance: {
   taxWithholding: number;
   loss: number;
 }) =>
-  balance.tradeEarning +
-  balance.dividendEarning -
-  balance.tax -
-  balance.taxWithholding -
-  balance.loss;
+  Math.max(
+    0,
+    balance.tradeEarning +
+      balance.dividendEarning -
+      balance.tax -
+      balance.taxWithholding -
+      balance.loss,
+  );
 
 export const formatterMoney = (amount: number): string =>
   new Intl.NumberFormat('pt-BR', {

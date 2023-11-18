@@ -39,11 +39,10 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 17px;
-  max-height: 350px;
-  overflow: auto;
-  max-width: 290px;
+  max-height: 210px;
+  overflow: scroll;
+  max-width: 270px;
 `;
-
 export const Menu = styled.nav<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
