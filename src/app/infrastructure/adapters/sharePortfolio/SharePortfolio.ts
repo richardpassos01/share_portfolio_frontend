@@ -1,9 +1,11 @@
+import { createQueryParams } from '@helpers';
 import { HttpClient } from '../../providers';
 import Endpoints from './Endpoints';
 import {
   Institution,
   MonthlyBalance,
   Pagination,
+  Share,
   TotalBalance,
   Transaction,
 } from './types';
@@ -33,6 +35,20 @@ export default class SharePortfolio {
   public static listInstitutions(userId: string): Promise<Institution[]> {
     return SharePortfolio.getInstance().get(
       Endpoints.LIST_INSTITUTIONS.replace(':userId', userId),
+    );
+  }
+
+  public static listTransactionsTicketSymbols(
+    institutionId: string,
+  ): Promise<string[]> {
+    return SharePortfolio.getInstance().get(
+      Endpoints.LIST_TICKET_SYMBOLS.replace(':institutionId', institutionId),
+    );
+  }
+
+  public static listMonthYears(institutionId: string): Promise<string[]> {
+    return SharePortfolio.getInstance().get(
+      Endpoints.LIST_MONTH_YEARS.replace(':institutionId', institutionId),
     );
   }
 
@@ -69,13 +85,32 @@ export default class SharePortfolio {
     page: string,
     limit: string,
     order: string,
+    monthYear: string[],
+    ticker: string[],
   ): Promise<Pagination<Transaction>> {
-    return SharePortfolio.getInstance().get(
-      Endpoints.LIST_TRANSACTIONS.replace(':institutionId', institutionId)
-        .replace(':page', page)
-        .replace(':limit', limit)
-        .replace(':order', order),
-    );
+    let queryParams = '';
+
+    if (monthYear.length) {
+      const params = createQueryParams('monthYear', monthYear);
+      queryParams += `&${params}`;
+    }
+
+    if (ticker.length) {
+      const params = createQueryParams('ticker', ticker);
+      queryParams += `&${params}`;
+    }
+
+    const endpoint = Endpoints.LIST_TRANSACTIONS.replace(
+      ':institutionId',
+      institutionId,
+    )
+      .replace(':page', page)
+      .replace(':limit', limit)
+      .replace(':order', order);
+
+    const endpointWithParams = endpoint + queryParams;
+
+    return SharePortfolio.getInstance().get(endpointWithParams);
   }
 
   public static createTransactions(

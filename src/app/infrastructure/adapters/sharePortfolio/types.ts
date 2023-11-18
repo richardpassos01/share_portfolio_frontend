@@ -55,3 +55,12 @@ export type Institution = {
   userId: string;
   id?: string;
 };
+
+export type Share = {
+  institutionId: string;
+  ticketSymbol: string;
+  quantity: number;
+  totalCost: number;
+  mediumPrice: number;
+  id: string;
+};

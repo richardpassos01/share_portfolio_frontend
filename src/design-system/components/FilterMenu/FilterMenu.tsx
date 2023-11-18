@@ -15,12 +15,12 @@ import CheckBox from '../Input/CheckBox';
 
 type Props = {
   label: string;
-  items: string[];
+  items?: string[];
   filter: string[];
   setFilter: Dispatch<SetStateAction<string[]>>;
 };
 
-export function Item({ label, items, filter, setFilter }: Props) {
+export function Item({ label, items = [], filter, setFilter }: Props) {
   const onChange = (isChecked: boolean, value: string) => {
     const newFilter = new Set(filter);
     if (isChecked) {
@@ -38,7 +38,7 @@ export function Item({ label, items, filter, setFilter }: Props) {
         <LabelTitle>{label}</LabelTitle>
       </LabelContainer>
       <InputContainer>
-        {items.map((item, index) => (
+        {items?.map((item, index) => (
           <CheckBox key={index} value={item} onChange={onChange} />
         ))}
       </InputContainer>

@@ -39,7 +39,7 @@ export default function TransactionsTable({
               onClick={() => handleDateSort()}
               $clickable={Boolean(sortOrder)}
             >
-              {sortIcon} Data
+              {sortIcon}Data
             </Table.HeaderCell>
             <Table.HeaderCell>Movimentação</Table.HeaderCell>
             <Table.HeaderCell>Produto</Table.HeaderCell>

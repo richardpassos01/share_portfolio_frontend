@@ -45,6 +45,7 @@ export const InstitutionProvider = ({
   useEffect(() => {
     mutate(FetcherKeys.GET_OVERVIEW);
     mutate(FetcherKeys.LIST_MONTHLY_BALANCES);
+    mutate(FetcherKeys.GET_TRANSACTION_TABLE_FILTERS);
   }, [mutate, institution]);
 
   return (

@@ -36,12 +36,16 @@ export default class TransactionController {
     page: string,
     limit: string,
     order: string,
+    monthYear: string[],
+    ticker: string[],
   ) {
     const { totalItems, items } = await SharePortfolioAdapter.listTransactions(
       institutionId,
       page,
       limit,
       order,
+      monthYear,
+      ticker,
     );
 
     return {

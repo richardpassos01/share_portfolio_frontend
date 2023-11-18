@@ -48,6 +48,8 @@ export const OptionList = styled.div<{ $isOpen: boolean }>`
   border-bottom-right-radius: 15px;
   border-bottom-left-radius: 15px;
   display: ${(props) => (props.$isOpen ? 'block' : 'none')};
+  max-height: 150px;
+  overflow: auto;
 
   & > *:first-child {
     margin-top: 10px;
