@@ -15,6 +15,11 @@ export default class MonthlyBalanceController {
           balance.tax,
           balance.tradeEarning,
           balance.dividendEarning,
+          balance.type,
+          balance.taxGross,
+          balance.totalSold,
+          balance.restitution,
+          balance.currentTotalLoss,
         ),
     );
   }

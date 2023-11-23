@@ -7,6 +7,7 @@ import EyeSlash from './icons/eyeSlash.svg';
 import Filter from './icons/filter.svg';
 import Xlsx from './icons/xlsx.png';
 import NotFoundIcon from './icons/notFound.png';
+import AddIcon from './icons/addIcon.svg';
 
 export { GlobalStyles } from './styles/GlobalStyles';
 export { Colors } from './styles/Colors';
@@ -47,4 +48,5 @@ export const Icons = {
   Filter,
   Xlsx,
   NotFound: NotFoundIcon,
+  AddIcon,
 };

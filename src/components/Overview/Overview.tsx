@@ -82,12 +82,12 @@ const Overview: React.FC = () => {
     <>
       <Notification toast={toast as Toast} />
       <Containers.CardContainer>
-        <Card>
+        <Card $height="100%">
           {data ? (
             <>
               <Header>
                 <HeaderTitle>
-                  <HeaderDescription>Perda total</HeaderDescription>
+                  <HeaderDescription>Perda acumulada</HeaderDescription>
                   <HeaderMoney>{data.totalLoss}</HeaderMoney>
                 </HeaderTitle>
 

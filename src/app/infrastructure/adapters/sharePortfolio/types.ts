@@ -46,7 +46,11 @@ export type MonthlyBalance = {
   dividendEarning: number;
   tax: number;
   taxWithholding: number;
+  taxGross: number;
   loss: number;
+  totalSold: number;
+  restitution: number;
+  currentTotalLoss: number;
   type: MONTHLY_BALANCE_TYPE;
 };
 

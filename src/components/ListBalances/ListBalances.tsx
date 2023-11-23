@@ -33,7 +33,7 @@ const ListBalances: React.FC = () => {
 
   return (
     <Containers.CardContainer>
-      <Card $mobileHeight="560px">
+      <Card $mobileHeight="560px" $height="680px">
         <Header></Header>
         {data?.length ? (
           <Containers.OverflowContainer>

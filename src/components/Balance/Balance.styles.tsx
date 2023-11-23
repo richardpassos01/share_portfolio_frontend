@@ -14,10 +14,11 @@ export const Container = styled.div`
   }
 `;
 
-export const Item = styled.div`
+export const Item = styled.div<{ $border?: boolean }>`
   display: flex;
   align-items: center;
-  border-bottom: 1px solid ${(props) => props.theme.colors.gray};
+  border-bottom: ${(props) =>
+    props.$border ? `1px solid ${props.theme.colors.gray}` : 'none'};
   width: 100%;
   justify-content: space-between;
 `;
@@ -41,4 +42,10 @@ export const ItemMoney = styled(Description)`
   font-size: 13px;
   font-weight: 400;
   margin-left: 10px;
+`;
+
+export const ReasonContainer = styled.div`
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
 `;

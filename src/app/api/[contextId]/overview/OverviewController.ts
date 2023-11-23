@@ -66,6 +66,11 @@ export default class OverviewController {
           previousMonth.tax,
           previousMonth.tradeEarning,
           previousMonth.dividendEarning,
+          previousMonth.type,
+          previousMonth.taxGross,
+          previousMonth.totalSold,
+          previousMonth.restitution,
+          previousMonth.currentTotalLoss,
         );
       }
     }
