@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  share_portfolio_frontend:
+    build:
+      context: .
+      target: development
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    env_file:
+      - ./.env.local
+    environment:
+      NEXT_PUBLIC_SHARE_PORTFOLIO_API: http://share_portfolio_backend:4000
+    command: npm run dev
+    stdin_open: true
+    tty: true
+    restart: always
+    ports:
+      - 3000:3000
+
+networks:
+  default:
+    name: share_portfolio

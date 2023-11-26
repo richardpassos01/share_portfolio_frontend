@@ -67,10 +67,6 @@ const List: React.FC = () => {
     router.push(Routes.ADD_TRANSACTIONS);
   };
 
-  // if (isLoading || isLoadingFilters) {
-  //   return <Loading />;
-  // }
-
   return (
     <Containers.CardContainer>
       <Card>

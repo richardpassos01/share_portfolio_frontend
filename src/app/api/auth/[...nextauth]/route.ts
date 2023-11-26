@@ -6,7 +6,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 const MINUTE = 60;
 const HOUR = 60 * MINUTE;
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       id: Providers.SIGNUP_PROVIDER,
