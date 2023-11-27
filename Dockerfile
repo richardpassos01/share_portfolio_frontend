@@ -20,7 +20,10 @@ WORKDIR /app
 COPY package*.json .
 
 RUN npm ci --only=production
+RUN npm install --global pm2
 
 COPY --from=development /app/.next .next
 
-CMD ["npm", "start"]
+EXPOSE 3000
+
+CMD [ "pm2-runtime", "npm", "--", "start" ]

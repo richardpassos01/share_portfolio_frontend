@@ -1,6 +1,17 @@
 version: '3.8'
 
 services:
+  nginx:
+    build:
+      dockerfile: Dockerfile
+      context: nginx/
+    ports:
+      - 3000:80
+    depends_on:
+      - share_portfolio_frontend
+    volumes:
+      - ./app:/var/www:delegated
+
   share_portfolio_frontend:
     build:
       context: .
@@ -16,8 +27,6 @@ services:
     stdin_open: true
     tty: true
     restart: always
-    ports:
-      - 3000:3000
 
 networks:
   default:
